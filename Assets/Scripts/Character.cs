@@ -8,6 +8,8 @@ public class Character : MonoBehaviour
     public bool CanJump;
     public float JumpForce = 6;
     public int Roll;
+    public int Coins;
+    public int Stars;
 
     private bool _isJumping;
 
