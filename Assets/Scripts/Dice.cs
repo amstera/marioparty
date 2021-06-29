@@ -6,6 +6,7 @@ public class Dice : MonoBehaviour
     public float Speed = 125;
     public int ChosenNumber = -1;
     public ParticleSystem PS;
+    public Character Character;
 
     void Update()
     {
@@ -55,5 +56,6 @@ public class Dice : MonoBehaviour
 
         PS.Play();
         transform.localEulerAngles = newAngle;
+        Character.Roll = ChosenNumber;
     }
 }

@@ -6,6 +6,17 @@ public class Character : MonoBehaviour
     public Rigidbody Rb;
     public bool IsPlayer;
     public bool CanJump;
+    public float JumpForce = 6;
+    public int Roll;
+
+    private bool _isJumping;
+
+    private GameController _gameController;
+
+    void Start()
+    {
+        _gameController = GameController.Instance;
+    }
 
     void FixedUpdate()
     {
@@ -18,6 +29,14 @@ public class Character : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.name == "Board" && _isJumping)
+        {
+            Land();
+        }
+    }
+
     public void Jump()
     {
         if (!CanJump)
@@ -26,15 +45,16 @@ public class Character : MonoBehaviour
         }
 
         Animator.SetInteger("State", (int)CharacterState.Jump);
-        Rb.AddForce(new Vector3(0, 6, 0), ForceMode.Impulse);
+        Rb.AddForce(new Vector3(0, JumpForce, 0), ForceMode.Impulse);
+        _isJumping = true;
         CanJump = false;
-
-        Invoke("Land", 0.5f);
     }
 
     private void Land()
     {
+        _isJumping = false;
         Animator.SetInteger("State", (int)CharacterState.Idle);
+        _gameController.NextCharacter();
     }
 }
 
