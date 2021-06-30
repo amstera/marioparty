@@ -123,6 +123,16 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &4407307 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 985097289067321554, guid: 43f6e884f3a8d4e2eb38444cef5e7aac, type: 3}
+  m_PrefabInstance: {fileID: 120860002}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &60813615 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 985097289067321554, guid: 43f6e884f3a8d4e2eb38444cef5e7aac, type: 3}
+  m_PrefabInstance: {fileID: 851438565}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &96764673 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7648127689439572055, guid: 911ea9f4205e24ca7b0526191fd96636, type: 3}
@@ -470,12 +480,19 @@ MonoBehaviour:
   - {fileID: 977543993}
   CharIndex: 0
   ReloadIndex: 0
+  Turn: -1
   GameStart: 0
   CharacterStats:
   - {fileID: 96764674}
   - {fileID: 407438882}
   - {fileID: 1826824206}
   - {fileID: 1381751511}
+  Dice:
+  - {fileID: 1455723904}
+  - {fileID: 60813615}
+  - {fileID: 956076135}
+  - {fileID: 4407307}
+  Coin: {fileID: 2769943966943191263, guid: 19fb72b169b684491a674c83c7b0d63e, type: 3}
 --- !u!4 &514670732
 Transform:
   m_ObjectHideFlags: 0
@@ -840,6 +857,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 911ea9f4205e24ca7b0526191fd96636, type: 3}
+--- !u!1 &956076135 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 985097289067321554, guid: 43f6e884f3a8d4e2eb38444cef5e7aac, type: 3}
+  m_PrefabInstance: {fileID: 3870620334762633447}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1282,6 +1304,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da6603635f34b4207838b0e2a1a146ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1455723904 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 985097289067321554, guid: 43f6e884f3a8d4e2eb38444cef5e7aac, type: 3}
+  m_PrefabInstance: {fileID: 1906500796}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1679984844
 PrefabInstance:
   m_ObjectHideFlags: 0

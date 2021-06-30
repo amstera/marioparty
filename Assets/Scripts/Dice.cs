@@ -32,6 +32,11 @@ public class Dice : MonoBehaviour
         Text.text = string.Empty;
     }
 
+    private void OnDisable()
+    {
+        Text.text = string.Empty;
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.tag == "Character")

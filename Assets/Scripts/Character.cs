@@ -12,6 +12,8 @@ public class Character : MonoBehaviour
     public int Stars;
     public CharacterType Type;
 
+    public AmountDisplay AmountDisplay;
+
     private bool _isJumping;
 
     private GameController _gameController;
@@ -51,6 +53,20 @@ public class Character : MonoBehaviour
         Rb.AddForce(new Vector3(0, JumpForce, 0), ForceMode.Impulse);
         _isJumping = true;
         CanJump = false;
+    }
+
+    public void ChangeCoins(int amount)
+    {
+        Coins += amount;
+        AmountDisplay.Display(amount, AmountType.Coin);
+        _gameController.LoadAllCharacterStats(false, false);
+    }
+
+    public void ChangeStars(int amount)
+    {
+        Stars += amount;
+        AmountDisplay.Display(amount, AmountType.Star);
+        _gameController.LoadAllCharacterStats(false, false);
     }
 
     private void Land()

@@ -56,6 +56,7 @@
     <Analyzer Include="/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Analyzers/Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets/Scripts/CharacterStat.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/ColorCorrectionCurves.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/SepiaTone.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/ImageEffects.cs" />
@@ -97,7 +98,8 @@
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/Grayscale.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/ColorCorrectionRamp.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/Triangles.cs" />
-    <Compile Include="Assets/Scripts/CharacterStat.cs" />
+    <Compile Include="Assets/Scripts/Coin.cs" />
+    <Compile Include="Assets/Scripts/AmountDisplay.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Shaders/Tonemapper.shader" />
