@@ -15,6 +15,6 @@ public class CharacterStat : MonoBehaviour
         ThumbnailImage.sprite = Thumbnails[(int)character.Type - 1];
         CoinsText.text = character.Coins.ToString();
         StarsText.text = character.Stars.ToString();
-        PlaceText.text = place == 0 ? "1st" : place == 1 ? "2nd" : place == 2 ? "3rd" : "4th";
+        PlaceText.text = place == 1 ? "1st" : place == 2 ? "2nd" : place == 3 ? "3rd" : "4th";
     } 
 }

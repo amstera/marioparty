@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -66,8 +67,8 @@ public class GameController : MonoBehaviour
         }
 
         var charStat = CharacterStats[ReloadIndex];
-        int place = Characters.Count - 1 - ReloadIndex;
-        var character = Characters[place];
+        var character = Characters[ReloadIndex];
+        int place = GetPlace(character.Type);
         charStat.Reload(character, place);
 
         if (!charStat.gameObject.activeSelf)
@@ -76,11 +77,45 @@ public class GameController : MonoBehaviour
         }
 
         ReloadIndex++;
-        Invoke("PopulateCharacterStatDelay", reloadDelay ? 0.5f : 0);
+        if (reloadDelay)
+        {
+            Invoke("PopulateCharacterStatDelay", 0.5f);
+        }
+        else
+        {
+            PopulateCharacterStat(false);
+        }
     }
 
     private void PopulateCharacterStatDelay()
     {
         PopulateCharacterStat(true);
+    }
+
+    private int GetPlace(CharacterType type)
+    {
+        var orderedCharacters = Characters.OrderByDescending(c => c.Stars).ThenByDescending(c => c.Coins).ToList();
+        int rank = 1;
+        int currentStars = 0;
+        int currentCoins = 0;
+        foreach (Character character in orderedCharacters)
+        {
+            if (character.Type == type)
+            {
+                return rank;
+            }
+            if (character.Stars != currentStars)
+            {
+                currentStars = character.Stars;
+                rank++;
+            }
+            else if  (character.Coins != currentCoins)
+            {
+                currentCoins = character.Coins;
+                rank++;
+            }
+        }
+
+        return 0;
     }
 }
