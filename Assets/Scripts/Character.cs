@@ -10,6 +10,7 @@ public class Character : MonoBehaviour
     public int Roll;
     public int Coins;
     public int Stars;
+    public CharacterType Type;
 
     private bool _isJumping;
 
@@ -65,4 +66,13 @@ public enum CharacterState
     Idle = 0,
     Jump = 1,
     Walk = 2
+}
+
+public enum CharacterType
+{
+    Unknown = 0,
+    Mario = 1,
+    Goomba = 2,
+    Peach = 3,
+    Boo = 4
 }

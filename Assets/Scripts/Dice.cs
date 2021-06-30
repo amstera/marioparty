@@ -74,7 +74,7 @@ public class Dice : MonoBehaviour
         transform.localEulerAngles = newAngle;
         Character.Roll = ChosenNumber;
 
-        Invoke("RevealNumber", 0.5f);
+        Invoke("RevealNumber", 0.55f);
     }
 
     private void RevealNumber()
