@@ -36,7 +36,7 @@ public class Character : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.name == "Board" && _isJumping)
+        if (collision.collider.tag == "Terrain" && _isJumping)
         {
             Land();
         }

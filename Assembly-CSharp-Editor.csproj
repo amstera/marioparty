@@ -60,6 +60,7 @@
     <Compile Include="Assets/NatureStarterKit2/Editor/ImageEffects/NoiseAndGrainEditor.cs" />
     <Compile Include="Assets/NatureStarterKit2/Editor/ImageEffects/ColorCorrectionCurvesEditor.cs" />
     <Compile Include="Assets/NatureStarterKit2/Editor/ImageEffects/BloomEditor.cs" />
+    <Compile Include="Assets/LowPolyWater_Pack/Scripts/Editor/GeneratePlane.cs" />
     <Compile Include="Assets/NatureStarterKit2/Editor/ImageEffects/ColorCorrectionLookupEditor.cs" />
     <Compile Include="Assets/NatureStarterKit2/Editor/ImageEffects/VignetteAndChromaticAberrationEditor.cs" />
     <Compile Include="Assets/NatureStarterKit2/Editor/ImageEffects/TonemappingEditor.cs" />
@@ -678,6 +679,9 @@
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Postprocessing.Runtime">
+      <HintPath>Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Recorder.Base">
       <HintPath>Library/ScriptAssemblies/Unity.Recorder.Base.dll</HintPath>
     </Reference>
@@ -687,14 +691,20 @@
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Formats.Fbx.Runtime">
+      <HintPath>Library/ScriptAssemblies/Unity.Formats.Fbx.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Autodesk.Fbx.Editor">
       <HintPath>Library/ScriptAssemblies/Autodesk.Fbx.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Formats.Fbx.Editor">
-      <HintPath>Library/ScriptAssemblies/Unity.Formats.Fbx.Editor.dll</HintPath>
+    <Reference Include="Unity.Timeline.Editor">
+      <HintPath>Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
       <HintPath>Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Formats.Fbx.Editor">
+      <HintPath>Library/ScriptAssemblies/Unity.Formats.Fbx.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
@@ -713,15 +723,6 @@
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Runtime">
-      <HintPath>Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Formats.Fbx.Runtime">
-      <HintPath>Library/ScriptAssemblies/Unity.Formats.Fbx.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Timeline.Editor">
-      <HintPath>Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Recorder">
       <HintPath>Library/ScriptAssemblies/Unity.Recorder.dll</HintPath>

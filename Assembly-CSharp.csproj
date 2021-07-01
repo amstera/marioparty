@@ -79,6 +79,7 @@
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/VignetteAndChromaticAberration.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/ScreenOverlay.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/ImageEffectBase.cs" />
+    <Compile Include="Assets/LowPolyWater_Pack/Scripts/LowPolyWater.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/BlurOptimized.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/NoiseAndGrain.cs" />
     <Compile Include="Assets/Scripts/AmountDisplay.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/Grayscale.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/ColorCorrectionRamp.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/Triangles.cs" />
+    <Compile Include="Assets/Scripts/Fish.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Shaders/Tonemapper.shader" />
@@ -143,6 +145,7 @@
      <None Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Shaders/_Antialiasing/FXAA3Console.shader" />
      <None Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Shaders/ColorCorrectionSelective.shader" />
      <None Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Shaders/RadialBlur.shader" />
+     <None Include="Assets/LowPolyWater_Pack/Shaders/WaterShaded.shader" />
      <None Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Shaders/_BloomAndFlares/VignetteShader.shader" />
      <None Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Shaders/MotionBlurClear.shader" />
      <None Include="Assets/NatureStarterKit2/Standard Assets/Effects/GlassRefraction/Shaders/GlassStainedBumpDistort.shader" />
@@ -157,6 +160,7 @@
      <None Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Shaders/FisheyeShader.shader" />
      <None Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Shaders/_BloomAndFlares/BlendOneOne.shader" />
      <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Surface.shader" />
+     <None Include="Assets/LowPolyWater_Pack/LowPoly Island/Credits.txt" />
      <None Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Shaders/_BloomAndFlares/BrightPassFilter.shader" />
      <None Include="Assets/TextMesh Pro/Sprites/EmojiOne Attribution.txt" />
      <None Include="Assets/TextMesh Pro/Shaders/TMP_Bitmap-Custom-Atlas.shader" />
@@ -785,6 +789,9 @@
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Postprocessing.Runtime">
+      <HintPath>Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Recorder.Base">
       <HintPath>Library/ScriptAssemblies/Unity.Recorder.Base.dll</HintPath>
     </Reference>
@@ -794,14 +801,20 @@
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Formats.Fbx.Runtime">
+      <HintPath>Library/ScriptAssemblies/Unity.Formats.Fbx.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Autodesk.Fbx.Editor">
       <HintPath>Library/ScriptAssemblies/Autodesk.Fbx.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Formats.Fbx.Editor">
-      <HintPath>Library/ScriptAssemblies/Unity.Formats.Fbx.Editor.dll</HintPath>
+    <Reference Include="Unity.Timeline.Editor">
+      <HintPath>Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
       <HintPath>Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Formats.Fbx.Editor">
+      <HintPath>Library/ScriptAssemblies/Unity.Formats.Fbx.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
@@ -820,15 +833,6 @@
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Runtime">
-      <HintPath>Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Formats.Fbx.Runtime">
-      <HintPath>Library/ScriptAssemblies/Unity.Formats.Fbx.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Timeline.Editor">
-      <HintPath>Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Recorder">
       <HintPath>Library/ScriptAssemblies/Unity.Recorder.dll</HintPath>
