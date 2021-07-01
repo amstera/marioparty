@@ -59,21 +59,21 @@ public class Character : MonoBehaviour
     {
         Coins += amount;
         AmountDisplay.Display(amount, AmountType.Coin);
-        _gameController.LoadAllCharacterStats(false, false);
+        _gameController.LoadAllCharacterStats(false);
     }
 
     public void ChangeStars(int amount)
     {
         Stars += amount;
         AmountDisplay.Display(amount, AmountType.Star);
-        _gameController.LoadAllCharacterStats(false, false);
+        _gameController.LoadAllCharacterStats(false);
     }
 
     private void Land()
     {
         _isJumping = false;
         Animator.SetInteger("State", (int)CharacterState.Idle);
-        _gameController.NextCharacter();
+        _gameController.CharacterLanded();
     }
 }
 

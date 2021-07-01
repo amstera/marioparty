@@ -6,12 +6,14 @@ public class GameController : MonoBehaviour
 {
     public static GameController Instance;
     public List<Character> Characters;
+    public List<Circle> Spaces;
     public int CharIndex;
     public int ReloadIndex;
     public int Turn = -1;
-    public bool GameStart;
 
     public List<CharacterStat> CharacterStats;
+    public Dialog Dialog;
+    public TurnText TurnText;
     public List<GameObject> Dice;
     public GameObject Coin;
 
@@ -25,13 +27,21 @@ public class GameController : MonoBehaviour
         ChooseCharacter();
     }
 
+    public void CharacterLanded()
+    {
+        if (Turn == -1)
+        {
+            NextCharacter();
+        }
+    }
+
     public void NextCharacter()
     {
-        if (GameStart)
+        if (Turn >= 0)
         {
-            DoTurn();
+            return;
         }
-        else if (CharIndex == Characters.Count - 1)
+        if (CharIndex == Characters.Count - 1)
         {
             Characters = Characters.OrderByDescending(c => c.Roll).ToList();
             CharIndex = 0;
@@ -44,15 +54,14 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void LoadAllCharacterStats(bool reloadDelay, bool moveGame = true)
+    public void LoadAllCharacterStats(bool reloadDelay)
     {
         if (ReloadIndex == Characters.Count)
         {
             ReloadIndex = 0;
-            GameStart = true;
-            if (moveGame)
+            if (Turn == -1)
             {
-                NextCharacter();
+                DoTurn();
             }
             return;
         }
@@ -81,13 +90,13 @@ public class GameController : MonoBehaviour
     private void ChooseCharacter()
     {
         Character character = Characters[CharIndex];
+        character.CanJump = true;
         if (Characters[CharIndex].IsPlayer)
         {
-            character.CanJump = true;
+            Dialog.ShowText("Press space to hit the dice block");
         }
         else
         {
-            character.CanJump = true;
             character.Jump();
         }
     }
@@ -101,17 +110,18 @@ public class GameController : MonoBehaviour
     {
         if (Turn == -1)
         {
-            foreach (GameObject die in Dice)
-            {
-                die.SetActive(false);
-            }
-            foreach (Character character in Characters)
-            {
-                Instantiate(Coin, character.gameObject.transform.position + Vector3.up * 3, Quaternion.identity);
-            }
-            Turn++;
-            DoTurn();
+            Dialog.ShowText("Each player starts with 5 coins", AddStartingCoins);
+            return;
         }
+
+        if (CharIndex == 0)
+        {
+            TurnText.DisplayTurn(Turn + 1);
+        }
+
+        Dialog.ShowText($"It's {Characters[CharIndex].Type}'s {(CharIndex == 0 && Turn == 0 ? "turn first" : "turn")}!");
+
+        Turn++;
     }
 
     private int GetPlace(CharacterType type)
@@ -139,5 +149,19 @@ public class GameController : MonoBehaviour
         }
 
         return 0;
+    }
+
+    private void AddStartingCoins()
+    {
+        Turn++;
+        foreach (GameObject die in Dice)
+        {
+            die.SetActive(false);
+        }
+        foreach (Character character in Characters)
+        {
+            Instantiate(Coin, character.gameObject.transform.position + Vector3.up * 3, Quaternion.identity);
+        }
+        Invoke("DoTurn", 1.5f);
     }
 }
