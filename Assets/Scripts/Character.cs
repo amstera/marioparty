@@ -27,6 +27,7 @@ public class Character : MonoBehaviour
     void Start()
     {
         _gameController = GameController.Instance;
+        AmountDisplay.transform.SetParent(null);
         foreach (Character character in FindObjectsOfType<Character>())
         {
             if (character.Type == Type)
@@ -63,7 +64,8 @@ public class Character : MonoBehaviour
             }
             else
             {
-                transform.LookAt(_destinations.Peek());
+                Vector3 pos = _destinations.Peek();
+                transform.LookAt(new Vector3(pos.x, transform.position.y, pos.z));
                 transform.position += transform.forward * Speed * Time.deltaTime;
             }
         }
@@ -98,15 +100,15 @@ public class Character : MonoBehaviour
 
     public void ChangeCoins(int amount)
     {
-        Coins += amount;
-        AmountDisplay.Display(amount, AmountType.Coin);
+        Coins = Mathf.Clamp(Coins + amount, 0, 100);
+        AmountDisplay.Display(amount, AmountType.Coin, transform.position);
         _gameController.LoadAllCharacterStats(false);
     }
 
     public void ChangeStars(int amount)
     {
-        Stars += amount;
-        AmountDisplay.Display(amount, AmountType.Star);
+        Stars += Mathf.Clamp(Stars + amount, 0, 100);
+        AmountDisplay.Display(amount, AmountType.Star, transform.position);
         _gameController.LoadAllCharacterStats(false);
     }
 

@@ -17,13 +17,16 @@ public class GameController : MonoBehaviour
     public List<Dice> Dice;
     public GameObject Coin;
 
-    void Start()
+    void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
         }
+    }
 
+    void Start()
+    {
         ChooseCharacter();
     }
 
@@ -97,16 +100,22 @@ public class GameController : MonoBehaviour
         Dice[(int)character.Type - 1].gameObject.SetActive(false);
 
         //make space do its action
-
-        //update char index and turn
-        CharIndex++;
-        if (CharIndex >= Characters.Count)
+        var space = Spaces[character.Position];
+        if (space.Type == CircleType.Positive || space.Type == CircleType.Negative)
         {
-            CharIndex = 0;
-            Turn++;
+            character.ChangeCoins(space.Type == CircleType.Positive ? 3 : -3);
+            Invoke("NextTurn", 1f);
+        }
+    }
+
+    public Character GetCurrentCharacter()
+    {
+        if (Turn == -1)
+        {
+            return null;
         }
 
-        DoTurn();
+        return Characters[CharIndex];
     }
 
     private void ChooseCharacter()
@@ -225,5 +234,18 @@ public class GameController : MonoBehaviour
             Instantiate(Coin, character.gameObject.transform.position + Vector3.up * 3, Quaternion.identity);
         }
         Invoke("DoTurn", 1.5f);
+    }
+
+    private void NextTurn()
+    {
+        //update char index and turn
+        CharIndex++;
+        if (CharIndex >= Characters.Count)
+        {
+            CharIndex = 0;
+            Turn++;
+        }
+
+        DoTurn();
     }
 }
