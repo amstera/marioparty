@@ -201,21 +201,29 @@ public class GameController : MonoBehaviour
         int rank = 1;
         int currentStars = orderedCharacters[0].Stars;
         int currentCoins = orderedCharacters[0].Coins;
+        int amountSinceLastIncrement = 0;
         foreach (Character character in orderedCharacters)
         {
-            if (character.Type == type)
-            {
-                return rank;
-            }
             if (character.Stars != currentStars)
             {
                 currentStars = character.Stars;
-                rank++;
+                rank += amountSinceLastIncrement;
+                amountSinceLastIncrement = 1;
             }
             else if  (character.Coins != currentCoins)
             {
                 currentCoins = character.Coins;
-                rank++;
+                rank += amountSinceLastIncrement;
+                amountSinceLastIncrement = 1;
+            }
+            else
+            {
+                amountSinceLastIncrement++;
+            }
+
+            if (character.Type == type)
+            {
+                return rank;
             }
         }
 
