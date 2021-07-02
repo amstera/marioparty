@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Character : MonoBehaviour
@@ -7,20 +9,32 @@ public class Character : MonoBehaviour
     public bool IsPlayer;
     public bool CanJump;
     public float JumpForce = 6;
+    public float Speed = 5;
     public int Roll;
+    public int Position;
     public int Coins;
     public int Stars;
     public CharacterType Type;
 
     public AmountDisplay AmountDisplay;
 
+    private Queue<Vector3> _destinations;
     private bool _isJumping;
+    private bool _isWalking;
 
     private GameController _gameController;
 
     void Start()
     {
         _gameController = GameController.Instance;
+        foreach (Character character in FindObjectsOfType<Character>())
+        {
+            if (character.Type == Type)
+            {
+                continue;
+            }
+            Physics.IgnoreCollision(GetComponent<Collider>(), character.GetComponent<Collider>(), true);
+        }
     }
 
     void FixedUpdate()
@@ -30,6 +44,27 @@ public class Character : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 Jump();
+            }
+        }
+    }
+
+    void Update()
+    {
+       if (_isWalking)
+        {
+            if (Vector3.Distance(transform.position, _destinations.Peek()) < 0.1f)
+            {
+                _destinations.Dequeue();
+                if (_destinations.Count == 0)
+                {
+                    _isWalking = false;
+                    _gameController.ReachedSpace(this);
+                }
+            }
+            else
+            {
+                transform.LookAt(_destinations.Peek());
+                transform.position += transform.forward * Speed * Time.deltaTime;
             }
         }
     }
@@ -55,6 +90,12 @@ public class Character : MonoBehaviour
         CanJump = false;
     }
 
+    public void WalkTowards(Queue<Vector3> destinations)
+    {
+        _isWalking = true;
+        _destinations = destinations;
+    }
+
     public void ChangeCoins(int amount)
     {
         Coins += amount;
@@ -73,7 +114,7 @@ public class Character : MonoBehaviour
     {
         _isJumping = false;
         Animator.SetInteger("State", (int)CharacterState.Idle);
-        _gameController.CharacterLanded();
+        _gameController.CharacterLanded(this);
     }
 }
 

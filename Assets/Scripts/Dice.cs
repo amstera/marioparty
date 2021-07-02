@@ -32,7 +32,7 @@ public class Dice : MonoBehaviour
         Text.text = string.Empty;
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         Text.text = string.Empty;
     }

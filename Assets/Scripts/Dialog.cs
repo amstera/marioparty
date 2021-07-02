@@ -31,7 +31,7 @@ public class Dialog : MonoBehaviour
 
         _callback = callback;
         _isShowingText = true;
-        _textToShow = text += "\n▼";
+        _textToShow = text += " ▼";
         StartCoroutine(WriteOutText());
     }
 
@@ -39,6 +39,10 @@ public class Dialog : MonoBehaviour
     {
         foreach (char c in _textToShow)
         {
+            if (!_isShowingText)
+            {
+                yield return null;
+            }
             DialogText.text += c;
             yield return new WaitForEndOfFrame();
         }

@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
     public List<CharacterStat> CharacterStats;
     public Dialog Dialog;
     public TurnText TurnText;
-    public List<GameObject> Dice;
+    public List<Dice> Dice;
     public GameObject Coin;
 
     void Start()
@@ -27,11 +27,15 @@ public class GameController : MonoBehaviour
         ChooseCharacter();
     }
 
-    public void CharacterLanded()
+    public void CharacterLanded(Character character)
     {
         if (Turn == -1)
         {
             NextCharacter();
+        }
+        else
+        {
+            Move(character);
         }
     }
 
@@ -87,6 +91,24 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void ReachedSpace(Character character)
+    {
+        //hide die
+        Dice[(int)character.Type - 1].gameObject.SetActive(false);
+
+        //make space do its action
+
+        //update char index and turn
+        CharIndex++;
+        if (CharIndex >= Characters.Count)
+        {
+            CharIndex = 0;
+            Turn++;
+        }
+
+        DoTurn();
+    }
+
     private void ChooseCharacter()
     {
         Character character = Characters[CharIndex];
@@ -119,9 +141,49 @@ public class GameController : MonoBehaviour
             TurnText.DisplayTurn(Turn + 1);
         }
 
-        Dialog.ShowText($"It's {Characters[CharIndex].Type}'s {(CharIndex == 0 && Turn == 0 ? "turn first" : "turn")}!");
+        Dialog.ShowText($"It's {Characters[CharIndex].Type}'s {(CharIndex == 0 && Turn == 0 ? "turn first" : "turn")}!", SetUpDice);
+    }
 
-        Turn++;
+    private void SetUpDice()
+    {
+        Character character = Characters[CharIndex];
+        Vector3 characterPosition = character.transform.position;
+        GameObject die = Dice[(int)character.Type - 1].gameObject;
+
+        die.transform.position = new Vector3(characterPosition.x, die.transform.position.y, characterPosition.z);
+        die.SetActive(true);
+        ChooseCharacter();
+    }
+
+    private void Move(Character character)
+    {
+        int roll = character.Roll;
+        int originalPos = character.Position;
+        character.Position = (originalPos + roll) % Spaces.Count;
+        if (Turn == 0)
+        {
+            character.Position--;
+        }
+
+        Queue<Vector3> spacePositions = new Queue<Vector3>();
+        for (int i = originalPos; i <= (character.Position < originalPos ? Spaces.Count - 1 : character.Position); i++)
+        {
+            Vector3 spacePosition = Spaces[i].transform.position;
+            var pos = new Vector3(spacePosition.x, character.transform.position.y, spacePosition.z);
+            spacePositions.Enqueue(pos);
+        }
+        if (character.Position < originalPos)
+        {
+            for (int i = 0; i <= character.Position; i++)
+            {
+                Vector3 spacePosition = Spaces[i].transform.position;
+                var pos = new Vector3(spacePosition.x, character.transform.position.y, spacePosition.z);
+                spacePositions.Enqueue(pos);
+            }
+        }
+
+        //walk towards this space
+        character.WalkTowards(spacePositions);
     }
 
     private int GetPlace(CharacterType type)
@@ -154,9 +216,9 @@ public class GameController : MonoBehaviour
     private void AddStartingCoins()
     {
         Turn++;
-        foreach (GameObject die in Dice)
+        foreach (Dice die in Dice)
         {
-            die.SetActive(false);
+            die.gameObject.SetActive(false);
         }
         foreach (Character character in Characters)
         {
