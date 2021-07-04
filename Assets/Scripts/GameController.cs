@@ -141,7 +141,7 @@ public class GameController : MonoBehaviour
     {
         if (Turn == -1)
         {
-            Dialog.ShowText("Each player starts with 5 coins", AddStartingCoins);
+            Dialog.ShowText($"{Characters[CharIndex].Type} goes first!", AddCoinsText);
             return;
         }
 
@@ -150,7 +150,7 @@ public class GameController : MonoBehaviour
             TurnText.DisplayTurn(Turn + 1);
         }
 
-        Dialog.ShowText($"It's {Characters[CharIndex].Type}'s {(CharIndex == 0 && Turn == 0 ? "turn first" : "turn")}!", SetUpDice);
+        Dialog.ShowText($"{Characters[CharIndex].Type}, start!", SetUpDice);
     }
 
     private void SetUpDice()
@@ -228,6 +228,11 @@ public class GameController : MonoBehaviour
         }
 
         return 0;
+    }
+
+    private void AddCoinsText()
+    {
+        Dialog.ShowText("Each player starts with 5 coins", AddStartingCoins);
     }
 
     private void AddStartingCoins()

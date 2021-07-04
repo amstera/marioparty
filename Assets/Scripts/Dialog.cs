@@ -8,17 +8,20 @@ public class Dialog : MonoBehaviour
     public Text DialogText;
     public bool _isShowingText;
     public string _textToShow;
+
     private Action _callback;
+    private bool _isFinished;
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && _isFinished)
         {
             DialogText.text = string.Empty;
             _isShowingText = false;
             _textToShow = string.Empty;
-            _callback?.Invoke();
+            var callBackToCall = _callback;
             _callback = null;
+            callBackToCall?.Invoke();
         }
     }
 
@@ -37,6 +40,7 @@ public class Dialog : MonoBehaviour
 
     private IEnumerator WriteOutText()
     {
+        _isFinished = false;
         foreach (char c in _textToShow)
         {
             if (!_isShowingText)
@@ -46,5 +50,7 @@ public class Dialog : MonoBehaviour
             DialogText.text += c;
             yield return new WaitForEndOfFrame();
         }
+
+        _isFinished = true;
     }
 }

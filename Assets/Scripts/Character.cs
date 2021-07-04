@@ -53,21 +53,7 @@ public class Character : MonoBehaviour
     {
        if (_isWalking)
         {
-            if (Vector3.Distance(transform.position, _destinations.Peek()) < 0.1f)
-            {
-                _destinations.Dequeue();
-                if (_destinations.Count == 0)
-                {
-                    _isWalking = false;
-                    _gameController.ReachedSpace(this);
-                }
-            }
-            else
-            {
-                Vector3 pos = _destinations.Peek();
-                transform.LookAt(new Vector3(pos.x, transform.position.y, pos.z));
-                transform.position += transform.forward * Speed * Time.deltaTime;
-            }
+            Walk();
         }
     }
 
@@ -95,6 +81,7 @@ public class Character : MonoBehaviour
     public void WalkTowards(Queue<Vector3> destinations)
     {
         _isWalking = true;
+        Animator.SetInteger("State", (int)CharacterState.Walk);
         _destinations = destinations;
     }
 
@@ -117,6 +104,25 @@ public class Character : MonoBehaviour
         _isJumping = false;
         Animator.SetInteger("State", (int)CharacterState.Idle);
         _gameController.CharacterLanded(this);
+    }
+
+    private void Walk()
+    {
+        if (Vector3.Distance(transform.position, _destinations.Peek()) < 0.2)
+        {
+            _destinations.Dequeue();
+            if (_destinations.Count == 0)
+            {
+                Animator.SetInteger("State", (int)CharacterState.Idle);
+                _isWalking = false;
+                _gameController.ReachedSpace(this);
+                return;
+            }
+        }
+
+        Vector3 pos = _destinations.Peek();
+        transform.LookAt(new Vector3(pos.x, transform.position.y, pos.z));
+        transform.position += transform.forward * Speed * Time.deltaTime;
     }
 }
 
