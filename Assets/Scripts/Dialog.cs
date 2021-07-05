@@ -11,7 +11,7 @@ public class Dialog : MonoBehaviour
 
     private Action _callback;
 
-    public void Update()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && DialogText.text == _textToShow)
         {

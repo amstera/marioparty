@@ -15,10 +15,10 @@ public class Character : MonoBehaviour
     public int Coins;
     public int Stars;
     public CharacterType Type;
+    public Queue<Circle> Destinations;
 
     public AmountDisplay AmountDisplay;
 
-    private Queue<Vector3> _destinations;
     private bool _isJumping;
     private bool _isWalking;
 
@@ -78,11 +78,11 @@ public class Character : MonoBehaviour
         CanJump = false;
     }
 
-    public void WalkTowards(Queue<Vector3> destinations)
+    public void WalkTowards(Queue<Circle> destinations)
     {
         _isWalking = true;
         Animator.SetInteger("State", (int)CharacterState.Walk);
-        _destinations = destinations;
+        Destinations = destinations;
     }
 
     public void ChangeCoins(int amount)
@@ -99,6 +99,27 @@ public class Character : MonoBehaviour
         _gameController.LoadAllCharacterStats(false);
     }
 
+    private void Walk()
+    {
+        Circle space = Destinations.Peek();
+        Vector3 pos = PositionFromSpace(space);
+        if (Vector3.Distance(transform.position, pos) < 0.2f)
+        {
+            Destinations.Dequeue();
+            if (Destinations.Count == 0 || space.Type == CircleType.Star)
+            {
+                Animator.SetInteger("State", (int)CharacterState.Idle);
+                _isWalking = false;
+                _gameController.ReachedSpace(this, space);
+                return;
+            }
+            pos = PositionFromSpace(Destinations.Peek());
+        }
+
+        transform.LookAt(new Vector3(pos.x, transform.position.y, pos.z));
+        transform.position += transform.forward * Speed * Time.deltaTime;
+    }
+
     private void Land()
     {
         _isJumping = false;
@@ -106,23 +127,11 @@ public class Character : MonoBehaviour
         _gameController.CharacterLanded(this);
     }
 
-    private void Walk()
+    private Vector3 PositionFromSpace(Circle space)
     {
-        if (Vector3.Distance(transform.position, _destinations.Peek()) < 0.2)
-        {
-            _destinations.Dequeue();
-            if (_destinations.Count == 0)
-            {
-                Animator.SetInteger("State", (int)CharacterState.Idle);
-                _isWalking = false;
-                _gameController.ReachedSpace(this);
-                return;
-            }
-        }
-
-        Vector3 pos = _destinations.Peek();
-        transform.LookAt(new Vector3(pos.x, transform.position.y, pos.z));
-        transform.position += transform.forward * Speed * Time.deltaTime;
+        Vector3 spacePosition = space.transform.position;
+        var pos = new Vector3(spacePosition.x, transform.position.y, spacePosition.z);
+        return pos;
     }
 }
 

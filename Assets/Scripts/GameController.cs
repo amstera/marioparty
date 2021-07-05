@@ -13,7 +13,9 @@ public class GameController : MonoBehaviour
 
     public List<CharacterStat> CharacterStats;
     public Dialog Dialog;
+    public Question Question;
     public TurnText TurnText;
+    public StarText StarText;
     public List<Dice> Dice;
     public GameObject Coin;
 
@@ -94,17 +96,20 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void ReachedSpace(Character character)
+    public void ReachedSpace(Character character, Circle space)
     {
         //hide die
         Dice[(int)character.Type - 1].gameObject.SetActive(false);
 
         //make space do its action
-        var space = Spaces[character.Position];
         if (space.Type == CircleType.Positive || space.Type == CircleType.Negative)
         {
             character.ChangeCoins(space.Type == CircleType.Positive ? 3 : -3);
             Invoke("NextTurn", 1f);
+        }
+        else if (space.Type == CircleType.Star)
+        {
+            Question.Show("Get this star for 20 coins?", character.IsPlayer ? AIChoice.None : character.Coins >= 20 ? AIChoice.Yes : AIChoice.No, BuyStar);
         }
     }
 
@@ -169,30 +174,31 @@ public class GameController : MonoBehaviour
         int roll = character.Roll;
         int originalPos = character.Position;
         character.Position = (originalPos + roll) % Spaces.Count;
+
+        Queue<Circle> spaces = new Queue<Circle>();
         if (Turn == 0)
         {
+            spaces.Enqueue(Spaces[originalPos]);
             character.Position--;
         }
 
-        Queue<Vector3> spacePositions = new Queue<Vector3>();
-        for (int i = originalPos; i <= (character.Position < originalPos ? Spaces.Count - 1 : character.Position); i++)
+        if (originalPos + 1 < Spaces.Count)
         {
-            Vector3 spacePosition = Spaces[i].transform.position;
-            var pos = new Vector3(spacePosition.x, character.transform.position.y, spacePosition.z);
-            spacePositions.Enqueue(pos);
+            for (int i = originalPos + 1; i <= (character.Position < originalPos ? Spaces.Count - 1 : character.Position); i++)
+            {
+                spaces.Enqueue(Spaces[i]);
+            }
         }
         if (character.Position < originalPos)
         {
             for (int i = 0; i <= character.Position; i++)
             {
-                Vector3 spacePosition = Spaces[i].transform.position;
-                var pos = new Vector3(spacePosition.x, character.transform.position.y, spacePosition.z);
-                spacePositions.Enqueue(pos);
+                spaces.Enqueue(Spaces[i]);
             }
         }
 
         //walk towards this space
-        character.WalkTowards(spacePositions);
+        character.WalkTowards(spaces);
     }
 
     private int GetPlace(CharacterType type)
@@ -267,5 +273,50 @@ public class GameController : MonoBehaviour
         Character character = Characters[CharIndex];
         character.CanJump = true;
         character.Jump();
+    }
+
+    private void BuyStar(bool buy)
+    {
+        Character character = GetCurrentCharacter();
+
+        if (buy)
+        {
+            if (character.Coins < 20)
+            {
+                Dialog.ShowText("You don't have enough coins to get this star!", ContinueTurn);
+            }
+            else
+            {
+                character.ChangeCoins(-20);
+                Invoke("AddStar", 1);
+            }
+        }
+        else
+        {
+            ContinueTurn();
+        }
+    }
+
+    private void AddStar()
+    {
+        Character character = GetCurrentCharacter();
+
+        character.ChangeStars(1);
+        StarText.Show(character.transform.position + Vector3.up);
+        Invoke("ContinueTurn", 1.5f);
+    }
+
+    private void ContinueTurn()
+    {
+        Character character = GetCurrentCharacter();
+
+        if (character.Destinations.Count == 0)
+        {
+            NextTurn();
+        }
+        else
+        {
+            character.WalkTowards(character.Destinations);
+        }
     }
 }
