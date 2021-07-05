@@ -10,11 +10,10 @@ public class Dialog : MonoBehaviour
     public string _textToShow;
 
     private Action _callback;
-    private bool _isFinished;
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _isFinished)
+        if (Input.GetKeyDown(KeyCode.Space) && DialogText.text == _textToShow)
         {
             DialogText.text = string.Empty;
             _isShowingText = false;
@@ -40,7 +39,6 @@ public class Dialog : MonoBehaviour
 
     private IEnumerator WriteOutText()
     {
-        _isFinished = false;
         foreach (char c in _textToShow)
         {
             if (!_isShowingText)
@@ -50,7 +48,5 @@ public class Dialog : MonoBehaviour
             DialogText.text += c;
             yield return new WaitForEndOfFrame();
         }
-
-        _isFinished = true;
     }
 }

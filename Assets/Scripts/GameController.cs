@@ -121,13 +121,13 @@ public class GameController : MonoBehaviour
     private void ChooseCharacter()
     {
         Character character = Characters[CharIndex];
-        character.CanJump = true;
         if (Characters[CharIndex].IsPlayer)
         {
-            Dialog.ShowText("Press space to hit the dice block");
+            Dialog.ShowText("Press space to hit the dice block", CharacterJump);
         }
         else
         {
+            character.CanJump = true;
             character.Jump();
         }
     }
@@ -260,5 +260,12 @@ public class GameController : MonoBehaviour
         }
 
         DoTurn();
+    }
+
+    private void CharacterJump()
+    {
+        Character character = Characters[CharIndex];
+        character.CanJump = true;
+        character.Jump();
     }
 }

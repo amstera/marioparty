@@ -9,5 +9,6 @@ public enum CircleType
 {
     Positive = 0,
     Negative = 1,
-    Star = 2
+    Star = 2,
+    Steal = 3
 }
