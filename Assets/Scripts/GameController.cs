@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
     public Question Question;
     public TurnText TurnText;
     public StarText StarText;
+    public Rankings Rankings;
     public List<Dice> Dice;
     public GameObject Coin;
 
@@ -123,6 +124,42 @@ public class GameController : MonoBehaviour
         return Characters[CharIndex];
     }
 
+
+    public int GetPlace(CharacterType type)
+    {
+        var orderedCharacters = Characters.OrderByDescending(c => c.Stars).ThenByDescending(c => c.Coins).ToList();
+        int rank = 1;
+        int currentStars = orderedCharacters[0].Stars;
+        int currentCoins = orderedCharacters[0].Coins;
+        int amountSinceLastIncrement = 0;
+        foreach (Character character in orderedCharacters)
+        {
+            if (character.Stars != currentStars)
+            {
+                currentStars = character.Stars;
+                rank += amountSinceLastIncrement;
+                amountSinceLastIncrement = 1;
+            }
+            else if (character.Coins != currentCoins)
+            {
+                currentCoins = character.Coins;
+                rank += amountSinceLastIncrement;
+                amountSinceLastIncrement = 1;
+            }
+            else
+            {
+                amountSinceLastIncrement++;
+            }
+
+            if (character.Type == type)
+            {
+                return rank;
+            }
+        }
+
+        return 0;
+    }
+
     private void ChooseCharacter()
     {
         Character character = Characters[CharIndex];
@@ -201,41 +238,6 @@ public class GameController : MonoBehaviour
         character.WalkTowards(spaces);
     }
 
-    private int GetPlace(CharacterType type)
-    {
-        var orderedCharacters = Characters.OrderByDescending(c => c.Stars).ThenByDescending(c => c.Coins).ToList();
-        int rank = 1;
-        int currentStars = orderedCharacters[0].Stars;
-        int currentCoins = orderedCharacters[0].Coins;
-        int amountSinceLastIncrement = 0;
-        foreach (Character character in orderedCharacters)
-        {
-            if (character.Stars != currentStars)
-            {
-                currentStars = character.Stars;
-                rank += amountSinceLastIncrement;
-                amountSinceLastIncrement = 1;
-            }
-            else if  (character.Coins != currentCoins)
-            {
-                currentCoins = character.Coins;
-                rank += amountSinceLastIncrement;
-                amountSinceLastIncrement = 1;
-            }
-            else
-            {
-                amountSinceLastIncrement++;
-            }
-
-            if (character.Type == type)
-            {
-                return rank;
-            }
-        }
-
-        return 0;
-    }
-
     private void AddCoinsText()
     {
         Dialog.ShowText("Each player starts with 5 coins", AddStartingCoins);
@@ -303,7 +305,7 @@ public class GameController : MonoBehaviour
 
         character.ChangeStars(1);
         StarText.Show(character.transform.position + Vector3.up);
-        Invoke("ContinueTurn", 1.5f);
+        Invoke("ShowRankings", 1.5f);
     }
 
     private void ContinueTurn()
@@ -318,5 +320,13 @@ public class GameController : MonoBehaviour
         {
             character.WalkTowards(character.Destinations);
         }
+    }
+
+    private void ShowRankings()
+    {
+        Rankings.gameObject.SetActive(true);
+        Rankings.ShowRankings();
+
+        ContinueTurn();
     }
 }

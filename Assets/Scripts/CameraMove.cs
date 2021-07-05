@@ -1,8 +1,11 @@
 using UnityEngine;
+using UnityStandardAssets.ImageEffects;
 
 public class CameraMove : MonoBehaviour
 {
     public GameObject Target;
+    public BlurOptimized Blur;
+
     private Vector3 _offset;
     private GameController _gameController;
 
