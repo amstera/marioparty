@@ -5,12 +5,14 @@ using UnityEngine;
 public class Rankings : MonoBehaviour
 {
     public List<RankingPanel> RankingPanels;
+    public GameObject CharacterStats;
+    public GameObject TurnText;
     public CameraMove Cam;
 
     private GameController _gameController;
     private bool _isShowingRanking;
 
-    void OnEnable()
+    void Start()
     {
         _gameController = GameController.Instance;
     }
@@ -29,20 +31,25 @@ public class Rankings : MonoBehaviour
         Cam.Blur.enabled = true;
         _isShowingRanking = true;
 
+        RankingPanels.ForEach(r => r.gameObject.SetActive(true));
+        CharacterStats.SetActive(false);
+        TurnText.SetActive(false);
+
         List<Character> rankedCharacters = _gameController.Characters.OrderByDescending(c => c.Stars).ThenByDescending(c => c.Coins).ToList();
         for (int i = 0; i < RankingPanels.Count; i++)
         {
             RankingPanels[i].Reload(_gameController.GetPlace(rankedCharacters[i].Type), rankedCharacters[i]);
         }
-
-        gameObject.SetActive(true);
     }
 
     private void Hide()
     {
         Time.timeScale = 1;
         Cam.Blur.enabled = false;
-        gameObject.SetActive(false);
         _isShowingRanking = false;
+
+        RankingPanels.ForEach(r => r.gameObject.SetActive(false));
+        CharacterStats.SetActive(true);
+        TurnText.SetActive(true);
     }
 }

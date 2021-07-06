@@ -324,7 +324,6 @@ public class GameController : MonoBehaviour
 
     private void ShowRankings()
     {
-        Rankings.gameObject.SetActive(true);
         Rankings.ShowRankings();
 
         ContinueTurn();
