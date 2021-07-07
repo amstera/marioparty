@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CharacterGame : MonoBehaviour
@@ -8,6 +9,7 @@ public class CharacterGame : MonoBehaviour
     public bool IsPlayer;
     public float JumpForce = 5;
     public List<GameObject> Obstacles;
+    public CharacterType Type;
 
     private bool _isJumping;
     private bool _shouldJump;
@@ -34,7 +36,7 @@ public class CharacterGame : MonoBehaviour
         {
             foreach (GameObject obstacle in Obstacles)
             {
-                if (Vector3.Distance(transform.position, obstacle.transform.position) < Random.Range(1.4f, 2f))
+                if (Vector3.Distance(transform.position, obstacle.transform.position) < Random.Range(1.25f, 2.2f))
                 {
                     Jump();
                 }
@@ -51,6 +53,8 @@ public class CharacterGame : MonoBehaviour
         else if (collision.collider.name == "Spinner")
         {
             Rb.freezeRotation = false;
+            Animator.SetInteger("State", (int)CharacterState.Idle);
+            Rb.AddForce(collision.contacts[0].normal * 2.5f, ForceMode.Impulse);
         }
         else if (collision.collider.name == "Lava")
         {
@@ -68,6 +72,12 @@ public class CharacterGame : MonoBehaviour
         Rb.AddForce(new Vector3(0, JumpForce, 0), ForceMode.Impulse);
         Animator.SetInteger("State", (int)CharacterState.Jump);
         _isJumping = true;
+    }
+
+    public void Win()
+    {
+        Animator.SetTrigger("Victory");
+        Rb.isKinematic = true;
     }
 
     private void Land()
