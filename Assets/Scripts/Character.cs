@@ -51,9 +51,13 @@ public class Character : MonoBehaviour
 
     void Update()
     {
-       if (_isWalking)
+        if (_isWalking)
         {
             Walk();
+        }
+        else
+        {
+            transform.LookAt(new Vector3(transform.position.x, transform.position.y, Camera.main.transform.position.z));
         }
     }
 
@@ -89,6 +93,10 @@ public class Character : MonoBehaviour
     {
         Coins = Mathf.Clamp(Coins + amount, 0, 100);
         AmountDisplay.Display(amount, AmountType.Coin, transform.position);
+        if (amount > 0)
+        {
+            Animator.SetTrigger("Victory");
+        }
         _gameController.LoadAllCharacterStats(false);
     }
 
@@ -96,6 +104,10 @@ public class Character : MonoBehaviour
     {
         Stars += Mathf.Clamp(Stars + amount, 0, 100);
         AmountDisplay.Display(amount, AmountType.Star, transform.position);
+        if (amount > 0)
+        {
+            Animator.SetTrigger("Victory");
+        }
         _gameController.LoadAllCharacterStats(false);
     }
 
