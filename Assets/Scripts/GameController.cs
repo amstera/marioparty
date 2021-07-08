@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class GameController : MonoBehaviour
     public Rankings Rankings;
     public List<Dice> Dice;
     public GameObject Coin;
+    public FadePanel FadePanel;
 
     void Awake()
     {
@@ -30,7 +32,16 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        ChooseCharacter();
+        var saveData = SaveController.Load();
+        if (saveData != null)
+        {
+            UpdateFromSaveData(saveData);
+            Rankings.ShowRankings(DoTurn, saveData.LastWinningCharacter);
+        }
+        else
+        {
+            ChooseCharacter();
+        }
     }
 
     public void CharacterLanded(Character character)
@@ -263,8 +274,10 @@ public class GameController : MonoBehaviour
         CharIndex++;
         if (CharIndex >= Characters.Count)
         {
-            CharIndex = 0;
+            CharIndex--;
             Turn++;
+            Invoke("LoadMiniGame", 0.5f);
+            return;
         }
 
         DoTurn();
@@ -324,8 +337,42 @@ public class GameController : MonoBehaviour
 
     private void ShowRankings()
     {
-        Rankings.ShowRankings();
+        Rankings.ShowRankings(ContinueTurn, CharacterType.Unknown);
+    }
 
-        ContinueTurn();
+    private void LoadMiniGame()
+    {
+        SaveController.Save(Characters, Turn);
+        FadePanel.FadeOut();
+        Invoke("LoadChosenMiniGame", 1.5f);
+    }
+
+    private void LoadChosenMiniGame()
+    {
+        SceneManager.LoadSceneAsync("Lava Jump");
+    }
+
+    private void UpdateFromSaveData(SaveData saveData)
+    {
+        foreach (Dice die in Dice)
+        {
+            die.gameObject.SetActive(false);
+        }
+
+        Turn = saveData.Turn;
+        foreach (Character character in Characters)
+        {
+            var savedCharacter = saveData.Characters.Find(c => c.Type == character.Type);
+            character.transform.position = savedCharacter.WorldPosition;
+            character.Position = savedCharacter.BoardPosition;
+            character.Coins = savedCharacter.Coins;
+            character.Stars = savedCharacter.Stars;
+            character.IsPlayer = savedCharacter.IsPlayer;
+            character.Roll = savedCharacter.RollPosition;
+        }
+
+        Characters = Characters.OrderBy(c => c.Roll).ToList();
+
+        LoadAllCharacterStats(false);
     }
 }
