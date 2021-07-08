@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class CharacterGame : MonoBehaviour
@@ -54,7 +53,8 @@ public class CharacterGame : MonoBehaviour
         {
             Rb.freezeRotation = false;
             Animator.SetInteger("State", (int)CharacterState.Idle);
-            Rb.AddForce(collision.contacts[0].normal * 2.5f, ForceMode.Impulse);
+            Vector3 normalForce = collision.contacts[0].normal;
+            Rb.AddForce(new Vector3(normalForce.x, 0, normalForce.z) * 5f, ForceMode.Impulse);
         }
         else if (collision.collider.name == "Lava")
         {
@@ -76,8 +76,8 @@ public class CharacterGame : MonoBehaviour
 
     public void Win()
     {
+        Physics.IgnoreCollision(GetComponent<Collider>(), FindObjectOfType<Spinner>().GetComponent<Collider>(), true);
         Animator.SetTrigger("Victory");
-        Rb.isKinematic = true;
     }
 
     private void Land()
