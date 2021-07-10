@@ -52,7 +52,7 @@ public class GameController : MonoBehaviour
         else
         {
             UpdateFromSaveData(saveData);
-            Rankings.ShowRankings(DoTurn, saveData.LastWinningCharacter);
+            Rankings.ShowRankings(DoTurn, saveData.LastWinningCharacter, false);
         }
     }
 
@@ -161,6 +161,11 @@ public class GameController : MonoBehaviour
     public int GetPlace(CharacterType type)
     {
         var orderedCharacters = Characters.OrderByDescending(c => c.Stars).ThenByDescending(c => c.Coins).ToList();
+        return GetPlace(type, orderedCharacters);
+    }
+
+    public static int GetPlace(CharacterType type, List<Character> orderedCharacters)
+    {
         int rank = 1;
         int currentStars = orderedCharacters[0].Stars;
         int currentCoins = orderedCharacters[0].Coins;
@@ -415,7 +420,7 @@ public class GameController : MonoBehaviour
 
     private void ShowRankings()
     {
-        Rankings.ShowRankings(ContinueTurn, CharacterType.Unknown);
+        Rankings.ShowRankings(ContinueTurn, CharacterType.Unknown, false);
     }
 
     private void LoadMiniGame()

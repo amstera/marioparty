@@ -28,20 +28,49 @@ public class Rankings : MonoBehaviour
         }
     }
 
-    public void ShowRankings(Action callback, CharacterType miniGameWinner)
+    public void ShowRankings(Action callback, CharacterType miniGameWinner, bool useSaveData)
     {
         Cam.Blur.enabled = true;
         _isShowingRanking = true;
 
         RankingPanels.ForEach(r => r.gameObject.SetActive(true));
-        CharacterStats.SetActive(false);
-        TurnText.SetActive(false);
+        if (CharacterStats != null)
+        {
+            CharacterStats.SetActive(false);
+        }
+        if (TurnText != null)
+        {
+            TurnText.SetActive(false);
+        }
         _callback = callback;
 
-        List<Character> rankedCharacters = _gameController.Characters.OrderByDescending(c => c.Stars).ThenByDescending(c => c.Coins).ToList();
-        for (int i = 0; i < RankingPanels.Count; i++)
+        if (useSaveData)
         {
-            RankingPanels[i].Reload(_gameController.GetPlace(rankedCharacters[i].Type), rankedCharacters[i], rankedCharacters[i].Type == miniGameWinner);
+            SaveData saveData = SaveController.Load();
+            List<Character> rankedCharacters = new List<Character>();
+            var rankedCompressedCharacters = saveData.Characters.OrderByDescending(c => c.Stars).ThenByDescending(c => c.Coins).ToList();
+            foreach (var rankedCharacter in rankedCompressedCharacters)
+            {
+                rankedCharacters.Add(new Character
+                {
+                    Coins = rankedCharacter.Coins,
+                    Stars = rankedCharacter.Stars,
+                    Type = rankedCharacter.Type
+                });
+            }
+
+            for (int i = 0; i < RankingPanels.Count; i++)
+            {
+                RankingPanels[i].Reload(GameController.GetPlace(rankedCharacters[i].Type, rankedCharacters), rankedCharacters[i], rankedCharacters[i].Type == miniGameWinner);
+            }
+        }
+        else
+        {
+            List<Character> rankedCharacters = _gameController.Characters.OrderByDescending(c => c.Stars).ThenByDescending(c => c.Coins).ToList();
+            for (int i = 0; i < RankingPanels.Count; i++)
+            {
+                RankingPanels[i].Reload(_gameController.GetPlace(rankedCharacters[i].Type), rankedCharacters[i], rankedCharacters[i].Type == miniGameWinner);
+            }
         }
     }
 
@@ -51,7 +80,13 @@ public class Rankings : MonoBehaviour
         _isShowingRanking = false;
 
         RankingPanels.ForEach(r => r.gameObject.SetActive(false));
-        CharacterStats.SetActive(true);
-        TurnText.SetActive(true);
+        if (CharacterStats != null)
+        {
+            CharacterStats.SetActive(true);
+        }
+        if (TurnText != null)
+        {
+            TurnText.SetActive(true);
+        }
     }
 }

@@ -18,7 +18,7 @@ public class CameraMove : MonoBehaviour
 
     void LateUpdate()
     {
-        Target = _gameController.GetCurrentCharacter();
+        Target = _gameController?.GetCurrentCharacter() ?? null;
         if (Target != null)
         {
             var newPos = Target.transform.position + _offset;

@@ -9,6 +9,7 @@ public class CharacterChooserController : MonoBehaviour
     public List<CharacterChoose> Characters;
     public CharacterChoose ChosenCharacter;
     public ParticleSystem Fireworks;
+    public FadePanel FadePanel;
 
     private int _charIndex;
 
@@ -61,8 +62,14 @@ public class CharacterChooserController : MonoBehaviour
             ChosenCharacter.GetComponentInChildren<Animator>().SetTrigger("Victory");
             Fireworks.Play();
 
-            Invoke("LoadGame", 1f);
+            Invoke("FadeOut", 1f);
         }
+    }
+
+    private void FadeOut()
+    {
+        FadePanel.FadeOut();
+        Invoke("LoadGame", 1f);
     }
 
     private void LoadGame()
