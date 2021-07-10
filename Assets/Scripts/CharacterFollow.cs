@@ -5,8 +5,10 @@ public class CharacterFollow : MonoBehaviour
     public Animator Animator;
     public BumperBall Ball;
     public GameObject Character;
+    public CharacterType CharacterType;
     public bool IsPlayer;
     public bool IsMoving;
+    public bool CanMove;
 
     private Vector3 _characterOffset;
     private bool _startedMoving;
@@ -20,6 +22,11 @@ public class CharacterFollow : MonoBehaviour
 
     void Update()
     {
+        if (!CanMove)
+        {
+            return;
+        }
+
         if (!_startedMoving && IsMoving)
         {
             Animator.SetInteger("State", (int)CharacterState.Walk);
@@ -27,12 +34,6 @@ public class CharacterFollow : MonoBehaviour
         }
 
         _forceToAdd = Vector3.zero;
-
-        var remainingCharacters = FindObjectsOfType<CharacterFollow>();
-        if (remainingCharacters.Length == 1)
-        {
-            Ball.Rb.isKinematic = true;
-        }
 
         if (IsPlayer)
         {
@@ -70,7 +71,7 @@ public class CharacterFollow : MonoBehaviour
                     continue;
                 }
                 var distance = Vector3.Distance(transform.position, bumperBall.transform.position);
-                if (distance < closestDistance)
+                if (distance < closestDistance && bumperBall.transform.position.y > 0)
                 {
                     closestDistance = distance;
                     closestBumperBall = bumperBall;
@@ -84,6 +85,7 @@ public class CharacterFollow : MonoBehaviour
             }
             else
             {
+                IsMoving = true;
                 var diff = (closestBumperBall.transform.position - Ball.transform.position).normalized;
                 _forceToAdd = diff;
             }
@@ -93,21 +95,29 @@ public class CharacterFollow : MonoBehaviour
     void LateUpdate()
     {
         Character.transform.position = Ball.transform.position + _characterOffset;
+        Vector3 lookAt = new Vector3(_forceToAdd.x * 10, Character.transform.position.y, _forceToAdd.z * 10);
         if (_targetBall != null)
         {
-            Character.transform.LookAt(new Vector3(_targetBall.transform.position.x, Character.transform.position.y, _targetBall.transform.position.z));
+            lookAt = new Vector3(_targetBall.transform.position.x, Character.transform.position.y, _targetBall.transform.position.z);
         }
-        else if (IsPlayer)
-        {
-            Character.transform.LookAt(new Vector3(_forceToAdd.x * 10, Character.transform.position.y, _forceToAdd.z * 10));
-        }
+
+        var targetRotation = Quaternion.LookRotation(lookAt - Character.transform.position);
+        Character.transform.rotation = Quaternion.Slerp(Character.transform.rotation, targetRotation, 5f * Time.deltaTime);
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         if (_forceToAdd != Vector3.zero)
         {
             Ball.AddForce(_forceToAdd);
         }
+    }
+
+    public void Win()
+    {
+        Ball.Rb.isKinematic = true;
+        CanMove = false;
+        Animator.SetInteger("State", (int)CharacterState.Idle);
+        Animator.SetTrigger("Victory");
     }
 }

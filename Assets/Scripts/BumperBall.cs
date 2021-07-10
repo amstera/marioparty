@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class BumperBall : MonoBehaviour
@@ -15,6 +16,10 @@ public class BumperBall : MonoBehaviour
         if (collision.collider.tag == "Terrain")
         {
             Destroy(transform.parent.gameObject);
+        }
+        else if (collision.collider.tag == "Player")
+        {
+            Rb.AddForce(collision.contacts.First().normal * 5);
         }
     }
 }

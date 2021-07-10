@@ -7,6 +7,7 @@ public class SaveData
 {
     public List<CompressedCharacter> Characters;
     public int Turn;
+    public string LastMiniGame;
     public CharacterType LastWinningCharacter;
 }
 

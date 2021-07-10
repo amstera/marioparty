@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
     public int CharIndex;
     public int ReloadIndex;
     public int Turn = -1;
+    public string LastMiniGame;
 
     public List<CharacterStat> CharacterStats;
     public Dialog Dialog;
@@ -349,7 +350,9 @@ public class GameController : MonoBehaviour
 
     private void LoadChosenMiniGame()
     {
-        SceneManager.LoadSceneAsync("Lava Jump");
+        List<string> miniGames = new List<string> { "Lava Jump", "Bumper Ball" };
+        miniGames.Remove(LastMiniGame);
+        SceneManager.LoadSceneAsync(miniGames[Random.Range(0, miniGames.Count)]);
     }
 
     private void UpdateFromSaveData(SaveData saveData)
@@ -360,6 +363,7 @@ public class GameController : MonoBehaviour
         }
 
         Turn = saveData.Turn;
+        LastMiniGame = saveData.LastMiniGame;
         foreach (Character character in Characters)
         {
             var savedCharacter = saveData.Characters.Find(c => c.Type == character.Type);
