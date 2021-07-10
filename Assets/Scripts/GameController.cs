@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour
     public Dialog Dialog;
     public Question Question;
     public TurnText TurnText;
+    public CurrentTurnText CurrentTurnText;
     public StarText StarText;
     public Rankings Rankings;
     public List<Dice> Dice;
@@ -222,13 +223,14 @@ public class GameController : MonoBehaviour
         if (Turn >= MaxTurns)
         {
             FadePanel.FadeOut();
-            Invoke("LoadEndGame", 1.5f);
+            Invoke("LoadEndGame", 1f);
             return;
         }
 
         if (CharIndex == 0)
         {
             TurnText.DisplayTurn(Turn + 1);
+            CurrentTurnText.Display(Turn + 1, MaxTurns);
             if ((Turn + 1) == MaxTurns - 5)
             {
                 Dialog.ShowText($"5 turns left, spaces are worth double!", ShowCharacterStart);
