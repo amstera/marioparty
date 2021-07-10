@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class GameController : MonoBehaviour
     public int CharIndex;
     public int ReloadIndex;
     public int Turn = -1;
+    public int MaxTurns = 10;
     public string LastMiniGame;
 
     public List<CharacterStat> CharacterStats;
@@ -117,12 +119,22 @@ public class GameController : MonoBehaviour
         //make space do its action
         if (space.Type == CircleType.Positive || space.Type == CircleType.Negative)
         {
-            character.ChangeCoins(space.Type == CircleType.Positive ? 3 : -3);
+            bool isDouble = (Turn + 1) >= MaxTurns - 5;
+            var coins = space.Type == CircleType.Positive ? 3 : -3;
+            if (isDouble)
+            {
+                coins *= 2;
+            }
+            character.ChangeCoins(coins);
             Invoke("NextTurn", 1f);
         }
         else if (space.Type == CircleType.Star)
         {
             Question.Show("Get this star for 20 coins?", character.IsPlayer ? AIChoice.None : character.Coins >= 20 ? AIChoice.Yes : AIChoice.No, BuyStar);
+        }
+        else if (space.Type == CircleType.Item)
+        {
+            Question.Show("Steal someone's star for 40 coins?", character.IsPlayer ? AIChoice.None : character.Coins >= 40 ? AIChoice.Yes : AIChoice.No, StealStar);
         }
     }
 
@@ -199,11 +211,28 @@ public class GameController : MonoBehaviour
             return;
         }
 
+        if (Turn >= MaxTurns)
+        {
+            FadePanel.FadeOut();
+            Invoke("LoadEndGame", 1.5f);
+            return;
+        }
+
         if (CharIndex == 0)
         {
             TurnText.DisplayTurn(Turn + 1);
+            if ((Turn + 1) == MaxTurns - 5)
+            {
+                Dialog.ShowText($"5 turns left, spaces are worth double!", ShowCharacterStart);
+                return;
+            }
         }
 
+        ShowCharacterStart();
+    }
+
+    private void ShowCharacterStart()
+    {
         Dialog.ShowText($"{Characters[CharIndex].Type}, start!", SetUpDice);
     }
 
@@ -313,6 +342,36 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private void StealStar(bool buy)
+    {
+        Character character = GetCurrentCharacter();
+
+        if (buy)
+        {
+            if (character.Coins < 40)
+            {
+                Dialog.ShowText("You don't have enough coins to steal a star!", ContinueTurn);
+            }
+            else
+            {
+                Character stealCharacter = Characters.FindAll(c => c.Stars > 0 && c != character).OrderByDescending(c => c.Stars).FirstOrDefault();
+                if (stealCharacter == null)
+                {
+                    Dialog.ShowText("There's nobody to steal a star from!", ContinueTurn);
+                }
+                else
+                {
+                    character.ChangeCoins(-40);
+                    StartCoroutine(AddStolenStar(stealCharacter));
+                }
+            }
+        }
+        else
+        {
+            ContinueTurn();
+        }
+    }
+
     private void AddStar()
     {
         Character character = GetCurrentCharacter();
@@ -320,6 +379,14 @@ public class GameController : MonoBehaviour
         character.ChangeStars(1);
         StarText.Show(character.transform.position + Vector3.up);
         Invoke("ShowRankings", 1.5f);
+    }
+
+    private IEnumerator AddStolenStar(Character stealCharacter)
+    {
+        yield return new WaitForSeconds(1);
+
+        stealCharacter.Stars--;
+        Dialog.ShowText($"You stole a star from {stealCharacter.Type}!", AddStar);
     }
 
     private void ContinueTurn()
@@ -346,6 +413,11 @@ public class GameController : MonoBehaviour
         SaveController.Save(Characters, Turn);
         FadePanel.FadeOut();
         Invoke("LoadChosenMiniGame", 1.5f);
+    }
+
+    private void LoadEndGame()
+    {
+        SceneManager.LoadSceneAsync("EndGame");
     }
 
     private void LoadChosenMiniGame()

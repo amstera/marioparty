@@ -3,7 +3,8 @@ using UnityStandardAssets.ImageEffects;
 
 public class CameraMove : MonoBehaviour
 {
-    public GameObject Target;
+    public Vector3 StartOffset;
+    public Character Target;
     public BlurOptimized Blur;
 
     private Vector3 _offset;
@@ -11,16 +12,22 @@ public class CameraMove : MonoBehaviour
 
     void Start()
     {
-        _offset = transform.position - (Target.transform.position + new Vector3(0, -2f, -0.25f));
+        _offset = transform.position - StartOffset;
         _gameController = GameController.Instance;
     }
 
     void LateUpdate()
     {
-        Target = _gameController.GetCurrentCharacter()?.gameObject;
+        Target = _gameController.GetCurrentCharacter();
         if (Target != null)
         {
-            transform.position = Vector3.Lerp(transform.position, Target.transform.position + _offset, Time.deltaTime * 2.5f);
+            var newPos = Target.transform.position + _offset;
+            if (Target.Position >= 22 && Target.Position <= 32)
+            {
+                newPos += Vector3.up * 0.5f;
+                newPos += Vector3.forward * 2;
+            }
+            transform.position = Vector3.Lerp(transform.position, newPos, Time.deltaTime * 2.5f);
         }
     }
 }

@@ -101,7 +101,7 @@ public class Character : MonoBehaviour
 
     public void ChangeStars(int amount)
     {
-        Stars += Mathf.Clamp(Stars + amount, 0, 100);
+        Stars = Mathf.Clamp(Stars + amount, 0, 100);
         AmountDisplay.Display(amount, AmountType.Star, transform.position);
         if (amount > 0)
         {
@@ -117,7 +117,7 @@ public class Character : MonoBehaviour
         if (Vector3.Distance(transform.position, pos) < 0.2f)
         {
             Destinations.Dequeue();
-            if (Destinations.Count == 0 || space.Type == CircleType.Star)
+            if (Destinations.Count == 0 || space.Type == CircleType.Star || space.Type == CircleType.Item)
             {
                 Animator.SetInteger("State", (int)CharacterState.Idle);
                 _isWalking = false;
