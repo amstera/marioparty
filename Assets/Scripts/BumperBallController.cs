@@ -12,6 +12,7 @@ public class BumperBallController : MonoBehaviour
     public CharacterType Winner;
 
     private SaveData _saveData;
+    private bool _isDraw;
 
     void Start()
     {
@@ -32,6 +33,19 @@ public class BumperBallController : MonoBehaviour
             Fireworks.Play();
             Invoke("FadeOut", 2);
         }
+        else if (Time.timeSinceLevelLoad >= 30 && !_isDraw)
+        {
+            _isDraw = true;
+            foreach (var character in Characters)
+            {
+                if (character != null)
+                {
+                    character.Draw();
+                }
+            }
+            Text.Show($"Draw!", 2f);
+            Invoke("FadeOut", 2);
+        }
     }
 
     private void ShowGoText()
@@ -50,10 +64,13 @@ public class BumperBallController : MonoBehaviour
     {
         if (_saveData != null)
         {
-            _saveData.LastWinningCharacter = Winner;
+            _saveData.LastWinningCharacter = _isDraw ? CharacterType.Unknown : Winner;
             _saveData.LastMiniGame = "Bumper Ball";
-            var winningCharacter = _saveData.Characters.Find(c => c.Type == Winner);
-            winningCharacter.Coins += 10;
+            if (Winner != CharacterType.Unknown)
+            {
+                var winningCharacter = _saveData.Characters.Find(c => c.Type == Winner);
+                winningCharacter.Coins += 10;
+            }
 
             SaveController.Save(_saveData);
         }

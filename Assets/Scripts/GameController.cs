@@ -36,14 +36,22 @@ public class GameController : MonoBehaviour
     void Start()
     {
         var saveData = SaveController.Load();
-        if (saveData != null)
+        if (saveData == null || saveData.Turn == 0)
         {
-            UpdateFromSaveData(saveData);
-            Rankings.ShowRankings(DoTurn, saveData.LastWinningCharacter);
+            if (saveData != null)
+            {
+                foreach (Character character in Characters)
+                {
+                    var savedCharacter = saveData.Characters.Find(c => c.Type == character.Type);
+                    character.IsPlayer = savedCharacter.IsPlayer;
+                }
+            }
+            Dialog.ShowText("Welcome to Mario Party!", ChooseCharacter);
         }
         else
         {
-            ChooseCharacter();
+            UpdateFromSaveData(saveData);
+            Rankings.ShowRankings(DoTurn, saveData.LastWinningCharacter);
         }
     }
 

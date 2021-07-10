@@ -120,4 +120,11 @@ public class CharacterFollow : MonoBehaviour
         Animator.SetInteger("State", (int)CharacterState.Idle);
         Animator.SetTrigger("Victory");
     }
+
+    public void Draw()
+    {
+        Ball.Rb.isKinematic = true;
+        CanMove = false;
+        Animator.SetInteger("State", (int)CharacterState.Idle);
+    }
 }
