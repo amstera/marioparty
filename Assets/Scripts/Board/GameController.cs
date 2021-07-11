@@ -27,6 +27,7 @@ public class GameController : MonoBehaviour
     public FadePanel FadePanel;
 
     public AudioSource EnterMiniGameSound;
+    public AudioSource MusicAS;
 
     void Awake()
     {
@@ -145,7 +146,7 @@ public class GameController : MonoBehaviour
         }
         else if (space.Type == CircleType.Item)
         {
-            Question.Show("Steal someone's star for 40 coins?", character.IsPlayer ? AIChoice.None : character.Coins >= 40 ? AIChoice.Yes : AIChoice.No, StealStar);
+            Question.Show("Steal someone's star for 30 coins?", character.IsPlayer ? AIChoice.None : character.Coins >= 30 ? AIChoice.Yes : AIChoice.No, StealStar);
         }
     }
 
@@ -365,7 +366,7 @@ public class GameController : MonoBehaviour
 
         if (buy)
         {
-            if (character.Coins < 40)
+            if (character.Coins < 30)
             {
                 Dialog.ShowText("You don't have enough coins to steal a star!", ContinueTurn);
             }
@@ -378,7 +379,7 @@ public class GameController : MonoBehaviour
                 }
                 else
                 {
-                    character.ChangeCoins(-40, true);
+                    character.ChangeCoins(-30, true);
                     StartCoroutine(AddStolenStar(stealCharacter));
                 }
             }

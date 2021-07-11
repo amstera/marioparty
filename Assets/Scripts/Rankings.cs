@@ -10,6 +10,8 @@ public class Rankings : MonoBehaviour
     public GameObject TurnText;
     public CameraMove Cam;
 
+    public AudioSource CoinSound;
+
     private GameController _gameController;
     private bool _isShowingRanking;
     private Action _callback;
@@ -43,6 +45,11 @@ public class Rankings : MonoBehaviour
             TurnText.SetActive(false);
         }
         _callback = callback;
+
+        if (miniGameWinner != CharacterType.Unknown)
+        {
+            CoinSound.Play();
+        }
 
         if (useSaveData)
         {

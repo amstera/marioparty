@@ -118,7 +118,9 @@ public class Character : MonoBehaviour
     {
         Stars = Mathf.Clamp(Stars + amount, 0, 100);
         AmountDisplay.Display(amount, AmountType.Star, transform.position);
+        _gameController.MusicAS.Stop();
         StarSound.Play();
+        _gameController.MusicAS.PlayDelayed(4f);
         if (amount > 0)
         {
             CharacterAS.clip = CharacterSounds[(int)CharacterSoundType.Happy];
