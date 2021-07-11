@@ -12,6 +12,8 @@ public class Dice : MonoBehaviour
     public GameObject Sides;
     public Character Character;
 
+    public AudioSource DiceHit;
+
     void Start()
     {
         Text.transform.SetParent(null);
@@ -75,6 +77,7 @@ public class Dice : MonoBehaviour
                 break;
         }
 
+        DiceHit.Play();
         Stars.Play();
         transform.localEulerAngles = newAngle;
         Character.Roll = ChosenNumber;

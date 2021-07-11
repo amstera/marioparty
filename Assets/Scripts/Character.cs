@@ -18,6 +18,9 @@ public class Character : MonoBehaviour
 
     public AmountDisplay AmountDisplay;
 
+    public AudioSource Step;
+    public AudioSource CoinSound;
+
     private bool _isJumping;
     private bool _isWalking;
 
@@ -92,6 +95,7 @@ public class Character : MonoBehaviour
     {
         Coins = Mathf.Clamp(Coins + amount, 0, 100);
         AmountDisplay.Display(amount, AmountType.Coin, transform.position);
+        CoinSound.Play();
         if (amount > 0)
         {
             Animator.SetTrigger("Victory");
@@ -112,6 +116,11 @@ public class Character : MonoBehaviour
 
     private void Walk()
     {
+        if (Step != null && !Step.isPlaying)
+        {
+            Step.Play();
+        }
+
         Circle space = Destinations.Peek();
         Vector3 pos = PositionFromSpace(space);
         if (Vector3.Distance(transform.position, pos) < 0.2f)
@@ -121,6 +130,10 @@ public class Character : MonoBehaviour
             {
                 Animator.SetInteger("State", (int)CharacterState.Idle);
                 _isWalking = false;
+                if (Step != null)
+                {
+                    Step.Stop();
+                }
                 _gameController.ReachedSpace(this, space);
                 return;
             }

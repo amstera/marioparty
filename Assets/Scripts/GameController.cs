@@ -47,7 +47,7 @@ public class GameController : MonoBehaviour
                     character.IsPlayer = savedCharacter.IsPlayer;
                 }
             }
-            Dialog.ShowText("Welcome to Mario Party!", ChooseCharacter);
+            Dialog.ShowText("Welcome! Get the most stars and coins to win!", ChooseCharacter);
         }
         else
         {
