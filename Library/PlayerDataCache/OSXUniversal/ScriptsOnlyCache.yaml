@@ -50,6 +50,9 @@ ScriptsOnlyBuild:
     Unity.Recorder.Editor.dll:
     - UnityEditor.Recorder.MovieRecorderEditor
     - UnityEditor.Recorder.MovieRecorderSettings
+    - UnityEditor.Recorder.RecorderControllerSettings
+    - UnityEditor.Recorder.RecorderSettingsPrefsEditor
+    - UnityEditor.Recorder.RecorderWindow
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.dll:
@@ -252,6 +255,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 114
       Script: {instanceID: 1812}
+    - Class: 114
+      Script: {instanceID: 2040}
     - Class: 114
       Script: {instanceID: 2100}
     - Class: 114
@@ -806,7 +811,7 @@ ScriptsOnlyBuild:
     className: EdgeDetection
   - hash:
       serializedVersion: 2
-      Hash: 597d533f211e6888e19fc6c64cc04765
+      Hash: bf70ee83c29a4a385753f0ab03d19b8b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CameraMove
@@ -890,7 +895,7 @@ ScriptsOnlyBuild:
     className: EnumerableTestState
   - hash:
       serializedVersion: 2
-      Hash: 90b305a019316b4ad8db8f237a70dffd
+      Hash: 4a389fa877a722423c3e4c904532867c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameController

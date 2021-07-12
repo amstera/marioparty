@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
     public int Turn = -1;
     public int MaxTurns = 10;
     public string LastMiniGame;
+    public CameraMove Cam;
 
     public List<CharacterStat> CharacterStats;
     public Dialog Dialog;
@@ -50,7 +51,7 @@ public class GameController : MonoBehaviour
                     character.IsPlayer = savedCharacter.IsPlayer;
                 }
             }
-            Dialog.ShowText("Welcome! Get the most stars and coins to win!", ChooseCharacter);
+            Cam.PanBoard(ShowOpeningText);
         }
         else
         {
@@ -444,6 +445,11 @@ public class GameController : MonoBehaviour
         List<string> miniGames = new List<string> { "Lava Jump", "Bumper Ball" };
         miniGames.Remove(LastMiniGame);
         SceneManager.LoadSceneAsync(miniGames[Random.Range(0, miniGames.Count)]);
+    }
+
+    private void ShowOpeningText()
+    {
+        Dialog.ShowText("Welcome! Get the most stars and coins to win!", ChooseCharacter);
     }
 
     private void UpdateFromSaveData(SaveData saveData)
