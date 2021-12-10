@@ -141,14 +141,25 @@ public class GameController : MonoBehaviour
             character.ChangeCoins(coins, false);
             Invoke("NextTurn", 1f);
         }
-        else if (space.Type == CircleType.Star)
+        else // if continue moving
         {
-            Question.Show("Get this star for 20 coins?", character.IsPlayer ? AIChoice.None : character.Coins >= 20 ? AIChoice.Yes : AIChoice.No, BuyStar);
+            if (space.Type == CircleType.Star)
+            {
+                Question.Show("Get this star for 20 coins?", character.IsPlayer ? AIChoice.None : character.Coins >= 20 ? AIChoice.Yes : AIChoice.No, BuyStar);
+            }
+            else if (space.Type == CircleType.Item)
+            {
+                Question.Show("Steal someone's star for 30 coins?", character.IsPlayer ? AIChoice.None : character.Coins >= 30 ? AIChoice.Yes : AIChoice.No, StealStar);
+            }
         }
-        else if (space.Type == CircleType.Item)
+
+        //if another player is at this space
+        foreach (CharacterType charType in space.OnSpace)
         {
-            Question.Show("Steal someone's star for 30 coins?", character.IsPlayer ? AIChoice.None : character.Coins >= 30 ? AIChoice.Yes : AIChoice.No, StealStar);
+            Characters.Find(c => c.Type == charType).Hide();
         }
+
+        space.OnSpace.Add(character.Type);
     }
 
     public Character GetCurrentCharacter()
@@ -252,7 +263,25 @@ public class GameController : MonoBehaviour
 
     private void ShowCharacterStart()
     {
-        Dialog.ShowText($"{Characters[CharIndex].Type}, start!", SetUpDice);
+        //Show yourself and hide other character at your space
+        var currentChar = Characters[CharIndex];
+        if (currentChar.Position >= 0)
+        {
+            foreach (var charType in Spaces[currentChar.Position].OnSpace)
+            {
+                var character = Characters.Find(c => c.Type == charType);
+                if (character.Type == currentChar.Type)
+                {
+                    character.Show();
+                }
+                else
+                {
+                    character.Hide();
+                }
+            }
+        }
+
+        Dialog.ShowText($"{currentChar.Type}, start!", SetUpDice);
     }
 
     private void SetUpDice()
@@ -275,8 +304,18 @@ public class GameController : MonoBehaviour
         Queue<Circle> spaces = new Queue<Circle>();
         if (Turn == 0)
         {
+            originalPos++;
             spaces.Enqueue(Spaces[originalPos]);
-            character.Position--;
+        }
+        else
+        {
+            //show another character on your space if you leave it
+            var startingSpace = Spaces[originalPos];
+            startingSpace.OnSpace.Remove(character.Type);
+            if (startingSpace.OnSpace.Any())
+            {
+                Characters.Find(c => c.Type == startingSpace.OnSpace.First()).Show();
+            }
         }
 
         if (originalPos + 1 < Spaces.Count)
@@ -418,6 +457,18 @@ public class GameController : MonoBehaviour
         }
         else
         {
+            foreach(Circle space in Spaces)
+            {
+                if (space.OnSpace.Contains(character.Type))
+                {
+                    space.OnSpace.Remove(character.Type);
+                    if (space.OnSpace.Any())
+                    {
+                        Characters.Find(c => c.Type == space.OnSpace.First()).Show();
+                    }
+                }
+            }
+
             character.WalkTowards(character.Destinations);
         }
     }
@@ -429,7 +480,7 @@ public class GameController : MonoBehaviour
 
     private void LoadMiniGame()
     {
-        SaveController.Save(Characters, Turn);
+        SaveController.Save(Characters, Spaces, Turn);
         EnterMiniGameSound.Play();
         FadePanel.FadeOut();
         Invoke("LoadChosenMiniGame", 1.5f);
@@ -470,6 +521,18 @@ public class GameController : MonoBehaviour
             character.Stars = savedCharacter.Stars;
             character.IsPlayer = savedCharacter.IsPlayer;
             character.Roll = savedCharacter.RollPosition;
+        }
+        for (int i = 0; i < Spaces.Count; i++)
+        {
+            Spaces[i].OnSpace = saveData.Spaces[i].OnSpace;
+            if (Spaces[i].OnSpace.Count > 1)
+            {
+                for (int j = 1; j < Spaces[i].OnSpace.Count; j++)
+                {
+                    CharacterType onSpaceCharType = Spaces[i].OnSpace[j];
+                    Characters.Find(c => c.Type == onSpaceCharType).Hide();
+                }
+            }
         }
 
         Characters = Characters.OrderBy(c => c.Roll).ToList();

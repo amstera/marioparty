@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Circle : MonoBehaviour
 {
     public CircleType Type;
+    public List<CharacterType> OnSpace = new List<CharacterType>();
 }
 
 public enum CircleType

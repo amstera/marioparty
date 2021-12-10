@@ -24,7 +24,7 @@ public class Spinner : MonoBehaviour
         {
             SpinAS.Play();
         }
-        Speed += Time.deltaTime * 2.75f;
+        Speed += Time.deltaTime * 6f;
     }
 
     public void Stop()

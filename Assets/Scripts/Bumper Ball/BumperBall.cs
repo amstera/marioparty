@@ -5,6 +5,7 @@ public class BumperBall : MonoBehaviour
 {
     public Rigidbody Rb;
     public float Speed = 50;
+    public GameObject WaterSplashPS;
 
     public AudioClip SplashClip;
 
@@ -17,12 +18,13 @@ public class BumperBall : MonoBehaviour
     {
         if (collision.collider.tag == "Terrain")
         {
-            AudioSource.PlayClipAtPoint(SplashClip, transform.position);
+            AudioSource.PlayClipAtPoint(SplashClip, transform.parent.position);
+            Instantiate(WaterSplashPS, transform.position, WaterSplashPS.transform.rotation);
             Destroy(transform.parent.gameObject);
         }
         else if (collision.collider.tag == "Player")
         {
-            Rb.AddForce(collision.contacts.First().normal * 5);
+            Rb.AddForce(collision.contacts.First().normal * Speed/1.25f);
         }
     }
 }
