@@ -5,7 +5,7 @@ public class SaveController
 {
     public static string SaveDataKey = "SaveData";
 
-    public static void Save(List<Character> characters, List<Circle> spaces, int turn)
+    public static void Save(List<Character> characters, List<Circle> spaces, int turn, bool isBoardReversed)
     {
         List<CompressedCharacter> compressedCharacters =  new List<CompressedCharacter>();
         int index = 0;
@@ -42,6 +42,7 @@ public class SaveController
         {
             Characters = compressedCharacters,
             Turn = turn,
+            BoardReversed = isBoardReversed,
             Spaces = compressedSpaces
         };
 

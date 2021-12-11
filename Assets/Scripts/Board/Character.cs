@@ -154,7 +154,7 @@ public class Character : MonoBehaviour
 
         Circle space = Destinations.Peek();
         Vector3 pos = PositionFromSpace(space);
-        if (Vector3.Distance(transform.position, pos) < 0.2f)
+        if (Vector3.Distance(transform.position, pos) < 0.15f)
         {
             Destinations.Dequeue();
             if (Destinations.Count == 0 || space.Type == CircleType.Star || space.Type == CircleType.Item)

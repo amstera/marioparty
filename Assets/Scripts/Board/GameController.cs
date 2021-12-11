@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
     public int Turn = -1;
     public int MaxTurns = 10;
     public string LastMiniGame;
+    public bool IsBoardReversed;
     public CameraMove Cam;
 
     public List<CharacterStat> CharacterStats;
@@ -26,6 +27,7 @@ public class GameController : MonoBehaviour
     public List<Dice> Dice;
     public GameObject Coin;
     public FadePanel FadePanel;
+    public EventText EventText;
 
     public AudioSource EnterMiniGameSound;
     public AudioSource MusicAS;
@@ -141,6 +143,12 @@ public class GameController : MonoBehaviour
             character.ChangeCoins(coins, false);
             Invoke("NextTurn", 1f);
         }
+        else if (space.Type == CircleType.Event)
+        {
+            IsBoardReversed = !IsBoardReversed;
+            ReverseBoard();
+            EventText.Show(NextTurn);
+        }
         else // if continue moving
         {
             if (space.Type == CircleType.Star)
@@ -190,6 +198,7 @@ public class GameController : MonoBehaviour
             if (character.Stars != currentStars)
             {
                 currentStars = character.Stars;
+                currentCoins = character.Coins;
                 rank += amountSinceLastIncrement;
                 amountSinceLastIncrement = 1;
             }
@@ -480,7 +489,7 @@ public class GameController : MonoBehaviour
 
     private void LoadMiniGame()
     {
-        SaveController.Save(Characters, Spaces, Turn);
+        SaveController.Save(Characters, Spaces, Turn, IsBoardReversed);
         EnterMiniGameSound.Play();
         FadePanel.FadeOut();
         Invoke("LoadChosenMiniGame", 1.5f);
@@ -503,6 +512,15 @@ public class GameController : MonoBehaviour
         Dialog.ShowText("Welcome! Get the most stars and coins to win!", ChooseCharacter);
     }
 
+    private void ReverseBoard()
+    {
+        Spaces.Reverse();
+        foreach (Character c in Characters)
+        {
+            c.Position = Spaces.Count - 1 - c.Position;
+        }
+    }
+
     private void UpdateFromSaveData(SaveData saveData)
     {
         foreach (Dice die in Dice)
@@ -512,6 +530,12 @@ public class GameController : MonoBehaviour
 
         Turn = saveData.Turn;
         LastMiniGame = saveData.LastMiniGame;
+        IsBoardReversed = saveData.BoardReversed;
+        if (IsBoardReversed)
+        {
+            ReverseBoard();
+        }
+
         foreach (Character character in Characters)
         {
             var savedCharacter = saveData.Characters.Find(c => c.Type == character.Type);
@@ -522,6 +546,7 @@ public class GameController : MonoBehaviour
             character.IsPlayer = savedCharacter.IsPlayer;
             character.Roll = savedCharacter.RollPosition;
         }
+
         for (int i = 0; i < Spaces.Count; i++)
         {
             Spaces[i].OnSpace = saveData.Spaces[i].OnSpace;

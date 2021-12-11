@@ -12,5 +12,7 @@ public enum CircleType
     Positive = 0,
     Negative = 1,
     Star = 2,
-    Item = 3
+    Boo = 3,
+    Event = 4,
+    Item = 5
 }
