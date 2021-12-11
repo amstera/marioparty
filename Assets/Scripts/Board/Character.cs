@@ -154,10 +154,10 @@ public class Character : MonoBehaviour
 
         Circle space = Destinations.Peek();
         Vector3 pos = PositionFromSpace(space);
-        if (Vector3.Distance(transform.position, pos) < 0.15f)
+        if (Vector3.Distance(transform.position, pos) < 0.2f)
         {
             Destinations.Dequeue();
-            if (Destinations.Count == 0 || space.Type == CircleType.Star || space.Type == CircleType.Item)
+            if (Destinations.Count == 0 || space.Type == CircleType.Star || space.Type == CircleType.Boo || space.Type == CircleType.Item)
             {
                 Animator.SetInteger("State", (int)CharacterState.Idle);
                 _isWalking = false;
