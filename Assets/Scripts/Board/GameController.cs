@@ -523,7 +523,7 @@ public class GameController : MonoBehaviour
 
     private void LoadChosenMiniGame()
     {
-        List<string> miniGames = new List<string> { "Lava Jump", "Bumper Ball" };
+        List<string> miniGames = new List<string> { "Lava Jump", "Bumper Ball", "Shy Guy" };
         miniGames.Remove(LastMiniGame);
         SceneManager.LoadSceneAsync(miniGames[Random.Range(0, miniGames.Count)]);
     }
