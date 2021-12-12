@@ -29,6 +29,11 @@ public class ShyGuyController : MonoBehaviour
         SetMainPlayer();
         Text.Show("Ready...", 1.5f);
         Invoke("ShowGoText", 1.5f);
+
+        foreach (FlagCharacter character in Characters)
+        {
+            character.ShyGuy = ShyGuy;
+        }
     }
 
     void Update()
@@ -43,12 +48,11 @@ public class ShyGuyController : MonoBehaviour
                     continue;
                 }
                 character.CanChangeFlag = false;
-                _timeBetweenTurns = Mathf.Clamp(_timeBetweenTurns - 0.2f, 0.5f, 3f);
+                _timeBetweenTurns = Mathf.Clamp(_timeBetweenTurns - 0.1f, 0.75f, 3f);
                 if (character.Flag != FlagType)
                 {
                     eliminatedCharacter = true;
                     character.Eliminate();
-                    //eliminate character properly
                 }
             }
 
@@ -62,7 +66,7 @@ public class ShyGuyController : MonoBehaviour
                 {
                     Winner = Characters.First().Type;
 
-                    //MusicAS.Stop();
+                    MusicAS.Stop();
                     MiniGameAS.clip = MiniGameSounds[(int)MiniGameSoundType.Win];
                     MiniGameAS.Play();
 
@@ -99,6 +103,7 @@ public class ShyGuyController : MonoBehaviour
     private void ChooseFlag()
     {
         FlagType = Random.Range(0, 2) == 1 ? FlagType.A : FlagType.B;
+        ShyGuy.WaitForSeconds = _timeBetweenTurns;
         ShyGuy.ShowChosenFlag(FlagType);
         _timeSinceFlagShown = Time.time;
         foreach (FlagCharacter character in Characters)
@@ -114,7 +119,7 @@ public class ShyGuyController : MonoBehaviour
         Characters.ForEach(c => c.HideFlag());
         ShyGuy.HideFlag();
 
-        Invoke("ChooseFlag", 1f);
+        Invoke("ChooseFlag", Random.Range(0.35f, 1.5f));
     }
 
     private void FadeOut()

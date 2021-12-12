@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ShyGuy : MonoBehaviour
@@ -6,10 +7,21 @@ public class ShyGuy : MonoBehaviour
     public GameObject FlagB;
 
     public FlagType Flag;
+    public float WaitForSeconds;
+    public bool ShowingTwoFlags;
 
     public void ShowChosenFlag(FlagType flagType)
     {
         Flag = flagType;
+
+        if (Random.Range(0, 2) == 1 && WaitForSeconds <= 2.75f)
+        {
+            ShowingTwoFlags = true;
+            FlagA.SetActive(true);
+            FlagB.SetActive(true);
+
+            StartCoroutine(HideBadFlag(flagType));
+        }
 
         if (Flag == FlagType.A)
         {
@@ -27,6 +39,21 @@ public class ShyGuy : MonoBehaviour
         FlagA.SetActive(false);
         FlagB.SetActive(false);
 
+    }
+
+    private IEnumerator HideBadFlag(FlagType flag)
+    {
+        yield return new WaitForSeconds(Mathf.Min(0.5f, WaitForSeconds/2));
+
+        ShowingTwoFlags = false;
+        if (Flag == FlagType.A)
+        {
+            FlagB.SetActive(false);
+        }
+        else
+        {
+            FlagA.SetActive(false);
+        }
     }
 }
 

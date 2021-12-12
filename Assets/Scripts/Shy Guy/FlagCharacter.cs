@@ -5,6 +5,8 @@ public class FlagCharacter : MonoBehaviour
     public Animator Animator;
     public GameObject FlagA;
     public GameObject FlagB;
+    public GameObject FlagNeutral;
+    public ShyGuy ShyGuy;
 
     public FlagType Flag;
     public FlagType CorrectFlag;
@@ -19,9 +21,11 @@ public class FlagCharacter : MonoBehaviour
     public AudioSource VictoryAS;
     public AudioSource LoseAS;
 
+    private bool _startMoving;
+
     void Update()
     {
-        if (Eliminated)
+        if (_startMoving)
         {
             transform.position += Vector3.forward * Speed * Time.deltaTime;
             return;
@@ -35,16 +39,19 @@ public class FlagCharacter : MonoBehaviour
                 {
                     Flag = FlagType.A;
                     FlagA.SetActive(true);
+                    FlagNeutral.SetActive(false);
                 }
-                else if (Input.GetKeyDown(KeyCode.S))
+                else if (Input.GetKeyDown(KeyCode.W))
                 {
                     Flag = FlagType.B;
                     FlagB.SetActive(true);
+                    FlagNeutral.SetActive(false);
                 }
             }
-            else
+            else if (!ShyGuy.ShowingTwoFlags)
             {
-                if (Random.Range(0, 4) == 1)
+                FlagNeutral.SetActive(false);
+                if (Random.Range(0, 6) == 1)
                 {
                     Flag = CorrectFlag == FlagType.A ? FlagType.B : FlagType.A;
                 }
@@ -70,6 +77,7 @@ public class FlagCharacter : MonoBehaviour
         Flag = FlagType.None;
         FlagA.SetActive(false);
         FlagB.SetActive(false);
+        FlagNeutral.SetActive(true);
     }
 
     public void MakeChangeFlag()
@@ -80,15 +88,16 @@ public class FlagCharacter : MonoBehaviour
         }
         else
         {
-            Invoke("WaitToChangeFlag", Random.Range(0.35f, Mathf.Min(1.5f, TimeBetweenTurns)));
+            Invoke("WaitToChangeFlag", Random.Range(0.3f, Mathf.Min(1.25f, TimeBetweenTurns)));
         }
     }
 
     public void Eliminate()
     {
+        Invoke("StartMoving", 0.5f);
         Eliminated = true;
         LoseAS.Play();
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 3.5f);
     }
 
     public void Win()
@@ -101,5 +110,10 @@ public class FlagCharacter : MonoBehaviour
     private void WaitToChangeFlag()
     {
         CanChangeFlag = true;
+    }
+
+    private void StartMoving()
+    {
+        _startMoving = true;
     }
 }
