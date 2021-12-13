@@ -15,6 +15,7 @@ public class Character : MonoBehaviour
     public int Stars;
     public CharacterType Type;
     public Queue<Circle> Destinations;
+    public List<ItemType> Items = new List<ItemType>();
 
     public AmountDisplay AmountDisplay;
 
@@ -95,10 +96,10 @@ public class Character : MonoBehaviour
         Destinations = destinations;
     }
 
-    public void ChangeCoins(int amount, bool gainingStar)
+    public void ChangeCoins(int amount, bool isBuying)
     {
         Coins = Mathf.Clamp(Coins + amount, 0, 100);
-        AmountDisplay.Display(amount, AmountType.Coin, transform.position);
+        AmountDisplay.Display(amount, AmountType.Coin, null, transform.position);
         CoinSound.Play();
         if (amount > 0)
         {
@@ -106,7 +107,7 @@ public class Character : MonoBehaviour
             CharacterAS.Play();
             Animator.SetTrigger("Victory");
         }
-        else if (!gainingStar)
+        else if (!isBuying)
         {
             CharacterAS.clip = CharacterSounds[(int)CharacterSoundType.Sad];
             CharacterAS.Play();
@@ -117,7 +118,7 @@ public class Character : MonoBehaviour
     public void ChangeStars(int amount)
     {
         Stars = Mathf.Clamp(Stars + amount, 0, 100);
-        AmountDisplay.Display(amount, AmountType.Star, transform.position);
+        AmountDisplay.Display(amount, AmountType.Star, null, transform.position);
         _gameController.MusicAS.Stop();
         StarSound.Play();
         _gameController.MusicAS.PlayDelayed(4f);
@@ -133,6 +134,17 @@ public class Character : MonoBehaviour
             CharacterAS.Play();
         }
         _gameController.LoadAllCharacterStats(false);
+    }
+
+    public void AddItem(ItemSelection item)
+    {
+        Items.Add(item.Type);
+
+        AmountDisplay.Display(1, AmountType.Item, item.ItemImage,  transform.position);
+
+        CharacterAS.clip = CharacterSounds[(int)CharacterSoundType.Happy];
+        CharacterAS.Play();
+        Animator.SetTrigger("Victory");
     }
 
     public void Show()

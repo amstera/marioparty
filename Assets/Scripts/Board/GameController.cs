@@ -28,6 +28,7 @@ public class GameController : MonoBehaviour
     public GameObject Coin;
     public FadePanel FadePanel;
     public EventText EventText;
+    public ItemsPanel ItemsPanel;
 
     public AudioSource EnterMiniGameSound;
     public AudioSource MusicAS;
@@ -162,7 +163,14 @@ public class GameController : MonoBehaviour
             }
             else if (space.Type == CircleType.Item)
             {
-                Question.Show("Would you like to buy an item?", character.IsPlayer ? AIChoice.None : character.Coins >= 5 ? AIChoice.First : AIChoice.Second, "Yes! (See items)", "No thanks", SeeItems);
+                if (Turn == MaxTurns - 1)
+                {
+                    Dialog.ShowText("You can't buy an item on your last turn.", ContinueTurn);
+                }
+                else
+                {
+                    Question.Show("Would you like to buy an item?", character.IsPlayer ? AIChoice.None : character.Coins >= 3 && character.Items.Count < 3 ? AIChoice.First : AIChoice.Second, "Yes! (See items)", "No thanks", SeeItems);
+                }
             }
         }
 
@@ -456,8 +464,24 @@ public class GameController : MonoBehaviour
     {
         if (see)
         {
-            //show items page
-            ContinueTurn(); //leaving this here for now so game won't freeze
+            bool upgradedItems = Turn >= MaxTurns / 2;
+            var character = GetCurrentCharacter();
+            if (character.IsPlayer)
+            {
+                if (character.Items.Count >= 3)
+                {
+                    Dialog.ShowText("You can only have 3 items at a time!", ContinueTurn);
+                }
+                else
+                {
+                    ItemsPanel.Show(character, upgradedItems, ContinueTurn);
+                }
+            }
+            else
+            {
+                // just add item
+                ContinueTurn();
+            }
         }
         else
         {
@@ -585,6 +609,7 @@ public class GameController : MonoBehaviour
             character.Stars = savedCharacter.Stars;
             character.IsPlayer = savedCharacter.IsPlayer;
             character.Roll = savedCharacter.RollPosition;
+            character.Items = savedCharacter.Items;
         }
 
         for (int i = 0; i < Spaces.Count; i++)

@@ -24,6 +24,7 @@ public class CompressedCharacter
     public int Stars;
     public int RollPosition;
     public bool IsPlayer;
+    public List<ItemType> Items;
 }
 
 [Serializable]

@@ -21,7 +21,8 @@ public class SaveController
                     Coins = character.Coins,
                     Stars = character.Stars,
                     RollPosition = index, 
-                    IsPlayer = character.IsPlayer
+                    IsPlayer = character.IsPlayer,
+                    Items = character.Items
                 }
             );
             index++;
