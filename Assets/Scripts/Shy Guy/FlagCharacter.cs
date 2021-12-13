@@ -97,7 +97,7 @@ public class FlagCharacter : MonoBehaviour
         Invoke("StartMoving", 0.5f);
         Eliminated = true;
         LoseAS.Play();
-        Destroy(gameObject, 3.5f);
+        Destroy(gameObject, 3f);
     }
 
     public void Win()

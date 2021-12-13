@@ -158,7 +158,11 @@ public class GameController : MonoBehaviour
             }
             else if (space.Type == CircleType.Boo)
             {
-                Question.Show("He he he! What would like to steal?", character.IsPlayer ? AIChoice.None : character.Coins >= 35 ? AIChoice.First : AIChoice.Second, "Star (35 coins)", "Coins (Free)", StealStar);
+                Question.Show("He he he! What would like to steal?", character.IsPlayer ? AIChoice.None : character.Coins >= 35 && Characters.Any(c => c.Type != character.Type && c.Stars > 0) ? AIChoice.First : AIChoice.Second, "Star (35 coins)", "Coins (Free)", StealStar);
+            }
+            else if (space.Type == CircleType.Item)
+            {
+                Question.Show("Would you like to buy an item?", character.IsPlayer ? AIChoice.None : character.Coins >= 5 ? AIChoice.First : AIChoice.Second, "Yes! (See items)", "No thanks", SeeItems);
             }
         }
 
@@ -410,11 +414,11 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void StealStar(bool yes)
+    private void StealStar(bool steal)
     {
         Character character = GetCurrentCharacter();
 
-        if (yes)
+        if (steal)
         {
             if (character.Coins < 35)
             {
@@ -445,6 +449,19 @@ public class GameController : MonoBehaviour
             {
                 StartCoroutine(AddStolenCoins(stealCharacter));
             }
+        }
+    }
+
+    private void SeeItems(bool see)
+    {
+        if (see)
+        {
+            //show items page
+            ContinueTurn(); //leaving this here for now so game won't freeze
+        }
+        else
+        {
+            ContinueTurn();
         }
     }
 

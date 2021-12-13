@@ -48,7 +48,7 @@ public class ShyGuyController : MonoBehaviour
                     continue;
                 }
                 character.CanChangeFlag = false;
-                _timeBetweenTurns = Mathf.Clamp(_timeBetweenTurns - 0.1f, 0.75f, 3f);
+                _timeBetweenTurns = Mathf.Clamp(_timeBetweenTurns - 0.1f, 1f, 3f);
                 if (character.Flag != FlagType)
                 {
                     eliminatedCharacter = true;
