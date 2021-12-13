@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,12 +9,15 @@ public class CharacterChooserController : MonoBehaviour
     public SpriteRenderer RightTriangle;
     public List<CharacterChoose> Characters;
     public CharacterChoose ChosenCharacter;
+    public TextMeshProUGUI TotalTurnsText;
     public ParticleSystem Fireworks;
     public FadePanel FadePanel;
+    public int TotalTurns = 20;
 
     public AudioSource SelectSound;
 
     private int _charIndex;
+    private int _turnIndex = 1;
 
     void Start()
     {
@@ -22,7 +26,7 @@ public class CharacterChooserController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow) && _charIndex > 0)
+        if (Input.GetKeyDown(KeyCode.A) && _charIndex > 0)
         {
             SelectSound.Play();
             _charIndex--;
@@ -33,7 +37,7 @@ public class CharacterChooserController : MonoBehaviour
                 LeftTriangle.enabled = false;
             }
         }
-        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow) && _charIndex < 3)
+        else if (Input.GetKeyDown(KeyCode.D) && _charIndex < 3)
         {
             SelectSound.Play();
             _charIndex++;
@@ -44,7 +48,23 @@ public class CharacterChooserController : MonoBehaviour
                 RightTriangle.enabled = false;
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Space))
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && _turnIndex > 0)
+        {
+            SelectSound.Play();
+            _turnIndex--;
+            TotalTurns -= 5;
+            UpdateTotalTurns();
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow) && _turnIndex < 3)
+        {
+            SelectSound.Play(); 
+            _turnIndex++;
+            TotalTurns += 5;
+            UpdateTotalTurns();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             SelectSound.Play();
 
@@ -61,7 +81,8 @@ public class CharacterChooserController : MonoBehaviour
 
             SaveData saveData = new SaveData
             {
-                Characters = compressedCharacters
+                Characters = compressedCharacters,
+                TotalTurns = TotalTurns
             };
             SaveController.Save(saveData);
 
@@ -95,5 +116,14 @@ public class CharacterChooserController : MonoBehaviour
         chosenCharacter.gameObject.SetActive(true);
         chosenCharacter.IsPlayer = true;
         ChosenCharacter = chosenCharacter;
+    }
+
+    private void UpdateTotalTurns()
+    {
+        TotalTurnsText.text = $"Total Turns: {TotalTurns}";
+        if (TotalTurns == 20)
+        {
+            TotalTurnsText.text += " (Recommended)";
+        }
     }
 }

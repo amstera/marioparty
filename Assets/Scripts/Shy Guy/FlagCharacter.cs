@@ -41,7 +41,7 @@ public class FlagCharacter : MonoBehaviour
                     FlagA.SetActive(true);
                     FlagNeutral.SetActive(false);
                 }
-                else if (Input.GetKeyDown(KeyCode.W))
+                else if (Input.GetKeyDown(KeyCode.D))
                 {
                     Flag = FlagType.B;
                     FlagB.SetActive(true);
@@ -88,7 +88,7 @@ public class FlagCharacter : MonoBehaviour
         }
         else
         {
-            Invoke("WaitToChangeFlag", Random.Range(0.3f, Mathf.Min(1.25f, TimeBetweenTurns)));
+            Invoke("WaitToChangeFlag", Random.Range(0.35f, Mathf.Min(1f, TimeBetweenTurns)));
         }
     }
 

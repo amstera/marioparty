@@ -7,6 +7,7 @@ public class SaveData
 {
     public List<CompressedCharacter> Characters;
     public int Turn;
+    public int TotalTurns;
     public string LastMiniGame;
     public bool BoardReversed;
     public List<CompressedCircle> Spaces;

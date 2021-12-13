@@ -52,6 +52,7 @@ public class GameController : MonoBehaviour
                     var savedCharacter = saveData.Characters.Find(c => c.Type == character.Type);
                     character.IsPlayer = savedCharacter.IsPlayer;
                 }
+                MaxTurns = saveData.TotalTurns;
             }
             Cam.PanBoard(ShowOpeningText);
         }
@@ -510,7 +511,7 @@ public class GameController : MonoBehaviour
 
     private void LoadMiniGame()
     {
-        SaveController.Save(Characters, Spaces, Turn, IsBoardReversed);
+        SaveController.Save(Characters, Spaces, Turn, MaxTurns, IsBoardReversed);
         EnterMiniGameSound.Play();
         FadePanel.FadeOut();
         Invoke("LoadChosenMiniGame", 1.5f);
@@ -552,6 +553,7 @@ public class GameController : MonoBehaviour
         Turn = saveData.Turn;
         LastMiniGame = saveData.LastMiniGame;
         IsBoardReversed = saveData.BoardReversed;
+        MaxTurns = saveData.TotalTurns;
         if (IsBoardReversed)
         {
             ReverseBoard();
