@@ -22,6 +22,7 @@ public class Character : MonoBehaviour
     public AudioSource Step;
     public AudioSource CoinSound;
     public AudioSource StarSound;
+    public AudioSource ItemSound;
     public AudioSource CharacterAS;
 
     public List<AudioClip> CharacterSounds;
@@ -141,6 +142,10 @@ public class Character : MonoBehaviour
         Items.Add(item.Type);
 
         AmountDisplay.Display(1, AmountType.Item, item.ItemImage,  transform.position);
+
+        _gameController.MusicAS.Stop();
+        ItemSound.Play();
+        _gameController.MusicAS.PlayDelayed(4f);
 
         CharacterAS.clip = CharacterSounds[(int)CharacterSoundType.Happy];
         CharacterAS.Play();

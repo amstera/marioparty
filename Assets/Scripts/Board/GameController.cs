@@ -110,7 +110,7 @@ public class GameController : MonoBehaviour
         var charStat = CharacterStats[ReloadIndex];
         var character = Characters[ReloadIndex];
         int place = GetPlace(character.Type);
-        charStat.Reload(character, place);
+        charStat.Reload(character, ItemsPanel, place);
 
         if (!charStat.gameObject.activeSelf)
         {
@@ -474,13 +474,18 @@ public class GameController : MonoBehaviour
                 }
                 else
                 {
-                    ItemsPanel.Show(character, upgradedItems, ContinueTurn);
+                    ItemsPanel.Show(character, upgradedItems, ReloadStatsAndContinueTurn);
                 }
             }
             else
             {
-                // just add item
-                ContinueTurn();
+                var possibleItems = ItemsPanel.GetItems(upgradedItems).FindAll(i => i.Cost <= character.Coins);
+                var selectedItem = possibleItems[Random.Range(0, possibleItems.Count)];
+
+                character.ChangeCoins(-selectedItem.Cost, true);
+                character.AddItem(selectedItem);
+
+                FindObjectOfType<Dialog>().ShowText($"{character.Type} got a {selectedItem.ItemNameText.text}!", ReloadStatsAndContinueTurn);
             }
         }
         else
@@ -502,7 +507,7 @@ public class GameController : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
 
-        stealCharacter.Stars--;
+        stealCharacter.ChangeStars(-1);
         Dialog.ShowText($"You stole a star from {stealCharacter.Type}!", AddStar);
     }
 
@@ -511,7 +516,7 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         int coinsToSteal = Random.Range(1, stealCharacter.Coins / 3);
-        stealCharacter.Coins -= coinsToSteal;
+        stealCharacter.ChangeCoins(-coinsToSteal, false);
 
         Character character = GetCurrentCharacter();
         character.ChangeCoins(coinsToSteal, false);
@@ -543,6 +548,12 @@ public class GameController : MonoBehaviour
 
             character.WalkTowards(character.Destinations);
         }
+    }
+
+    private void ReloadStatsAndContinueTurn()
+    {
+        LoadAllCharacterStats(false);
+        ContinueTurn();
     }
 
     private void ShowRankings()
