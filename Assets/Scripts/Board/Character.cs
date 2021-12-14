@@ -113,18 +113,20 @@ public class Character : MonoBehaviour
             CharacterAS.clip = CharacterSounds[(int)CharacterSoundType.Sad];
             CharacterAS.Play();
         }
-        _gameController.LoadAllCharacterStats(false);
+        _gameController?.LoadAllCharacterStats(false);
     }
 
     public void ChangeStars(int amount)
     {
         Stars = Mathf.Clamp(Stars + amount, 0, 100);
         AmountDisplay.Display(amount, AmountType.Star, null, transform.position);
-        _gameController.MusicAS.Stop();
-        StarSound.Play();
-        _gameController.MusicAS.PlayDelayed(4f);
+
         if (amount > 0)
         {
+            _gameController.MusicAS.Stop();
+            StarSound.Play();
+            _gameController.MusicAS.PlayDelayed(4f);
+
             CharacterAS.clip = CharacterSounds[(int)CharacterSoundType.Happy];
             CharacterAS.Play();
             Animator.SetTrigger("Victory");
@@ -134,7 +136,7 @@ public class Character : MonoBehaviour
             CharacterAS.clip = CharacterSounds[(int)CharacterSoundType.Sad];
             CharacterAS.Play();
         }
-        _gameController.LoadAllCharacterStats(false);
+        _gameController?.LoadAllCharacterStats(false);
     }
 
     public void AddItem(ItemSelection item)

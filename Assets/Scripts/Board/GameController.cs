@@ -159,17 +159,17 @@ public class GameController : MonoBehaviour
             }
             else if (space.Type == CircleType.Boo)
             {
-                Question.Show("He he he! What would like to steal?", character.IsPlayer ? AIChoice.None : character.Coins >= 35 && Characters.Any(c => c.Type != character.Type && c.Stars > 0) ? AIChoice.First : AIChoice.Second, "Star (35 coins)", "Coins (Free)", StealStar);
+                Question.Show("He he he! What would like to steal?", character.IsPlayer ? AIChoice.None : character.Coins >= 35 && Characters.Any(c => c.Type != character.Type && c.Stars > 0) ? AIChoice.Second : AIChoice.First, "Coins (Free)", "Star (35 coins)", StealStar);
             }
             else if (space.Type == CircleType.Item)
             {
                 if (Turn == MaxTurns - 1)
                 {
-                    Dialog.ShowText("You can't buy an item on your last turn.", ContinueTurn);
+                    Dialog.ShowText("You can't buy an item on the last turn.", ContinueTurn);
                 }
                 else
                 {
-                    Question.Show("Would you like to buy an item?", character.IsPlayer ? AIChoice.None : character.Coins >= 3 && character.Items.Count < 3 ? AIChoice.First : AIChoice.Second, "Yes! (See items)", "No thanks", SeeItems);
+                    Question.Show("Would you like to buy an item?", character.IsPlayer ? AIChoice.None : character.Coins >= 3 && character.Items.Count < 3 ? AIChoice.First : AIChoice.Second, "See items", "No thanks", SeeItems);
                 }
             }
         }
@@ -303,7 +303,68 @@ public class GameController : MonoBehaviour
             }
         }
 
-        Dialog.ShowText($"{currentChar.Type}, start!", SetUpDice);
+        Question.Show($"{currentChar.Type}, it's your turn!", currentChar.IsPlayer ? AIChoice.None : ShouldUseItem(currentChar) ? AIChoice.Second : AIChoice.First, "Roll Dice", "Use Item", SetUpMove, 0.25f);
+    }
+
+    private void SetUpMove(bool setUpDice)
+    {
+        if (setUpDice)
+        {
+            SetUpDice();
+        }
+        else
+        {
+            Character character = GetCurrentCharacter();
+            //show option to choose item
+            Debug.Log($"{character.Type} tried to use an item.");
+            SetUpDice();
+        }
+    }
+
+    private bool ShouldUseItem(Character character)
+    {
+        if (character.Items.Count == 0)
+        {
+            return false;
+        }
+
+        if (Turn == MaxTurns - 1)
+        {
+            if (character.Items.Any(i => i != ItemType.WarpBlock))
+            {
+                return true;
+            }
+        }
+
+        if (character.Items.All(i => i == ItemType.GoldenPipe) && character.Coins <  20)
+        {
+            return false;
+        }
+
+        if (character.Items.All(i => i == ItemType.WarpBlock) && DistanceToStar(character) < 6)
+        {
+            return false;
+        }
+
+        if (Turn + character.Items.Count >= MaxTurns)
+        {
+            return true;
+        }
+
+        return Random.Range(0, 3) == 1;
+    }
+
+    private int DistanceToStar(Character character)
+    {
+        int posOfStar = Spaces.FindIndex(s => s.Type == CircleType.Star);
+        int charPos = character.Position;
+
+        if (posOfStar > charPos)
+        {
+            return posOfStar - charPos;
+        }
+
+        return Spaces.Count - charPos + posOfStar;
     }
 
     private void SetUpDice()
@@ -422,11 +483,23 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void StealStar(bool steal)
+    private void StealStar(bool getCoins)
     {
         Character character = GetCurrentCharacter();
 
-        if (steal)
+        if (getCoins)
+        {
+            Character stealCharacter = Characters.FindAll(c => c != character).OrderByDescending(c => c.Coins).FirstOrDefault();
+            if (stealCharacter.Coins == 0)
+            {
+                Dialog.ShowText("There's nobody to steal coins from!", ContinueTurn);
+            }
+            else
+            {
+                StartCoroutine(AddStolenCoins(stealCharacter));
+            }
+        }
+        else
         {
             if (character.Coins < 35)
             {
@@ -444,18 +517,6 @@ public class GameController : MonoBehaviour
                     character.ChangeCoins(-35, true);
                     StartCoroutine(AddStolenStar(stealCharacter));
                 }
-            }
-        }
-        else
-        {
-            Character stealCharacter = Characters.FindAll(c => c != character).OrderByDescending(c => c.Coins).FirstOrDefault();
-            if (stealCharacter.Coins == 0)
-            {
-                Dialog.ShowText("There's nobody to steal coins from!", ContinueTurn);
-            }
-            else
-            {
-                StartCoroutine(AddStolenCoins(stealCharacter));
             }
         }
     }

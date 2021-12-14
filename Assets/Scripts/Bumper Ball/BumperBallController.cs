@@ -29,7 +29,7 @@ public class BumperBallController : MonoBehaviour
 
     void Update()
     {
-        if (Characters.Count(c => c != null) == 1 && Winner == CharacterType.Unknown)
+        if (Characters.Count(c => c != null) == 1 && Winner == CharacterType.Unknown && !_isDraw)
         {
             CharacterFollow winningCharacter = Characters.Find(c => c != null);
             Winner = winningCharacter.CharacterType;
@@ -41,7 +41,7 @@ public class BumperBallController : MonoBehaviour
             Fireworks.Play();
             Invoke("FadeOut", 2);
         }
-        else if (Time.timeSinceLevelLoad >= 30 && !_isDraw)
+        else if (Time.timeSinceLevelLoad >= 30 && Winner == CharacterType.Unknown && !_isDraw)
         {
             _isDraw = true;
             foreach (var character in Characters)

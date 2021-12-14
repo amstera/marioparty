@@ -42,7 +42,7 @@ public class Question : MonoBehaviour
         }
     }
 
-    public void Show(string text, AIChoice choice, string firstAnswer = "Yes", string secondAnswer = "No", Action<bool> callback = null)
+    public void Show(string text, AIChoice choice, string firstAnswer = "Yes", string secondAnswer = "No", Action<bool> callback = null, float showDelay = 0)
     {
         if (_isShowingQuestion)
         {
@@ -50,7 +50,6 @@ public class Question : MonoBehaviour
         }
 
         _callback = callback;
-        _isShowingQuestion = true;
         _aiChoice = choice;
         QuestionText.text = text;
         YesText.text = firstAnswer;
@@ -60,6 +59,15 @@ public class Question : MonoBehaviour
         IsYes = true;
         Yes.enabled = true;
 
+        if (showDelay > 0)
+        {
+            Invoke("ShowDelay", showDelay);
+        }
+        else
+        {
+            _isShowingQuestion = true;
+        }
+
         if (_aiChoice == AIChoice.First)
         {
             Invoke("SelectChoice", 0.75f);
@@ -68,6 +76,11 @@ public class Question : MonoBehaviour
         {
             Invoke("ChooseNoAI", 0.5f);
         }
+    }
+
+    private void ShowDelay()
+    {
+        _isShowingQuestion = true;
     }
 
     private void ChooseNo()
