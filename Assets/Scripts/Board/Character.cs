@@ -154,6 +154,12 @@ public class Character : MonoBehaviour
         Animator.SetTrigger("Victory");
     }
 
+    public void UseItem(ItemType item)
+    {
+        Items.Remove(item);
+        _gameController.UseItem(this, item);
+    }
+
     public void Show()
     {
         gameObject.SetActive(true);

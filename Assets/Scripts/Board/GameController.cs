@@ -29,6 +29,7 @@ public class GameController : MonoBehaviour
     public FadePanel FadePanel;
     public EventText EventText;
     public ItemsPanel ItemsPanel;
+    public ItemChoicePanel ItemChoicePanel;
 
     public AudioSource EnterMiniGameSound;
     public AudioSource MusicAS;
@@ -235,6 +236,23 @@ public class GameController : MonoBehaviour
         return 0;
     }
 
+    public void UseItem(Character character, ItemType item)
+    {
+        LoadAllCharacterStats(false);
+
+        switch (item)
+        {
+            case ItemType.Mushroom:
+            case ItemType.DoubleDice:
+            case ItemType.WarpBlock:
+            case ItemType.GoldenPipe:
+            default:
+                break;
+        }
+
+        Dialog.ShowText($"{character.Type} used a {item}!", SetUpDice);
+    }
+
     private void ChooseCharacter()
     {
         Character character = Characters[CharIndex];
@@ -315,9 +333,13 @@ public class GameController : MonoBehaviour
         else
         {
             Character character = GetCurrentCharacter();
-            //show option to choose item
-            Debug.Log($"{character.Type} tried to use an item.");
-            SetUpDice();
+            if (character.Items.Count == 0)
+            {
+                Dialog.ShowText("You don't have any items to use.", SetUpDice);
+                return;
+            }
+
+            ItemChoicePanel.ShowPanel(character, ItemsPanel, SetUpDice);
         }
     }
 
