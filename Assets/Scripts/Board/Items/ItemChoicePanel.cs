@@ -86,6 +86,7 @@ public class ItemChoicePanel : MonoBehaviour
                 continue;
             }
 
+            ItemChoices[i].gameObject.SetActive(true);
             var characterItem = character.Items[i];
             var matchingItem = itemsPanel.ItemSelections.Find(i => i.Type == characterItem);
             ItemChoices[i].Set(matchingItem.ItemNameText.text, matchingItem.ItemImage, matchingItem.Type);

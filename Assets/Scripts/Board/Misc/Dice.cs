@@ -17,6 +17,8 @@ public class Dice : MonoBehaviour
     public AudioSource DiceHit;
     public AudioSource DiceRoll;
 
+    private string _rollText;
+
     void Start()
     {
         Text.transform.SetParent(null);
@@ -106,6 +108,8 @@ public class Dice : MonoBehaviour
             Character.Roll += 3;
         }
 
+        _rollText = Character.Roll.ToString();
+
         Invoke("RevealNumber", 0.55f);
     }
 
@@ -114,7 +118,9 @@ public class Dice : MonoBehaviour
         Explosion.Play();
         ShowHideSides(false);
         Text.transform.position = transform.position;
-        Text.text = Character.Roll.ToString();
+        Text.text = _rollText;
+
+        Invoke("HideNumber", 0.5f);
     }
 
     private void ShowHideSides(bool showSides)
@@ -124,5 +130,10 @@ public class Dice : MonoBehaviour
         {
             meshRenderer.enabled = showSides;
         }
+    }
+
+    private void HideNumber()
+    {
+        Text.text = string.Empty;
     }
 }

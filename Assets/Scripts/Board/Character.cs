@@ -32,10 +32,12 @@ public class Character : MonoBehaviour
     private bool _isWalking;
 
     private GameController _gameController;
+    public SpacesText _spacesText;
 
     void Start()
     {
         _gameController = GameController.Instance;
+        _spacesText = FindObjectOfType<SpacesText>();
         AmountDisplay.transform.SetParent(null);
         foreach (Character character in FindObjectsOfType<Character>())
         {
@@ -193,6 +195,10 @@ public class Character : MonoBehaviour
 
         Circle space = Destinations.Peek();
         Vector3 pos = PositionFromSpace(space);
+        if (Destinations.Count < Roll)
+        {
+            _spacesText.Show(Destinations.Count.ToString());
+        }
         if (Vector3.Distance(transform.position, pos) < 0.2f)
         {
             Destinations.Dequeue();
@@ -204,6 +210,7 @@ public class Character : MonoBehaviour
                 {
                     Step.Stop();
                 }
+                _spacesText.Hide();
                 _gameController.ReachedSpace(this, space);
                 return;
             }

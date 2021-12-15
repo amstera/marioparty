@@ -30,6 +30,7 @@ public class GameController : MonoBehaviour
     public EventText EventText;
     public ItemsPanel ItemsPanel;
     public ItemChoicePanel ItemChoicePanel;
+    public Pipe GoldenPipe;
 
     public AudioSource EnterMiniGameSound;
     public AudioSource MusicAS;
@@ -307,7 +308,43 @@ public class GameController : MonoBehaviour
 
     private void UseGoldenPipe(Character character)
     {
+        character.UsedItem = ItemType.None;
 
+        var goldenPipe = Instantiate<Pipe>(GoldenPipe, character.transform.position, Quaternion.identity);
+        goldenPipe.Show(GoldenPipeRaised);
+    }
+
+    private void GoldenPipeRaised()
+    {
+        var character = GetCurrentCharacter();
+        character.gameObject.SetActive(false);
+
+        var starSpace = Spaces[Spaces.FindIndex(s => s.Type == CircleType.Star) - 1];
+        var goldenPipe = Instantiate<Pipe>(GoldenPipe, starSpace.transform.position, Quaternion.identity);
+        goldenPipe.Show(RevealCharacterFromGoldenPipe);
+
+        foreach (CharacterType charType in starSpace.OnSpace)
+        {
+            Characters.Find(c => c.Type == charType).Hide();
+        }
+
+        Spaces[character.Position].OnSpace.Remove(character.Type);
+    }
+
+    private void RevealCharacterFromGoldenPipe()
+    {
+        var character = GetCurrentCharacter();
+        character.gameObject.SetActive(true);
+
+        var starSpace = Spaces.FindIndex(s => s.Type == CircleType.Star);
+        character.Position = starSpace - 1;
+
+        var newSpace = Spaces[character.Position];
+        character.transform.position = new Vector3(newSpace.transform.position.x, character.transform.position.y, newSpace.transform.position.z);
+
+        newSpace.OnSpace.Add(character.Type);
+
+        Invoke("SetUpDice", 0.5f);
     }
 
     private void ChooseCharacter()
@@ -407,15 +444,7 @@ public class GameController : MonoBehaviour
             return false;
         }
 
-        if (Turn == MaxTurns - 1)
-        {
-            if (character.Items.Any(i => i != ItemType.WarpBlock))
-            {
-                return true;
-            }
-        }
-
-        if (character.Items.All(i => i == ItemType.GoldenPipe) && character.Coins <  20)
+        if (character.Items.All(i => i == ItemType.GoldenPipe) && character.Coins < 20)
         {
             return false;
         }
