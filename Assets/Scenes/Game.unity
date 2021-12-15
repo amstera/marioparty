@@ -784,7 +784,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 254, y: -0}
+  m_AnchoredPosition: {x: 254, y: 32}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &92615501
@@ -2488,13 +2488,14 @@ RectTransform:
   - {fileID: 1052861434}
   - {fileID: 1740227605}
   - {fileID: 92615500}
+  - {fileID: 1645236047}
   m_Father: {fileID: 1372664652}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 250}
+  m_SizeDelta: {x: 486.6063, y: 304.1289}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &458880470
 MonoBehaviour:
@@ -2550,6 +2551,7 @@ MonoBehaviour:
   - {fileID: 1052861435}
   - {fileID: 1740227606}
   - {fileID: 92615501}
+  Description: {fileID: 1645236049}
   SelectAS: {fileID: 458880473}
 --- !u!82 &458880473
 AudioSource:
@@ -2816,7 +2818,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000015259, y: 88.56192}
+  m_AnchoredPosition: {x: -0.000015259, y: 120.56192}
   m_SizeDelta: {x: 400, y: 72.8762}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &505094196
@@ -4706,6 +4708,7 @@ MonoBehaviour:
   ItemImage: {fileID: 21300000, guid: 92fdc742aeec34f148aa7b9b900c44c5, type: 3}
   Type: 4
   Cost: 25
+  Description: Warp to the star
   IsSelected: 0
 --- !u!1001 &801885018
 PrefabInstance:
@@ -5166,6 +5169,7 @@ MonoBehaviour:
   ItemImage: {fileID: 21300000, guid: b4560293f0e304e8ba7f9eca91439dac, type: 3}
   Type: 2
   Cost: 5
+  Description: Roll two dice blocks
   IsSelected: 0
 --- !u!114 &872678653 stripped
 MonoBehaviour:
@@ -6068,6 +6072,7 @@ MonoBehaviour:
   ItemImage: {fileID: 21300000, guid: 242bd97d2fe244aa8a25f04e50d7c601, type: 3}
   Type: 1
   Cost: 3
+  Description: Add +3 to your roll
   IsSelected: 1
 --- !u!1 &1013048546
 GameObject:
@@ -6360,7 +6365,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.0000205, y: 0}
+  m_AnchoredPosition: {x: -3.0000205, y: 32.000004}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1052861435
@@ -8921,6 +8926,7 @@ MonoBehaviour:
   ItemImage: {fileID: 21300000, guid: 45d807478e94042898ebae879236d057, type: 3}
   Type: 3
   Cost: 8
+  Description: Swap places with another player
   IsSelected: 0
 --- !u!114 &1455723905 stripped
 MonoBehaviour:
@@ -9785,6 +9791,101 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43eb74ffbc0fe4bcf9e8cd4cff78ca1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1645236046
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1645236047}
+  - component: {fileID: 1645236050}
+  - component: {fileID: 1645236049}
+  - component: {fileID: 1645236048}
+  m_Layer: 5
+  m_Name: Description
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1645236047
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645236046}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 458880469}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 9.0401, y: -103.59146}
+  m_SizeDelta: {x: 443.6507, y: 45.9145}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1645236048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645236046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
+--- !u!114 &1645236049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645236046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 20
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Add +3 to your roll.
+--- !u!222 &1645236050
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645236046}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1649212557
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10668,7 +10769,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 130.99998, y: 0}
+  m_AnchoredPosition: {x: 130.99998, y: 32.000004}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1740227606

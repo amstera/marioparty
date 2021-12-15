@@ -16,6 +16,7 @@ public class Character : MonoBehaviour
     public CharacterType Type;
     public Queue<Circle> Destinations;
     public List<ItemType> Items = new List<ItemType>();
+    public ItemType UsedItem;
 
     public AmountDisplay AmountDisplay;
 
@@ -157,7 +158,8 @@ public class Character : MonoBehaviour
     public void UseItem(ItemType item)
     {
         Items.Remove(item);
-        _gameController.UseItem(this, item);
+        UsedItem = item;
+        _gameController.UseItem(this);
     }
 
     public void Show()
@@ -168,6 +170,18 @@ public class Character : MonoBehaviour
     public void Hide()
     {
         gameObject.SetActive(false);
+    }
+
+    public void PlayHappySound()
+    {
+        CharacterAS.clip = CharacterSounds[(int)CharacterSoundType.Happy];
+        CharacterAS.Play();
+    }
+
+    public void PlaySadSound()
+    {
+        CharacterAS.clip = CharacterSounds[(int)CharacterSoundType.Sad];
+        CharacterAS.Play();
     }
 
     private void Walk()

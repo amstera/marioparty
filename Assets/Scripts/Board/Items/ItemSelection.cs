@@ -10,6 +10,7 @@ public class ItemSelection : MonoBehaviour
     public Sprite ItemImage;
     public ItemType Type;
     public int Cost;
+    public string Description;
 
     public bool IsSelected;
 

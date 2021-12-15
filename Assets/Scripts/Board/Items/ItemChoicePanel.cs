@@ -1,13 +1,16 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemChoicePanel : MonoBehaviour
 {
     public List<ItemChoice> ItemChoices;
+    public Text Description;
 
     private int _choiceIndex;
     private Character _character;
+    private ItemsPanel _itemsPanel;
     private Action _callback;
     private bool _choseItem;
 
@@ -23,6 +26,8 @@ public class ItemChoicePanel : MonoBehaviour
                 _choiceIndex++;
                 ItemChoices[_choiceIndex].Select(true);
 
+                UpdateDescription();
+
                 SelectAS.Play();
             }
             else if (_choiceIndex > 0 && (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)))
@@ -30,6 +35,8 @@ public class ItemChoicePanel : MonoBehaviour
                 ItemChoices[_choiceIndex].Select(false);
                 _choiceIndex--;
                 ItemChoices[_choiceIndex].Select(true);
+
+                UpdateDescription();
 
                 SelectAS.Play();
             }
@@ -53,6 +60,13 @@ public class ItemChoicePanel : MonoBehaviour
             _choiceIndex = itemChoice;
             ItemChoices[_choiceIndex].Select(true);
 
+            UpdateDescription();
+
+            if (_choiceIndex > 0)
+            {
+                SelectAS.Play();
+            }
+
             _choseItem = true;
             Invoke("ChooseItem", 0.75f);
         }
@@ -62,6 +76,7 @@ public class ItemChoicePanel : MonoBehaviour
     {
         _character = character;
         _callback = callback;
+        _itemsPanel = itemsPanel;
 
         for (int i = 0; i < ItemChoices.Count; i++)
         {
@@ -77,6 +92,7 @@ public class ItemChoicePanel : MonoBehaviour
             ItemChoices[i].Select(i == 0);
         }
 
+        UpdateDescription();
         gameObject.SetActive(true);
     }
 
@@ -84,5 +100,11 @@ public class ItemChoicePanel : MonoBehaviour
     {
         _character.UseItem(ItemChoices[_choiceIndex].Type);
         gameObject.SetActive(false);
+    }
+
+    private void UpdateDescription()
+    {
+        var matchingItem = _itemsPanel.ItemSelections.Find(i => i.Type == ItemChoices[_choiceIndex].Type);
+        Description.text = matchingItem.Description;
     }
 }

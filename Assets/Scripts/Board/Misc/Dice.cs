@@ -7,6 +7,7 @@ public class Dice : MonoBehaviour
     public bool IsRotating;
     public float Speed = 125;
     public int ChosenNumber = -1;
+    public bool IsDoubleDice;
     public ParticleSystem Stars;
     public ParticleSystem Explosion;
     public TextMeshPro Text;
@@ -89,7 +90,21 @@ public class Dice : MonoBehaviour
         DiceHit.Play();
         Stars.Play();
         transform.localEulerAngles = newAngle;
-        Character.Roll = ChosenNumber;
+
+        if (IsDoubleDice)
+        {
+            Character.Roll += ChosenNumber;
+        }
+        else
+        {
+            Character.Roll = ChosenNumber;
+        }
+
+        if (Character.UsedItem == ItemType.Mushroom)
+        {
+            Character.UsedItem = ItemType.None;
+            Character.Roll += 3;
+        }
 
         Invoke("RevealNumber", 0.55f);
     }
@@ -99,7 +114,7 @@ public class Dice : MonoBehaviour
         Explosion.Play();
         ShowHideSides(false);
         Text.transform.position = transform.position;
-        Text.text = ChosenNumber.ToString();
+        Text.text = Character.Roll.ToString();
     }
 
     private void ShowHideSides(bool showSides)

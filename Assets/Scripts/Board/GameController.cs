@@ -73,7 +73,15 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            Move(character);
+            if (character.UsedItem == ItemType.DoubleDice)
+            {
+                character.UsedItem = ItemType.None;
+                Dialog.ShowText($"{character.Type} rolls again with Double Dice", SetUpDoubleDice);
+            }
+            else
+            {
+                Move(character);
+            }
         }
     }
 
@@ -166,7 +174,7 @@ public class GameController : MonoBehaviour
             {
                 if (Turn == MaxTurns - 1)
                 {
-                    Dialog.ShowText("You can't buy an item on the last turn.", ContinueTurn);
+                    Dialog.ShowText("You can't buy an item on the last turn", ContinueTurn);
                 }
                 else
                 {
@@ -236,21 +244,70 @@ public class GameController : MonoBehaviour
         return 0;
     }
 
-    public void UseItem(Character character, ItemType item)
+    public void UseItem(Character character)
     {
         LoadAllCharacterStats(false);
 
-        switch (item)
+        var itemType = character.UsedItem;
+        var matchingItem = ItemsPanel.ItemSelections.Find(i => i.Type == itemType);
+        Dialog.ShowText($"{character.Type} used a {matchingItem.ItemNameText.text}!", CallItem);
+    }
+
+    private void CallItem()
+    {
+        var character = GetCurrentCharacter();
+        switch (character.UsedItem)
         {
             case ItemType.Mushroom:
             case ItemType.DoubleDice:
+                SetUpDice();
+                return;
             case ItemType.WarpBlock:
+                WarpCharacter(character);
+                return;
             case ItemType.GoldenPipe:
-            default:
-                break;
+                UseGoldenPipe(character);
+                return;
+        }
+    }
+
+    private void WarpCharacter(Character character)
+    {
+        var otherCharacters = Characters.FindAll(c => c.Type != character.Type);
+        Character randomCharacter = otherCharacters[Random.Range(0, otherCharacters.Count)];
+        var randomCharacterPosition = randomCharacter.transform.position;
+
+        randomCharacter.transform.position = character.transform.position + Vector3.up;
+        character.transform.position = randomCharacterPosition + Vector3.up;
+
+        Spaces[character.Position].OnSpace.Add(randomCharacter.Type);
+        Spaces[randomCharacter.Position].OnSpace.Remove(randomCharacter.Type);
+
+        foreach (CharacterType charType in Spaces[randomCharacter.Position].OnSpace)
+        {
+            Characters.Find(c => c.Type == charType).Hide();
         }
 
-        Dialog.ShowText($"{character.Type} used a {item}!", SetUpDice);
+        Spaces[randomCharacter.Position].OnSpace.Add(character.Type);
+        Spaces[character.Position].OnSpace.Remove(character.Type);
+
+        var randomCharacterSpacePosition = randomCharacter.Position;
+        randomCharacter.Position = character.Position;
+        character.Position = randomCharacterSpacePosition;
+
+        randomCharacter.gameObject.SetActive(true);
+
+        character.UsedItem = ItemType.None;
+
+        character.PlayHappySound();
+        randomCharacter.PlaySadSound();
+
+        Dialog.ShowText($"{character.Type} and {randomCharacter.Type} swapped places!", SetUpDice);
+    }
+
+    private void UseGoldenPipe(Character character)
+    {
+
     }
 
     private void ChooseCharacter()
@@ -335,7 +392,7 @@ public class GameController : MonoBehaviour
             Character character = GetCurrentCharacter();
             if (character.Items.Count == 0)
             {
-                Dialog.ShowText("You don't have any items to use.", SetUpDice);
+                Dialog.ShowText("You don't have any items to use", SetUpDice);
                 return;
             }
 
@@ -391,12 +448,28 @@ public class GameController : MonoBehaviour
 
     private void SetUpDice()
     {
+        SetUpDice(false);
+    }
+
+    private void SetUpDoubleDice()
+    {
+        SetUpDice(true);
+    }
+
+    private void SetUpDice(bool isDouble)
+    {
         Character character = Characters[CharIndex];
         Vector3 characterPosition = character.transform.position;
-        GameObject die = Dice[(int)character.Type - 1].gameObject;
+        Dice singleDie = Dice[(int)character.Type - 1];
 
-        die.transform.position = new Vector3(characterPosition.x, die.transform.position.y, characterPosition.z);
-        die.SetActive(true);
+        if (isDouble)
+        {
+            singleDie.gameObject.SetActive(false);
+        }
+
+        singleDie.IsDoubleDice = isDouble;
+        singleDie.transform.position = new Vector3(characterPosition.x, singleDie.transform.position.y, characterPosition.z);
+        singleDie.gameObject.SetActive(true);
         ChooseCharacter();
     }
 
@@ -563,7 +636,16 @@ public class GameController : MonoBehaviour
             else
             {
                 var possibleItems = ItemsPanel.GetItems(upgradedItems).FindAll(i => i.Cost <= character.Coins);
-                var selectedItem = possibleItems[Random.Range(0, possibleItems.Count)];
+                ItemSelection selectedItem;
+                var goldenPipe = possibleItems.Find(i => i.Type == ItemType.GoldenPipe);
+                if (goldenPipe != null)
+                {
+                    selectedItem = goldenPipe;
+                }
+                else
+                {
+                    selectedItem = possibleItems[Random.Range(0, possibleItems.Count)];
+                }
 
                 character.ChangeCoins(-selectedItem.Cost, true);
                 character.AddItem(selectedItem);
