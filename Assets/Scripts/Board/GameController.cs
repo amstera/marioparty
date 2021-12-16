@@ -387,7 +387,7 @@ public class GameController : MonoBehaviour
             CurrentTurnText.Display(Turn + 1, MaxTurns);
             if ((Turn + 1) == MaxTurns - 5)
             {
-                Dialog.ShowText($"5 turns left, spaces are worth double!", ShowCharacterStart);
+                Dialog.ShowText($"Only 5 turns left! Spaces are worth double!", ShowCharacterStart);
                 return;
             }
         }
