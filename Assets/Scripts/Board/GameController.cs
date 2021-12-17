@@ -62,7 +62,7 @@ public class GameController : MonoBehaviour
         else
         {
             UpdateFromSaveData(saveData);
-            Rankings.ShowRankings(DoTurn, saveData.LastWinningCharacter, false);
+            Rankings.ShowRankings(DoTurn, saveData.LastWinningCharacters, false);
         }
     }
 
@@ -752,7 +752,7 @@ public class GameController : MonoBehaviour
 
     private void ShowRankings()
     {
-        Rankings.ShowRankings(ContinueTurn, CharacterType.Unknown, false);
+        Rankings.ShowRankings(ContinueTurn, new List<CharacterType> { CharacterType.Unknown }, false);
     }
 
     private void LoadMiniGame()
@@ -770,7 +770,7 @@ public class GameController : MonoBehaviour
 
     private void LoadChosenMiniGame()
     {
-        List<string> miniGames = new List<string> { "Lava Jump", "Bumper Ball", "Shy Guy" };
+        List<string> miniGames = new List<string> { "Lava Jump", "Bumper Ball", "Shy Guy", "Air Hockey" };
         miniGames.Remove(LastMiniGame);
         SceneManager.LoadSceneAsync(miniGames[Random.Range(0, miniGames.Count)]);
     }

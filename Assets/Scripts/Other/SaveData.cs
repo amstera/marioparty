@@ -11,7 +11,7 @@ public class SaveData
     public string LastMiniGame;
     public bool BoardReversed;
     public List<CompressedCircle> Spaces;
-    public CharacterType LastWinningCharacter;
+    public List<CharacterType> LastWinningCharacters;
 }
 
 [Serializable]

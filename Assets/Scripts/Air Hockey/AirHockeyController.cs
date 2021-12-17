@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,7 +9,7 @@ public class AirHockeyController : MonoBehaviour
     public SpecialText Text;
     public ParticleSystem Fireworks;
     public FadePanel FadePanel;
-    public CharacterType Winner;
+    public List<CharacterType> Winners;
 
     public Lights RedLights;
     public Lights BlueLights;
@@ -21,7 +22,6 @@ public class AirHockeyController : MonoBehaviour
     public List<AudioClip> MiniGameSounds;
 
     private SaveData _saveData;
-    private bool _isDraw;
 
     void Start()
     {
@@ -44,6 +44,8 @@ public class AirHockeyController : MonoBehaviour
             RedLights.AddScore();
         }
 
+        Characters.FindAll(c => c.Color == color).ForEach(c => c.Win());
+
         if (RedLights.Score == 3)
         {
             ShowWinner(TeamColor.Red);
@@ -54,7 +56,7 @@ public class AirHockeyController : MonoBehaviour
         }
         else
         {
-            AddShell();
+            Invoke("AddShell", 0.5f);
         }
     }
 
@@ -62,7 +64,21 @@ public class AirHockeyController : MonoBehaviour
     {
         Characters.ForEach(c => c.CanMove = false);
 
-        //do stuff
+        foreach (var character in Characters)
+        {
+            if (character.Color == color)
+            {
+                Winners.Add(character.Type);
+            }
+        }
+
+        MusicAS.Stop();
+        MiniGameAS.clip = MiniGameSounds[(int)MiniGameSoundType.Win];
+        MiniGameAS.Play();
+
+        Text.Show($"{Winners[0]} & {Winners[1]} Win!", 2f);
+        Fireworks.Play();
+        Invoke("FadeOut", 2f);
     }
 
     private void ShowGoText()
@@ -90,12 +106,17 @@ public class AirHockeyController : MonoBehaviour
     {
         if (_saveData != null)
         {
-            _saveData.LastWinningCharacter = _isDraw ? CharacterType.Unknown : Winner;
-            _saveData.LastMiniGame = "Shy Guy";
-            if (Winner != CharacterType.Unknown)
+            _saveData.LastWinningCharacters = Winners;
+            _saveData.LastMiniGame = "Air Hockey";
+            if (Winners.Count > 0)
             {
-                var winningCharacter = _saveData.Characters.Find(c => c.Type == Winner);
-                winningCharacter.Coins += 10;
+                foreach (var character in _saveData.Characters)
+                {
+                    if (Winners.Any(w => w == character.Type))
+                    {
+                        character.Coins += 10;
+                    }
+                }
             }
 
             SaveController.Save(_saveData);

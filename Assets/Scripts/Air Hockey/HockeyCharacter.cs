@@ -4,6 +4,7 @@ public class HockeyCharacter : MonoBehaviour
 {
     public Animator Animator;
     public CharacterType Type;
+    public TeamColor Color;
 
     public bool IsPlayer;
     public float Speed = 5.5f;
@@ -41,7 +42,7 @@ public class HockeyCharacter : MonoBehaviour
 
             if (_shell != null)
             {
-                float buffer = 0.75f;
+                float buffer = 1f;
                 if (transform.position.z < _shell.transform.position.z - buffer)
                 {
                     transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.forward * Speed, Time.deltaTime);
@@ -59,5 +60,10 @@ public class HockeyCharacter : MonoBehaviour
         Animator.SetInteger("State", (int)CharacterState.Idle);
         Animator.SetTrigger("Victory");
         VictoryAS.Play();
+    }
+
+    public void Lose()
+    {
+        LoseAS.Play();
     }
 }

@@ -27,7 +27,7 @@ public class EndGameController : MonoBehaviour
     {
         _saveData = SaveController.Load();
         EndAS.Play();
-        Dialog.ShowText("And the winner of Mario Party is...", RevealWinner);
+        Dialog.ShowText("Time for the bonus stars!", StartBonusStars);
     }
 
     void Update()
@@ -36,8 +36,18 @@ public class EndGameController : MonoBehaviour
         {
             _isWinnerShown = false;
             WinnerText.text = string.Empty;
-            Rankings.ShowRankings(FadeOut, CharacterType.Unknown, true);
+            Rankings.ShowRankings(FadeOut, new List<CharacterType> {  CharacterType.Unknown }, true);
         }
+    }
+
+    private void StartBonusStars()
+    {
+        Dialog.ShowText("The bonus star for most mini games won goes to...", GiveMiniGameBonusStar);
+    }
+
+    private void GiveMiniGameBonusStar()
+    {
+        //do something
     }
 
     private void RevealWinner()

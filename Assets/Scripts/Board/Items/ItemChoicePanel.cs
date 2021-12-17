@@ -100,6 +100,7 @@ public class ItemChoicePanel : MonoBehaviour
     private void ChooseItem()
     {
         _character.UseItem(ItemChoices[_choiceIndex].Type);
+        _choseItem = false;
         gameObject.SetActive(false);
     }
 

@@ -26,7 +26,7 @@ public class ItemsPanel : MonoBehaviour
     public List<ItemSelection> GetItems(bool showUpdatedItems)
     {
         ShowUpdatedItems(showUpdatedItems);
-        return ItemSelections;
+        return _shownSelections;
     }
 
     private void ShowUpdatedItems(bool showUpdatedItems)

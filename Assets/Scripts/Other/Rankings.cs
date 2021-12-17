@@ -30,7 +30,7 @@ public class Rankings : MonoBehaviour
         }
     }
 
-    public void ShowRankings(Action callback, CharacterType miniGameWinner, bool useSaveData)
+    public void ShowRankings(Action callback, List<CharacterType> miniGameWinners, bool useSaveData)
     {
         Cam.Blur.enabled = true;
         _isShowingRanking = true;
@@ -46,7 +46,7 @@ public class Rankings : MonoBehaviour
         }
         _callback = callback;
 
-        if (miniGameWinner != CharacterType.Unknown)
+        if (miniGameWinners.First() != CharacterType.Unknown)
         {
             CoinSound.Play();
         }
@@ -68,7 +68,7 @@ public class Rankings : MonoBehaviour
 
             for (int i = 0; i < RankingPanels.Count; i++)
             {
-                RankingPanels[i].Reload(GameController.GetPlace(rankedCharacters[i].Type, rankedCharacters), rankedCharacters[i], rankedCharacters[i].Type == miniGameWinner);
+                RankingPanels[i].Reload(GameController.GetPlace(rankedCharacters[i].Type, rankedCharacters), rankedCharacters[i], miniGameWinners.Any(m => m == rankedCharacters[i].Type));
             }
         }
         else
@@ -76,7 +76,7 @@ public class Rankings : MonoBehaviour
             List<Character> rankedCharacters = _gameController.Characters.OrderByDescending(c => c.Stars).ThenByDescending(c => c.Coins).ToList();
             for (int i = 0; i < RankingPanels.Count; i++)
             {
-                RankingPanels[i].Reload(_gameController.GetPlace(rankedCharacters[i].Type), rankedCharacters[i], rankedCharacters[i].Type == miniGameWinner);
+                RankingPanels[i].Reload(_gameController.GetPlace(rankedCharacters[i].Type), rankedCharacters[i], miniGameWinners.Any(m => m == rankedCharacters[i].Type));
             }
         }
     }
