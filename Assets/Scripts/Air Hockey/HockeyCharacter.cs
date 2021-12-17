@@ -5,6 +5,7 @@ public class HockeyCharacter : MonoBehaviour
     public Animator Animator;
     public CharacterType Type;
     public TeamColor Color;
+    public bool IsGoalie;
 
     public bool IsPlayer;
     public float Speed = 5.5f;
@@ -14,6 +15,16 @@ public class HockeyCharacter : MonoBehaviour
     public AudioSource LoseAS;
 
     private Shell _shell;
+    private float _buffer;
+
+    void Start()
+    {
+        _buffer = Random.Range(0.85f, 1.15f);
+        if (IsGoalie)
+        {
+            _buffer *= 1.5f;
+        }
+    }
 
     void Update()
     {
@@ -42,12 +53,11 @@ public class HockeyCharacter : MonoBehaviour
 
             if (_shell != null)
             {
-                float buffer = 1f;
-                if (transform.position.z < _shell.transform.position.z - buffer)
+                if (transform.position.z < _shell.transform.position.z - _buffer)
                 {
                     transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.forward * Speed, Time.deltaTime);
                 }
-                else if (transform.position.z > _shell.transform.position.z + buffer)
+                else if (transform.position.z > _shell.transform.position.z + _buffer)
                 {
                     transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.back * Speed, Time.deltaTime);
                 }

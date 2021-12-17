@@ -815,6 +815,8 @@ public class GameController : MonoBehaviour
             character.IsPlayer = savedCharacter.IsPlayer;
             character.Roll = savedCharacter.RollPosition;
             character.Items = savedCharacter.Items;
+            character.MiniGamesWon = savedCharacter.MiniGamesWon;
+            character.SpacesWalked = savedCharacter.SpacesWalked;
         }
 
         for (int i = 0; i < Spaces.Count; i++)

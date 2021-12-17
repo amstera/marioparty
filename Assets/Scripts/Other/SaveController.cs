@@ -22,7 +22,9 @@ public class SaveController
                     Stars = character.Stars,
                     RollPosition = index, 
                     IsPlayer = character.IsPlayer,
-                    Items = character.Items
+                    Items = character.Items,
+                    MiniGamesWon = character.MiniGamesWon,
+                    SpacesWalked = character.SpacesWalked
                 }
             );
             index++;

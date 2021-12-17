@@ -138,6 +138,7 @@ public class ShyGuyController : MonoBehaviour
             {
                 var winningCharacter = _saveData.Characters.Find(c => c.Type == Winner);
                 winningCharacter.Coins += 10;
+                winningCharacter.MiniGamesWon++;
             }
 
             SaveController.Save(_saveData);

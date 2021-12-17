@@ -115,6 +115,7 @@ public class AirHockeyController : MonoBehaviour
                     if (Winners.Any(w => w == character.Type))
                     {
                         character.Coins += 10;
+                        character.MiniGamesWon++;
                     }
                 }
             }

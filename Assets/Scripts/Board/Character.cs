@@ -13,6 +13,8 @@ public class Character : MonoBehaviour
     public int Position;
     public int Coins;
     public int Stars;
+    public int MiniGamesWon;
+    public int SpacesWalked;
     public CharacterType Type;
     public Queue<Circle> Destinations;
     public List<ItemType> Items = new List<ItemType>();

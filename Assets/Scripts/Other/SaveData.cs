@@ -24,6 +24,8 @@ public class CompressedCharacter
     public int Stars;
     public int RollPosition;
     public bool IsPlayer;
+    public int MiniGamesWon;
+    public int SpacesWalked;
     public List<ItemType> Items;
 }
 

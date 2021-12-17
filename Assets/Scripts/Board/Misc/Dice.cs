@@ -108,6 +108,7 @@ public class Dice : MonoBehaviour
             Character.Roll += 3;
         }
 
+        Character.SpacesWalked += Character.Roll;
         _rollText = Character.Roll.ToString();
 
         Invoke("RevealNumber", 0.55f);
