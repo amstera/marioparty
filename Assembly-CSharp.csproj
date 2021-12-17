@@ -59,6 +59,7 @@
     <Compile Include="Assets/Scripts/Other/CharacterStat.cs" />
     <Compile Include="Assets/Scripts/Other/SpacesText.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/ColorCorrectionCurves.cs" />
+    <Compile Include="Assets/Scripts/Air Hockey/HockeyCharacter.cs" />
     <Compile Include="Assets/Scripts/Board/Misc/Pipe.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/SepiaTone.cs" />
     <Compile Include="Assets/Scripts/Board/Items/ItemChoicePanel.cs" />
@@ -70,11 +71,14 @@
     <Compile Include="Assets/Scripts/End Game/EndGameController.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/ContrastEnhance.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/Blur.cs" />
+    <Compile Include="Assets/Scripts/Air Hockey/LightBulb.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/SunShafts.cs" />
+    <Compile Include="Assets/Scripts/Air Hockey/Shell.cs" />
     <Compile Include="Assets/Scripts/Other/RankingPanel.cs" />
     <Compile Include="Assets/Scripts/Board/Items/ItemChoice.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/PostEffectsHelper.cs" />
     <Compile Include="Assets/Scripts/Board/GameController.cs" />
+    <Compile Include="Assets/Scripts/Air Hockey/Lights.cs" />
     <Compile Include="Assets/Scripts/Board/CloudController.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/DepthOfFieldDeprecated.cs" />
     <Compile Include="Assets/Scripts/Lava Jump/Spinner.cs" />
@@ -83,13 +87,14 @@
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/CameraMotionBlur.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/Bloom.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/GlobalFog.cs" />
-    <Compile Include="Assets/Scripts/Other/EventText.cs" />
+    <Compile Include="Assets/Scripts/Board/EventText.cs" />
     <Compile Include="Assets/Scripts/Board/TurnText.cs" />
     <Compile Include="Assets/Scripts/Other/SaveController.cs" />
     <Compile Include="Assets/Scripts/Lava Jump/LavaController.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/PostEffectsBase.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/Tonemapping.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/ScreenSpaceAmbientObscurance.cs" />
+    <Compile Include="Assets/Scripts/Air Hockey/AirHockeyController.cs" />
     <Compile Include="Assets/Scripts/Character Chooser/CharacterChooserController.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/BloomAndFlares.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/VignetteAndChromaticAberration.cs" />
@@ -137,11 +142,8 @@
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/ColorCorrectionRamp.cs" />
     <Compile Include="Assets/Scripts/Board/Items/ItemSelection.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/Triangles.cs" />
-    <Compile Include="Assets/Scripts/Air Hockey/Shell.cs" />
-    <Compile Include="Assets/Scripts/Air Hockey/Lights.cs" />
-    <Compile Include="Assets/Scripts/Air Hockey/LightBulb.cs" />
-    <Compile Include="Assets/Scripts/Air Hockey/AirHockeyController.cs" />
-    <Compile Include="Assets/Scripts/Air Hockey/HockeyCharacter.cs" />
+    <Compile Include="Assets/Scripts/Board/LuckySpace.cs" />
+    <Compile Include="Assets/Scripts/Board/LuckySpaceOption.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Shaders/Tonemapper.shader" />

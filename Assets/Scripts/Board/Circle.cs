@@ -14,5 +14,6 @@ public enum CircleType
     Star = 2,
     Boo = 3,
     Event = 4,
-    Item = 5
+    Item = 5,
+    Lucky = 6
 }

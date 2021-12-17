@@ -46,7 +46,7 @@ public class Rankings : MonoBehaviour
         }
         _callback = callback;
 
-        if (miniGameWinners.First() != CharacterType.Unknown)
+        if (miniGameWinners.Count > 0 && miniGameWinners.First() != CharacterType.Unknown)
         {
             CoinSound.Play();
         }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,7 @@ public class ItemChoicePanel : MonoBehaviour
     private ItemsPanel _itemsPanel;
     private Action _callback;
     private bool _choseItem;
+    private int _turnsLeft;
 
     public AudioSource SelectAS;
 
@@ -56,7 +58,24 @@ public class ItemChoicePanel : MonoBehaviour
         else if (!_choseItem)
         {
             ItemChoices[_choiceIndex].Select(false);
-            int itemChoice = UnityEngine.Random.Range(0, _character.Items.Count);
+            int itemChoice;
+            if (_character.Coins >= 20 && _character.Items.Any(c => c == ItemType.GoldenPipe))
+            {
+                itemChoice = ItemChoices.FindIndex(i => i.Type == ItemType.GoldenPipe);
+            }
+            else if (_turnsLeft < 5)
+            {
+                var userItems = _itemsPanel.ItemSelections.FindAll(i => _character.Items.Any(ui => ui == i.Type));
+                if (_character.Coins < 20 && userItems.Count > 1)
+                {
+                    userItems.RemoveAll(u => u.Type == ItemType.GoldenPipe);
+                }
+                itemChoice = ItemChoices.FindIndex(i => i.Type == userItems.OrderByDescending(i => i.Cost).First().Type);
+            }
+            else
+            {
+                itemChoice = UnityEngine.Random.Range(0, _character.Items.Count);
+            }
             _choiceIndex = itemChoice;
             ItemChoices[_choiceIndex].Select(true);
 
@@ -72,11 +91,12 @@ public class ItemChoicePanel : MonoBehaviour
         }
     }
 
-    public void ShowPanel(Character character, ItemsPanel itemsPanel, Action callback)
+    public void ShowPanel(Character character, ItemsPanel itemsPanel, Action callback, int turnsLeft)
     {
         _character = character;
         _callback = callback;
         _itemsPanel = itemsPanel;
+        _turnsLeft = turnsLeft;
 
         for (int i = 0; i < ItemChoices.Count; i++)
         {

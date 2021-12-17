@@ -23,6 +23,8 @@ public class EndGameController : MonoBehaviour
     public AudioSource Applause;
     public AudioSource MusicAS;
     public AudioSource ToadetteAS;
+    public AudioSource CeremonyAS;
+    public AudioSource SuperstarAS;
 
     private SaveData _saveData;
     private bool _isWinnerShown;
@@ -30,7 +32,6 @@ public class EndGameController : MonoBehaviour
 	void Start()
     {
         _saveData = SaveController.Load();
-        EndAS.Play();
         ToadetteAS.Play();
         Dialog.ShowText("Time for the bonus stars!", StartBonusStars);
     }
@@ -47,6 +48,10 @@ public class EndGameController : MonoBehaviour
 
     private void StartBonusStars()
     {
+        Star.SetActive(false);
+        Star2.SetActive(false);
+
+        EndAS.Play();
         Dialog.ShowText("The bonus star for most mini games won goes to...", GiveMiniGameBonusStar);
     }
 
@@ -115,9 +120,11 @@ public class EndGameController : MonoBehaviour
 
     private void RevealWinner()
     {
+        CeremonyAS.Stop();
         EndAS.clip = FanfareClip;
         EndAS.Play();
         Applause.Play();
+        SuperstarAS.Play();
         MusicAS.PlayDelayed(3);
         _isWinnerShown = true;
 

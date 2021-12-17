@@ -31,6 +31,7 @@ public class GameController : MonoBehaviour
     public ItemsPanel ItemsPanel;
     public ItemChoicePanel ItemChoicePanel;
     public Pipe GoldenPipe;
+    public LuckySpace LuckySpace;
 
     public AudioSource EnterMiniGameSound;
     public AudioSource MusicAS;
@@ -161,6 +162,10 @@ public class GameController : MonoBehaviour
             ReverseBoard();
             EventText.Show(NextTurn);
         }
+        else if (space.Type == CircleType.Lucky)
+        {
+            LuckySpace.Show(character, ItemsPanel, Dialog, ReloadStatsAndContinueTurn, Turn == MaxTurns - 1);
+        }
         else // if continue moving
         {
             if (space.Type == CircleType.Star)
@@ -274,8 +279,16 @@ public class GameController : MonoBehaviour
 
     private void WarpCharacter(Character character)
     {
-        var otherCharacters = Characters.FindAll(c => c.Type != character.Type);
-        Character randomCharacter = otherCharacters[Random.Range(0, otherCharacters.Count)];
+        var otherCharacters = Characters.FindAll(c => c.Type != character.Type && c.Position != character.Position).OrderBy(c => DistanceToStar(c)).ToList();
+        if (otherCharacters.Count == 0)
+        {
+            character.UsedItem = ItemType.None;
+            character.Items.Add(ItemType.WarpBlock);
+            Dialog.ShowText($"There's no one to warp with! The item wasn't used", SetUpDice);
+            return;
+        }
+
+        Character randomCharacter = otherCharacters.First();
         var randomCharacterPosition = randomCharacter.transform.position;
 
         randomCharacter.transform.position = character.transform.position + Vector3.up;
@@ -433,7 +446,7 @@ public class GameController : MonoBehaviour
                 return;
             }
 
-            ItemChoicePanel.ShowPanel(character, ItemsPanel, SetUpDice);
+            ItemChoicePanel.ShowPanel(character, ItemsPanel, SetUpDice, MaxTurns - Turn);
         }
     }
 
