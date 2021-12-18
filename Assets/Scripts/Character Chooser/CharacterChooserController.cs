@@ -11,6 +11,7 @@ public class CharacterChooserController : MonoBehaviour
     public CharacterChoose ChosenCharacter;
     public TextMeshProUGUI TotalTurnsText;
     public ParticleSystem Fireworks;
+    public QuitPanel QuitPanel;
     public FadePanel FadePanel;
     public int TotalTurns = 20;
 
@@ -22,6 +23,8 @@ public class CharacterChooserController : MonoBehaviour
     void Start()
     {
         PlayerPrefs.DeleteAll();
+
+        Cursor.visible = false;
     }
 
     void Update()
@@ -62,6 +65,11 @@ public class CharacterChooserController : MonoBehaviour
             _turnIndex++;
             TotalTurns += 5;
             UpdateTotalTurns();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !QuitPanel.gameObject.activeSelf)
+        {
+            QuitPanel.Show();
         }
 
         if (Input.GetKeyDown(KeyCode.Space))

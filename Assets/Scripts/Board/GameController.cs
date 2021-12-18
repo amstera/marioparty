@@ -32,6 +32,7 @@ public class GameController : MonoBehaviour
     public ItemChoicePanel ItemChoicePanel;
     public Pipe GoldenPipe;
     public LuckySpace LuckySpace;
+    public QuitPanel QuitPanel;
 
     public AudioSource EnterMiniGameSound;
     public AudioSource MusicAS;
@@ -64,6 +65,16 @@ public class GameController : MonoBehaviour
         {
             UpdateFromSaveData(saveData);
             Rankings.ShowRankings(DoTurn, saveData.LastWinningCharacters, false);
+        }
+
+        Cursor.visible = false;
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && !QuitPanel.gameObject.activeSelf && !ItemsPanel.gameObject.activeSelf && !ItemChoicePanel.gameObject.activeSelf)
+        {
+            QuitPanel.Show();
         }
     }
 
