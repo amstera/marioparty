@@ -1,0 +1,539 @@
+Using pre-set license
+
+ COMMAND LINE ARGUMENTS:
+/Applications/Unity/Hub/Editor/2020.3.1f1/Unity.app/Contents/MacOS/Unity
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+/Users/tylergreen/Games/Mario Party
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+49737
+Successfully changed project path to: /Users/tylergreen/Games/Mario Party
+/Users/tylergreen/Games/Mario Party
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 85.97 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.1f1 (77a89f25062f)
+[Subsystems] Discovering subsystems at path /Applications/Unity/Hub/Editor/2020.3.1f1/Unity.app/Contents/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path /Users/tylergreen/Games/Mario Party/Assets
+GfxDevice: creating device client; threaded=0
+2021-12-18 10:58:42.626 Unity[1159:22030] Color LCD preferred device: Intel Iris Pro Graphics (low power)
+2021-12-18 10:58:42.626 Unity[1159:22030] Metal devices available: 2
+2021-12-18 10:58:42.626 Unity[1159:22030] 0: AMD Radeon R9 M370X (high power)
+2021-12-18 10:58:42.626 Unity[1159:22030] 1: Intel Iris Pro Graphics (low power)
+2021-12-18 10:58:42.626 Unity[1159:22030] Using device AMD Radeon R9 M370X (high power)
+Initializing Metal device caps: AMD Radeon R9 M370X
+Initialize mono
+Mono path[0] = '/Applications/Unity/Hub/Editor/2020.3.1f1/Unity.app/Contents/Managed'
+Mono path[1] = '/Applications/Unity/Hub/Editor/2020.3.1f1/Unity.app/Contents/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = '/Applications/Unity/Hub/Editor/2020.3.1f1/Unity.app/Contents/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56159
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: /Applications/Unity/Hub/Editor/2020.3.1f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+Register platform support module: /Applications/Unity/Hub/Editor/2020.3.1f1/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.002066 seconds.
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Refreshing native plugins compatible for Editor in 67.71 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  3.154 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.001607 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Refreshing native plugins compatible for Editor in 1.07 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.760 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launching external process: /Applications/Unity/Hub/Editor/2020.3.1f1/Unity.app/Contents/Tools/UnityShaderCompiler
+Launched and connected shader compiler UnityShaderCompiler after 0.02 seconds
+Refreshing native plugins compatible for Editor in 0.75 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1797 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 281.9 MB.
+System memory in use after: 281.9 MB.
+
+Unloading 20 unused Assets to reduce memory usage. Loaded Objects now: 2271.
+Total: 9.533484 ms (FindLiveObjects: 1.107004 ms CreateObjectMapping: 0.190684 ms MarkObjects: 7.889357 ms  DeleteObjects: 0.344336 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Scripts/Board/GameController.cs
+  artifactKey: Guid(d7106c929dde049d4bbdf69f0cd58f6f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Board/GameController.cs using Guid(d7106c929dde049d4bbdf69f0cd58f6f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1526ddb0c605640a974959915980f01f') in 1.021898 seconds
+  Import took 1.029097 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 206.132784 seconds.
+  path: Assets/Scenes/Shy Guy/LightingData.asset
+  artifactKey: Guid(8195e8b69e19b46e08c05612139a6911) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Shy Guy/LightingData.asset using Guid(8195e8b69e19b46e08c05612139a6911) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5b9f1f3ff4cfbb708c8f69cb8c538ce3') in 1.146781 seconds
+  Import took 1.151560 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.114605 seconds.
+  path: Assets/Scenes/Shy Guy.unity
+  artifactKey: Guid(f3eaf97e9783f41419d76cff3f7a6b9c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Shy Guy.unity using Guid(f3eaf97e9783f41419d76cff3f7a6b9c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8340a864863b1234e9b87bb435121845') in 0.001665 seconds
+  Import took 0.005404 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.135363 seconds.
+  path: Assets/Scenes/Shy Guy 1.unity
+  artifactKey: Guid(32924c1613ba8456985b25a8c60fcc9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Shy Guy 1.unity using Guid(32924c1613ba8456985b25a8c60fcc9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1fce2a339da4b7dec3452b10c1826d18') in 0.003848 seconds
+  Import took 0.008921 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.497669 seconds.
+  path: Assets/Scenes/Honeycomb Havoc.unity
+  artifactKey: Guid(32924c1613ba8456985b25a8c60fcc9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Honeycomb Havoc.unity using Guid(32924c1613ba8456985b25a8c60fcc9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'efa368cd99a412cf1518ae4e61f2e012') in 0.001196 seconds
+  Import took 0.004300 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.001370 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Refreshing native plugins compatible for Editor in 0.59 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.172 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.61 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1667 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 281.5 MB.
+System memory in use after: 281.5 MB.
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 2274.
+Total: 2.745671 ms (FindLiveObjects: 0.381141 ms CreateObjectMapping: 0.085131 ms MarkObjects: 2.027007 ms  DeleteObjects: 0.250551 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.001238 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Refreshing native plugins compatible for Editor in 0.61 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.149 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.57 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1667 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 282.4 MB.
+System memory in use after: 282.5 MB.
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 2277.
+Total: 2.689516 ms (FindLiveObjects: 0.309012 ms CreateObjectMapping: 0.124682 ms MarkObjects: 2.034816 ms  DeleteObjects: 0.220070 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 1133.447425 seconds.
+  path: Assets/Tree_Textures/diffuse.png
+  artifactKey: Guid(23b4c962e81f140ab871c77a3aad947c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tree_Textures/diffuse.png using Guid(23b4c962e81f140ab871c77a3aad947c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bddbc6c175c6f99fcc5e2488f885d61d') in 1.041310 seconds
+  Import took 1.048862 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000328 seconds.
+  path: Assets/Tree_Textures/normal_specular.png
+  artifactKey: Guid(d021c9f5fac41493997f63da864b8333) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tree_Textures/normal_specular.png using Guid(d021c9f5fac41493997f63da864b8333) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c57ad58ac2ed4451fa475a81ba641cc1') in 0.008656 seconds
+  Import took 0.014340 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000210 seconds.
+  path: Assets/Tree_Textures/translucency_gloss.png
+  artifactKey: Guid(ff48449e20be346d3b6286e208c1f2b6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tree_Textures/translucency_gloss.png using Guid(ff48449e20be346d3b6286e208c1f2b6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd28ec6587fe928721bf1ad93e609d228') in 0.030931 seconds
+  Import took 0.036703 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000238 seconds.
+  path: Assets/Tree_Textures/shadow.png
+  artifactKey: Guid(8bd164c03b6434be5834ba2af2af0a94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tree_Textures/shadow.png using Guid(8bd164c03b6434be5834ba2af2af0a94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '034779863bd623c10f2883cdc7f97c50') in 0.013848 seconds
+  Import took 0.019243 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 14.425260 seconds.
+  path: Assets/NatureStarterKit2/Standard Assets
+  artifactKey: Guid(9b8ade7eba1f7d343843ab9f870b877f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/NatureStarterKit2/Standard Assets using Guid(9b8ade7eba1f7d343843ab9f870b877f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7a85c2618e77ca7282da3559c9b0bc1c') in 0.002930 seconds
+  Import took 0.007404 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 48.726119 seconds.
+  path: Assets/Models/Oak Tree
+  artifactKey: Guid(50bd9413ab2ac4a9dbc84e5960b1f097) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree using Guid(50bd9413ab2ac4a9dbc84e5960b1f097) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c08efd72983fce69054ae7a3d45621c1') in 0.004136 seconds
+  Import took 0.007690 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.098212 seconds.
+  path: Assets/Models/Oak Tree/animal_island_ibl_cube_specular_0.png
+  artifactKey: Guid(aca668f49c8be44ada10f25988e7bfa7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/animal_island_ibl_cube_specular_0.png using Guid(aca668f49c8be44ada10f25988e7bfa7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8e237472400dbec4a5c9c4bc0f2937be') in 0.009133 seconds
+  Import took 0.012355 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000185 seconds.
+  path: Assets/Models/Oak Tree/s09_is_ftree01_low.dae
+  artifactKey: Guid(06e89f7a77ca648be8328ee9ddafd022) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/s09_is_ftree01_low.dae using Guid(06e89f7a77ca648be8328ee9ddafd022) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9c87cd44277d5777ac9fe40b0a1115ea') in 0.661233 seconds
+  Import took 0.665043 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000312 seconds.
+  path: Assets/Models/Oak Tree/island_field_item_mtl.png
+  artifactKey: Guid(a25dd23b478d04b0cb52ae926e2b8109) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/island_field_item_mtl.png using Guid(a25dd23b478d04b0cb52ae926e2b8109) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '365cbe44eee7d3a1c901bd2c5dc6e71f') in 0.010709 seconds
+  Import took 0.014147 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000275 seconds.
+  path: Assets/Models/Oak Tree/animal_island_ibl_cube_specular_2.png
+  artifactKey: Guid(473ffa94e01814114bb1368783966cc6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/animal_island_ibl_cube_specular_2.png using Guid(473ffa94e01814114bb1368783966cc6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c6d3ac253d0d979a0692f71d4d306854') in 0.014494 seconds
+  Import took 0.017520 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000207 seconds.
+  path: Assets/Models/Oak Tree/island_field_item_spc.png
+  artifactKey: Guid(b51165263d11a4f5184d84ad27d74763) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/island_field_item_spc.png using Guid(b51165263d11a4f5184d84ad27d74763) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '04aa5a93b353be9160d36ce0d6bc884f') in 0.008027 seconds
+  Import took 0.010876 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000185 seconds.
+  path: Assets/Models/Oak Tree/animal_island_ibl_cube_specular_4.png
+  artifactKey: Guid(62c18c7601f3542e3bf2f0d9e6ca68b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/animal_island_ibl_cube_specular_4.png using Guid(62c18c7601f3542e3bf2f0d9e6ca68b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eb50116459785f25508f392a24b18851') in 0.012294 seconds
+  Import took 0.015300 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000209 seconds.
+  path: Assets/Models/Oak Tree/animal_island_ibl_cube_specular_5.png
+  artifactKey: Guid(3af429e9ec9ff41249de0f0da453d6f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/animal_island_ibl_cube_specular_5.png using Guid(3af429e9ec9ff41249de0f0da453d6f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2f5815e2f3911c493065c1cb5a1acc0e') in 0.008361 seconds
+  Import took 0.012013 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000210 seconds.
+  path: Assets/Models/Oak Tree/island_tree_miki_nor_b.png
+  artifactKey: Guid(9604fe054624c42d59028fff1ff78d94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/island_tree_miki_nor_b.png using Guid(9604fe054624c42d59028fff1ff78d94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fe3048950714fb71b85a29b98e930af5') in 0.009611 seconds
+  Import took 0.012974 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000201 seconds.
+  path: Assets/Models/Oak Tree/ftree_8bit_lit.png
+  artifactKey: Guid(cd1f7d671474a4d23b440ea064ce1b98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/ftree_8bit_lit.png using Guid(cd1f7d671474a4d23b440ea064ce1b98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9ddb7a2224cc53ca08531a672ff2b5d4') in 0.010108 seconds
+  Import took 0.015228 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000214 seconds.
+  path: Assets/Models/Oak Tree/island_field_item_rgh.png
+  artifactKey: Guid(92af995908dc543468dcc23f712f23af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/island_field_item_rgh.png using Guid(92af995908dc543468dcc23f712f23af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5d32047b99e29b2303214aaf853a2c3b') in 0.019737 seconds
+  Import took 0.023952 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000496 seconds.
+  path: Assets/Models/Oak Tree/island_tree_miki_rgh.png
+  artifactKey: Guid(11b73ac1685c5445385142bb2120d34d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/island_tree_miki_rgh.png using Guid(11b73ac1685c5445385142bb2120d34d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1101dbbb1204b2d7d3fed736a6d650ac') in 0.009830 seconds
+  Import took 0.013297 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000228 seconds.
+  path: Assets/Models/Oak Tree/island_tree_miki_mtl.png
+  artifactKey: Guid(bcd7575cda16c46f9bbac3733bdb1d41) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/island_tree_miki_mtl.png using Guid(bcd7575cda16c46f9bbac3733bdb1d41) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e6525b799e6ea5a6973c55e6fac79483') in 0.014097 seconds
+  Import took 0.017572 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000230 seconds.
+  path: Assets/Models/Oak Tree/island_field_item_nor.png
+  artifactKey: Guid(f3d619365e1b94b4480e76b248aa3239) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/island_field_item_nor.png using Guid(f3d619365e1b94b4480e76b248aa3239) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dd4b57204a597e72545a932c6cb1d69a') in 0.021723 seconds
+  Import took 0.025067 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000526 seconds.
+  path: Assets/Models/Oak Tree/s09_is_ftree01_high.dae
+  artifactKey: Guid(10b166f64f8534a99b1dffb4bcd50969) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/s09_is_ftree01_high.dae using Guid(10b166f64f8534a99b1dffb4bcd50969) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8df81784a15800d48f7df9856d8b4f04') in 0.077182 seconds
+  Import took 0.081176 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000226 seconds.
+  path: Assets/Models/Oak Tree/s09_is_ftree01.dae
+  artifactKey: Guid(5ef6d3c3b9ba64eadb5f4b5e533b7f77) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/s09_is_ftree01.dae using Guid(5ef6d3c3b9ba64eadb5f4b5e533b7f77) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c687530462b167bf06eb87206291a3ad') in 0.060372 seconds
+  Import took 0.063654 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000181 seconds.
+  path: Assets/Models/Oak Tree/island_tree_miki_spc.png
+  artifactKey: Guid(502a8defd1b8e4e0fa7ba2ce89e65e31) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/island_tree_miki_spc.png using Guid(502a8defd1b8e4e0fa7ba2ce89e65e31) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'afaa0a7a7ce7f3a6d22e64dafd78a672') in 0.009177 seconds
+  Import took 0.011985 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000219 seconds.
+  path: Assets/Models/Oak Tree/island_field_item_nor_b.png
+  artifactKey: Guid(29e5ce4e2ce0940cc81025f135f577b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/island_field_item_nor_b.png using Guid(29e5ce4e2ce0940cc81025f135f577b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '73052777ecf4298a66df3ca7dfd72037') in 0.013075 seconds
+  Import took 0.016566 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000222 seconds.
+  path: Assets/Models/Oak Tree/island_tree_miki_col.png
+  artifactKey: Guid(41e92a798de044f95990614f7906370a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/island_tree_miki_col.png using Guid(41e92a798de044f95990614f7906370a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '62ba6f78c51efc0bc9f4a410bf79955d') in 0.021572 seconds
+  Import took 0.025767 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000313 seconds.
+  path: Assets/Models/Oak Tree/island_field_item_col.png
+  artifactKey: Guid(ddf6aee755b8647e79cf20d3ee0ab1c4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/island_field_item_col.png using Guid(ddf6aee755b8647e79cf20d3ee0ab1c4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '77546254871b8d8ad8da92f5b11f1206') in 0.008425 seconds
+  Import took 0.011499 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000193 seconds.
+  path: Assets/Models/Oak Tree/island_field_item_nor_a.png
+  artifactKey: Guid(2f74bbdfa44aa49b79fb90f2ad9782ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/island_field_item_nor_a.png using Guid(2f74bbdfa44aa49b79fb90f2ad9782ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5a1768402c2cddbe503e9c6c56cae7b2') in 0.008000 seconds
+  Import took 0.011595 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000263 seconds.
+  path: Assets/Models/Oak Tree/island_tree_miki_ao.png
+  artifactKey: Guid(afe584b48185b4c9aa107f3d278b6328) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/island_tree_miki_ao.png using Guid(afe584b48185b4c9aa107f3d278b6328) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '027f102e418d04ee79fe9d53fb1998c4') in 0.011354 seconds
+  Import took 0.014456 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000198 seconds.
+  path: Assets/Models/Oak Tree/animal_island_ibl_cube_specular_3.png
+  artifactKey: Guid(8db142959b2424c179c91627c3777b5b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/animal_island_ibl_cube_specular_3.png using Guid(8db142959b2424c179c91627c3777b5b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '95891a27a460f0f942a5e14c72092989') in 0.015335 seconds
+  Import took 0.018966 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000476 seconds.
+  path: Assets/Models/Oak Tree/island_tree_miki_nor_a.png
+  artifactKey: Guid(0ed277af0a28a4ab291bc580d5aab86c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/island_tree_miki_nor_a.png using Guid(0ed277af0a28a4ab291bc580d5aab86c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9ec4ca380a905a044f88abcfdd791326') in 0.008108 seconds
+  Import took 0.011880 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000293 seconds.
+  path: Assets/Models/Oak Tree/s09_is_ftree01_high.fbx
+  artifactKey: Guid(6da2f8fdf70984377ae80163b6d12a52) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/s09_is_ftree01_high.fbx using Guid(6da2f8fdf70984377ae80163b6d12a52) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '631eee7db9edae8e5aced450a1a03110') in 0.410317 seconds
+  Import took 0.413662 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000234 seconds.
+  path: Assets/Models/Oak Tree/animal_island_ibl_cube_specular_1.png
+  artifactKey: Guid(e05f23ebc595d46168d56fcd5c9cbd27) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/animal_island_ibl_cube_specular_1.png using Guid(e05f23ebc595d46168d56fcd5c9cbd27) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd61d97568cb42a7ba9bd9e3cba0923be') in 0.006872 seconds
+  Import took 0.009954 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000240 seconds.
+  path: Assets/Models/Oak Tree/island_field_item_ao.png
+  artifactKey: Guid(98fc989ffa7d145c4a024bdee705b8ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/island_field_item_ao.png using Guid(98fc989ffa7d145c4a024bdee705b8ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ad94efa1085edb91425e91bffc51f4b5') in 0.006220 seconds
+  Import took 0.009289 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000157 seconds.
+  path: Assets/Models/Oak Tree/island_tree_miki_nor.png
+  artifactKey: Guid(b3a5b18ab2c17414399308f1e0af9c62) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/island_tree_miki_nor.png using Guid(b3a5b18ab2c17414399308f1e0af9c62) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6e6f5915c96e8d5e8c2acb11118783b8') in 0.013777 seconds
+  Import took 0.017181 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000191 seconds.
+  path: Assets/Models/Oak Tree/s09_is_ftree01_low.fbx
+  artifactKey: Guid(b2da9f7492eb34e298e9754cb9efa1a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/s09_is_ftree01_low.fbx using Guid(b2da9f7492eb34e298e9754cb9efa1a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ed6317782be03a582e5948ce011f89cf') in 0.083792 seconds
+  Import took 0.088479 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000355 seconds.
+  path: Assets/Models/Oak Tree/s09_is_ftree01.fbx
+  artifactKey: Guid(cfedb40c58f424fd1bb03e989e4e88ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/s09_is_ftree01.fbx using Guid(cfedb40c58f424fd1bb03e989e4e88ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b483e077998ea3700ccebb3893977613') in 0.057396 seconds
+  Import took 0.061022 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 267.964503 seconds.
+  path: Assets/TextMesh Pro/Sprites/EmojiOne.png
+  artifactKey: Guid(dffef66376be4fa480fb02b19edbe903) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/TextMesh Pro/Sprites/EmojiOne.png using Guid(dffef66376be4fa480fb02b19edbe903) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4c17f5a3822cb06b4203d323f0ec1e79') in 0.011724 seconds
+  Import took 0.016479 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.004271 seconds.
+  path: Assets/TextMesh Pro/Sprites/EmojiOne.png
+  artifactKey: Guid(dffef66376be4fa480fb02b19edbe903) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/TextMesh Pro/Sprites/EmojiOne.png using Guid(dffef66376be4fa480fb02b19edbe903) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4c17f5a3822cb06b4203d323f0ec1e79') in 0.008517 seconds
+  Import took 0.011840 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 75.661331 seconds.
+  path: Assets/Models/Oak Tree/Materials/island_tree_miki_col.mat
+  artifactKey: Guid(c82a449909d944cc484a503abb151aa4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/Materials/island_tree_miki_col.mat using Guid(c82a449909d944cc484a503abb151aa4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a855055f73cf98d44bb3e757e2ed8c40') in 0.176322 seconds
+  Import took 0.180965 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000412 seconds.
+  path: Assets/Models/Oak Tree/Materials
+  artifactKey: Guid(e28834e0298534328baadee68e7f644c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/Materials using Guid(e28834e0298534328baadee68e7f644c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b87434fbaec013e088c5f0f7be647305') in 0.001361 seconds
+  Import took 0.004423 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 9.530147 seconds.
+  path: Assets/Models/Oak Tree/Materials/island_tree_miki_col.mat
+  artifactKey: Guid(c82a449909d944cc484a503abb151aa4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/Materials/island_tree_miki_col.mat using Guid(c82a449909d944cc484a503abb151aa4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '188548c2220728b0fdcaef5500dcc3f8') in 0.016475 seconds
+  Import took 0.021290 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004648 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Refreshing native plugins compatible for Editor in 0.77 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.421 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.58 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1667 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 319.7 MB.
+System memory in use after: 319.8 MB.
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 2329.
+Total: 2.228575 ms (FindLiveObjects: 0.265481 ms CreateObjectMapping: 0.071128 ms MarkObjects: 1.683645 ms  DeleteObjects: 0.207107 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 206.919208 seconds.
+  path: Assets/Images/Honeycomb Havoc
+  artifactKey: Guid(821f6235ab9ef41f3ab48465e1446d9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Honeycomb Havoc using Guid(821f6235ab9ef41f3ab48465e1446d9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2cc955e9af4313cd4c549c0c254168bb') in 0.009597 seconds
+  Import took 0.014835 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 80.629182 seconds.
+  path: Assets/Images/Wood 2.jpg
+  artifactKey: Guid(40a499393e85943b6aceba5f78a1923e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Wood 2.jpg using Guid(40a499393e85943b6aceba5f78a1923e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3ae7ff3f1140932dcf2586aa42e5a4e5') in 1.033215 seconds
+  Import took 1.038807 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 13.637865 seconds.
+  path: Assets/Images/Materials/Wood 2.mat
+  artifactKey: Guid(4c21f386a03ce4eb7a75c1830efb9bf4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Materials/Wood 2.mat using Guid(4c21f386a03ce4eb7a75c1830efb9bf4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a19c3176eeba205659bca5c93ff73b91') in 0.054779 seconds
+  Import took 0.061110 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 65.476575 seconds.
+  path: Assets/Models/Oak Tree/NewLayer.terrainlayer
+  artifactKey: Guid(0edb09a2d6a7c43aabec43f2441855da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Oak Tree/NewLayer.terrainlayer using Guid(0edb09a2d6a7c43aabec43f2441855da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5f7ebf908f0acc97959bf85f5ce10818') in 0.180405 seconds
+  Import took 0.187569 seconds .
+

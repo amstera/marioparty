@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <created>2017-12-11T01:04:58Z</created>
+    <modified>2017-12-11T01:04:58Z</modified>
+  </asset>
+  <library_images>
+    <image id="Image">
+      <init_from>./shadow_base.png</init_from>
+    </image>
+    <image id="Image1">
+      <init_from>./t_fg_pear.png</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="VisualMaterial" name="m_sdw_circle">
+      <instance_effect url="#Effect"/>
+      <extra>
+        <technique profile="FCOLLADA">
+          <user_properties>m_sdw_circle</user_properties>
+        </technique>
+      </extra>
+    </material>
+    <material id="VisualMaterial1" name="m_fg_pear">
+      <instance_effect url="#Effect1"/>
+      <extra>
+        <technique profile="FCOLLADA">
+          <user_properties>m_fg_pear</user_properties>
+        </technique>
+      </extra>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="Effect" name="shadow_base__02113_png">
+      <profile_COMMON>
+        <newparam sid="Image-surface">
+          <surface type="2D">
+            <init_from>Image</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="Image-sampler">
+          <sampler2D>
+            <source>Image-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color>0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color>0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="Image-sampler" texcoord=""/>
+            </diffuse>
+            <specular>
+              <color>1 1 1 1</color>
+            </specular>
+            <shininess>
+              <float>0</float>
+            </shininess>
+            <transparent opaque="A_ONE">
+              <color>0 0 0 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+            <index_of_refraction>
+              <float>1.55</float>
+            </index_of_refraction>
+          </phong>
+          <extra>
+            <technique profile="FCOLLADA">
+              <spec_level>
+                <float>0</float>
+              </spec_level>
+            </technique>
+          </extra>
+        </technique>
+      </profile_COMMON>
+      <extra>
+        <technique profile="FCOLLADA">
+          <user_properties>shadow_base #02113.png</user_properties>
+        </technique>
+      </extra>
+    </effect>
+    <effect id="Effect1" name="t_fg_pear_png">
+      <profile_COMMON>
+        <newparam sid="Image1-surface">
+          <surface type="2D">
+            <init_from>Image1</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="Image1-sampler">
+          <sampler2D>
+            <source>Image1-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color>0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color>0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="Image1-sampler" texcoord=""/>
+            </diffuse>
+            <specular>
+              <color>1 1 1 1</color>
+            </specular>
+            <shininess>
+              <float>0</float>
+            </shininess>
+            <transparent opaque="A_ONE">
+              <color>0 0 0 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+            <index_of_refraction>
+              <float>1.55</float>
+            </index_of_refraction>
+          </phong>
+          <extra>
+            <technique profile="FCOLLADA">
+              <spec_level>
+                <float>0</float>
+              </spec_level>
+            </technique>
+          </extra>
+        </technique>
+      </profile_COMMON>
+      <extra>
+        <technique profile="FCOLLADA">
+          <user_properties>t_fg_pear.png</user_properties>
+        </technique>
+      </extra>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="Geometry" name="sdw_circle">
+      <mesh>
+        <source id="GeometrySource" name="sdw_circlePos">
+          <float_array id="GeometrySource-array" count="27">0.018208 -0.000375 0.014841 0.018208 -0.000375 -0.021575 0 -0.000375 -0.003366 0.02475 -0.000375 -0.003366 0 -0.000375 -0.028116 -0.018208 -0.000375 -0.021575 -0.018208 -0.000375 0.014841 -0.02475 -0.000375 -0.003366 0 -0.000375 0.021383</float_array>
+          <technique_common>
+            <accessor source="#GeometrySource-array" count="9" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="GeometrySource1" name="sdw_circleNrm">
+          <float_array id="GeometrySource1-array" count="27">0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0</float_array>
+          <technique_common>
+            <accessor source="#GeometrySource1-array" count="9" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="GeometrySource2" name="sdw_circleUV">
+          <float_array id="GeometrySource2-array" count="18">0.867851 0.132149 0.867851 0.867851 0.5 0.5 1 0.5 0.5 1 0.132149 0.867851 0.132149 0.132149 0 0.5 0.5 0</float_array>
+          <technique_common>
+            <accessor source="#GeometrySource2-array" count="9" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Geometry-vertices">
+          <input semantic="POSITION" source="#GeometrySource"/>
+          <input semantic="NORMAL" source="#GeometrySource1"/>
+          <input semantic="TEXCOORD" source="#GeometrySource2"/>
+        </vertices>
+        <triangles material="VisualMaterial0" count="8">
+          <input semantic="VERTEX" source="#Geometry-vertices" offset="0"/>
+          <p>0 1 2 0 3 1 2 1 4 2 4 5 6 2 5 6 5 7 8 0 2 8 2 6</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="Geometry1" name="fg_pear">
+      <mesh>
+        <source id="GeometrySource3" name="fg_pearPos">
+          <float_array id="GeometrySource3-array" count="285">0.005272 0.00054 -0.009482 -0.011031 0.00822 -0.018766 0.008517 0.006583 -0.018766 -0.008885 0.001706 -0.009482 -0.020079 0.010679 -0.002969 -0.012582 0.002796 -0.002212 0.009103 0.000971 -0.002212 0.017533 0.007461 -0.002969 -0.009674 0.018488 -0.022317 0.011424 0.016642 -0.022317 -0.004491 0.027108 -0.018484 0.009632 0.0275 -0.018484 -0.001283 0.039266 -0.015821 0.008349 0.038847 -0.015865 -0.002499 -0.000753 -0.001925 -0.021426 0.016155 -0.003522 0.017737 0.016893 -0.014704 -0.017446 0.020131 -0.013197 -0.021118 0.021414 -0.004076 -0.017712 0.027007 -0.004693 -0.010752 0.030572 -0.006273 0.019463 0.012578 -0.003522 -0.004992 0.040346 -0.011177 -0.001283 0.039266 -0.015821 -0.012582 0.002796 -0.002212 -0.00657 0.003274 0.006609 -0.020079 0.010679 -0.002969 -0.002499 -0.000753 -0.001925 0.006076 0.002167 0.006609 0.009103 0.000971 -0.002212 0.017533 0.007461 -0.002969 0.011584 0.010075 0.011052 -0.001995 0.011016 0.014531 0.014255 0.019822 0.010163 0.019463 0.012578 -0.003522 0.020038 0.017813 -0.004076 0.017737 0.016893 -0.014704 0.01874 0.023487 -0.005299 0.009632 0.0275 -0.018484 0.01593 0.029158 -0.006369 0.014667 0.035072 -0.00715 0.011819 0.028112 0.005268 0.005034 0.030156 0.007749 0.008566 0.041327 0.001269 0.011373 0.040785 -0.001032 0.006422 0.044455 -0.003852 -0.001108 0.041264 0.000745 0.011466 0.041851 -0.00782 0.013393 0.039343 -0.007575 0.014667 0.035072 -0.00715 0.011664 0.038657 -0.012524 0.006168 0.041541 -0.011933 0.008765 0.043602 -0.007978 0.003842 0.042591 -0.007827 0.0015 0.043457 -0.012091 0.001587 0.044455 -0.003808 -0.003979 0.041143 -0.001313 0.000046 0.043651 -0.004526 -0.00124 0.044064 -0.009865 -0.000924 0.043527 -0.006792 -0.00546 0.041539 -0.002566 -0.006416 0.040919 -0.005461 0.008349 0.038847 -0.015865 -0.001283 0.039266 -0.015821 -0.004992 0.040346 -0.011177 -0.003945 0.031011 0.005306 -0.001108 0.041264 0.000745 -0.002262 0.021818 0.015384 -0.016482 0.022466 0.009739 -0.01367 0.01163 0.011363 -0.010233 0.031171 -0.000167 -0.017712 0.027007 -0.004693 -0.010752 0.030572 -0.006273 -0.021118 0.021414 -0.004076 -0.021426 0.016155 -0.003522 -0.006416 0.040919 -0.005461 -0.004992 0.040346 -0.011177 -0.00546 0.041539 -0.002566 0.011664 0.038657 -0.012524 0.008349 0.038847 -0.015865 0.000905 0.053081 -0.004771 0.001645 0.050984 -0.010156 0.002598 0.051032 -0.006031 -0.000375 0.053384 -0.010375 0.005044 0.051752 -0.009065 0.003484 0.055733 -0.008715 0.002778 0.046469 -0.009769 0.003516 0.046749 -0.006704 0.005408 0.046653 -0.008991 0.002786 0.042004 -0.008536 0.003284 0.042157 -0.006775 0.00455 0.04182 -0.008061 0.000905 0.053081 -0.004771 0.003484 0.055733 -0.008715 -0.000375 0.053384 -0.010375</float_array>
+          <technique_common>
+            <accessor source="#GeometrySource3-array" count="95" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="GeometrySource4" name="fg_pearNrm">
+          <float_array id="GeometrySource4-array" count="285">0.213272 -0.882253 -0.419697 -0.294477 -0.577799 -0.761204 0.214853 -0.62344 -0.751772 -0.357069 -0.832851 -0.422919 -0.869203 -0.484718 0.097646 -0.638854 -0.763856 0.091599 0.484332 -0.874083 0.03744 0.823027 -0.560048 0.094722 -0.195075 0.012996 -0.980702 0.176243 -0.02779 -0.983954 -0.560843 0.382104 -0.734474 0.632881 0.278957 -0.72225 -0.156367 0.319028 -0.934757 0.127491 0.306311 -0.943356 -0.176583 -0.984105 0.018843 -0.994574 -0.099455 -0.03053 0.877953 0.188663 -0.440005 -0.788151 0.325755 -0.522208 -0.912295 0.404512 0.063941 -0.677539 0.719874 0.150741 -0.678816 0.69484 0.237501 0.979749 -0.147955 0.134909 -0.760552 0.540006 -0.360492 -0.156367 0.319028 -0.934757 -0.638854 -0.763856 0.091599 -0.410568 -0.709259 0.573049 -0.869203 -0.484718 0.097646 -0.176583 -0.984105 0.018843 0.312902 -0.762148 0.566765 0.484332 -0.874083 0.03744 0.823027 -0.560048 0.094722 0.645351 -0.332012 0.687961 0.03686 -0.214357 0.97606 0.681569 0.1408 0.71808 0.979749 -0.147955 0.134909 0.952781 0.281054 0.114967 0.877953 0.188663 -0.440005 0.787341 0.517798 0.334633 0.632881 0.278957 -0.72225 0.812254 0.552357 0.187468 0.909633 0.414796 0.022635 0.770232 0.233309 0.593556 0.168055 0.519824 0.837581 0.313033 0.555393 0.770422 0.789261 0.497701 0.359668 0.188619 0.868616 0.458181 -0.193636 0.645277 0.739002 0.698682 0.704872 -0.122472 0.910586 0.383126 -0.155076 0.909633 0.414796 0.022635 0.754826 0.410936 -0.511243 0.418888 0.74542 -0.518538 0.254715 0.934199 -0.249787 -0.101466 0.780582 -0.616763 0.216703 0.752159 -0.622332 -0.404496 0.892989 0.197365 -0.495402 0.576675 0.649633 -0.466178 0.852682 -0.235821 -0.480107 0.845965 -0.232036 -0.255808 0.897151 0.360113 -0.532561 0.799779 0.277004 -0.84183 0.537546 0.048651 0.127491 0.306311 -0.943356 -0.156367 0.319028 -0.934757 -0.760552 0.540006 -0.360492 -0.354119 0.620064 0.700086 -0.193636 0.645277 0.739002 0.031347 0.358301 0.93308 -0.752225 0.339291 0.564835 -0.623448 -0.302325 0.72105 -0.537313 0.676553 0.503558 -0.677539 0.719874 0.150741 -0.678816 0.69484 0.237501 -0.912295 0.404512 0.063941 -0.994574 -0.099455 -0.03053 -0.84183 0.537546 0.048651 -0.760552 0.540006 -0.360492 -0.532561 0.799779 0.277004 0.754826 0.410936 -0.511243 0.127491 0.306311 -0.943356 -0.0055 -0.428655 0.903452 -0.540924 -0.350457 -0.764579 -0.087647 -0.329014 0.940249 -0.45422 -0.415594 -0.788014 0.924133 0.257816 -0.281975 0.875018 0.403451 -0.267528 -0.665331 -0.207845 -0.717032 -0.204403 -0.069937 0.976385 0.959837 -0.04479 -0.27696 -0.703853 -0.13433 -0.697529 -0.23645 0.08357 0.968043 0.946254 -0.196286 -0.257052 -0.526805 0.836143 0.152776 -0.526805 0.836143 0.152776 -0.526805 0.836143 0.152776</float_array>
+          <technique_common>
+            <accessor source="#GeometrySource4-array" count="95" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="GeometrySource5" name="fg_pearUV">
+          <float_array id="GeometrySource5-array" count="190">0.830041 0.152671 0.977536 0.275538 0.813393 0.275538 0.952283 0.152671 1.09458 0.275538 1.04374 0.152671 0.794683 0.152671 0.779641 0.244715 0.96978 0.400677 0.801327 0.400677 0.905178 0.515748 0.808683 0.506957 0.910537 0.672705 0.819608 0.672705 0.912036 0.073585 1.09574 0.328537 0.788366 0.370795 1.00776 0.400677 1.11471 0.385958 1.10685 0.454102 1.11202 0.504832 0.780667 0.30147 1.11638 0.531198 1.08387 0.672705 0.619906 0.024703 0.622295 0.215705 0.522538 0.010749 0.71288 0.443671 0.618323 0.544307 0.66883 0.813237 0.523076 0.998028 0.526446 0.626147 0.529724 0.37933 0.425823 0.638457 0.480392 0.997935 0.435415 0.893853 0.40927 0.998384 0.378661 0.868881 0.297062 0.986138 0.326812 0.861092 0.206716 0.759014 0.353867 0.548361 0.345055 0.43408 0.212619 0.591393 0.203434 0.664138 0.159753 0.53677 0.221794 0.395547 0.117581 0.664905 0.120117 0.778178 0.122596 0.776549 0.047366 0.772295 0.057714 0.530957 0.110071 0.560031 0.106491 0.480394 0.059406 0.403512 0.161445 0.409324 0.222875 0.32607 0.154043 0.375685 0.080967 0.359902 0.114785 0.342366 0.174251 0.244068 0.125796 0.24912 -0.000032 0.626346 0.003985 0.323787 0.077016 0.264846 0.33682 0.27639 0.222078 0.394538 0.426549 0.340449 0.42938 0.127302 0.53258 0.164249 0.34107 0.15491 0.377551 0.018312 0.335904 0.070013 0.432551 0.01286 0.480876 0.013157 0.219295 0.242528 0.210945 0.184896 0.221398 0.293564 0.219524 0.813658 0.268714 0.945005 0.917424 0.872264 0.855591 0.851029 0.910832 0.850882 0.848373 0.872448 0.878405 0.843756 0.876573 0.872601 0.86559 0.830344 0.906888 0.830578 0.882627 0.8224 0.878226 0.811872 0.905759 0.812028 0.890044 0.805132 0.874479 0.938045 0.857597 0.966945 0.845579 0.941821</float_array>
+          <technique_common>
+            <accessor source="#GeometrySource5-array" count="95" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Geometry1-vertices">
+          <input semantic="POSITION" source="#GeometrySource3"/>
+          <input semantic="NORMAL" source="#GeometrySource4"/>
+          <input semantic="TEXCOORD" source="#GeometrySource5"/>
+        </vertices>
+        <triangles material="VisualMaterial10" count="129">
+          <input semantic="VERTEX" source="#Geometry1-vertices" offset="0"/>
+          <p>0 1 2 0 3 1 3 4 1 3 5 4 6 0 2 6 2 7 2 1 8 2 8 9 9 8 10 9 10 11 11 10 12 11 12 13 5 3 14 0 6 14 3 0 14 1 4 15 16 2 9 7 2 16 11 16 9 17 10 8 1 17 8 1 15 17 17 15 18 19 10 17 17 18 19 10 19 20 7 16 21 10 20 22 10 22 23 24 25 26 25 24 27 28 25 27 29 28 27 29 30 28 28 30 31 25 28 32 32 28 31 32 31 33 31 34 33 31 30 34 33 34 35 34 36 35 33 35 37 35 36 37 37 36 38 37 38 39 39 38 40 41 37 39 33 37 41 41 39 40 42 33 41 42 41 43 41 40 44 41 44 43 44 45 43 46 43 45 47 45 44 44 48 47 44 49 48 49 50 48 48 50 47 47 50 51 47 52 45 47 51 52 45 52 53 52 51 53 51 54 53 46 45 55 55 45 53 56 46 55 57 55 53 54 58 53 59 57 53 58 59 53 59 58 60 57 60 55 60 56 55 60 57 59 60 58 61 62 54 51 51 50 62 62 63 54 63 58 54 64 61 58 63 64 58 65 42 66 66 42 43 56 65 66 67 42 65 67 33 42 67 32 33 68 67 65 25 32 69 68 69 67 69 32 67 26 25 69 70 68 65 70 65 56 71 68 70 72 71 70 73 68 71 74 68 73 74 69 68 26 69 74 72 70 75 72 75 76 70 56 77 75 70 77 40 38 78 78 38 79 80 81 82 80 83 81 83 84 81 85 82 84 85 80 82 83 85 84 82 81 86 84 82 87 82 86 87 81 84 88 84 87 88 81 88 86 87 86 89 87 89 90 88 87 90 86 88 91 88 90 91 86 91 89 92 93 94</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_controllers>
+    <controller id="Controller">
+      <skin source="#Geometry">
+        <bind_shape_matrix>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</bind_shape_matrix>
+        <source id="Controller-joints">
+          <Name_array id="Controller-joints-array" count="2">sdw_circle fg_pear</Name_array>
+          <technique_common>
+            <accessor source="#Controller-joints-array" count="2" stride="1">
+              <param name="JOINT" type="Name"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Controller-bind_poses">
+          <float_array id="Controller-bind_poses-array" count="32">1.81818 0 0 0 0 1 0 0.000375 0 0 1.81818 0.006121 0 0 0 1 1 0 0 0.000693 0 1 0 -0.02749 0 0 1 0.003466 0 0 0 1</float_array>
+          <technique_common>
+            <accessor source="#Controller-bind_poses-array" count="2" stride="16">
+              <param name="TRANSFORM" type="float4x4"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Controller-weights">
+          <float_array id="Controller-weights-array" count="1">1</float_array>
+          <technique_common>
+            <accessor source="#Controller-weights-array" count="1" stride="1">
+              <param name="WEIGHT" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <joints>
+          <input semantic="JOINT" source="#Controller-joints"/>
+          <input semantic="INV_BIND_MATRIX" source="#Controller-bind_poses"/>
+        </joints>
+        <vertex_weights count="9">
+          <input semantic="JOINT" source="#Controller-joints" offset="0"/>
+          <input semantic="WEIGHT" source="#Controller-weights" offset="1"/>
+          <vcount>1 1 1 1 1 1 1 1 1 </vcount>
+          <v>0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</v>
+        </vertex_weights>
+      </skin>
+      <extra>
+        <technique profile="FCOLLADA">
+          <user_properties>SkinController</user_properties>
+        </technique>
+      </extra>
+    </controller>
+    <controller id="Controller1">
+      <skin source="#Geometry1">
+        <bind_shape_matrix>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</bind_shape_matrix>
+        <source id="Controller1-joints">
+          <Name_array id="Controller1-joints-array" count="2">sdw_circle fg_pear</Name_array>
+          <technique_common>
+            <accessor source="#Controller1-joints-array" count="2" stride="1">
+              <param name="JOINT" type="Name"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Controller1-bind_poses">
+          <float_array id="Controller1-bind_poses-array" count="32">1.81818 0 0 0 0 1 0 0.000375 0 0 1.81818 0.006121 0 0 0 1 1 0 0 0.000693 0 1 0 -0.02749 0 0 1 0.003466 0 0 0 1</float_array>
+          <technique_common>
+            <accessor source="#Controller1-bind_poses-array" count="2" stride="16">
+              <param name="TRANSFORM" type="float4x4"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Controller1-weights">
+          <float_array id="Controller1-weights-array" count="1">1</float_array>
+          <technique_common>
+            <accessor source="#Controller1-weights-array" count="1" stride="1">
+              <param name="WEIGHT" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <joints>
+          <input semantic="JOINT" source="#Controller1-joints"/>
+          <input semantic="INV_BIND_MATRIX" source="#Controller1-bind_poses"/>
+        </joints>
+        <vertex_weights count="95">
+          <input semantic="JOINT" source="#Controller1-joints" offset="0"/>
+          <input semantic="WEIGHT" source="#Controller1-weights" offset="1"/>
+          <vcount>1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 </vcount>
+          <v>1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0</v>
+        </vertex_weights>
+      </skin>
+      <extra>
+        <technique profile="FCOLLADA">
+          <user_properties>SkinController</user_properties>
+        </technique>
+      </extra>
+    </controller>
+  </library_controllers>
+  <library_visual_scenes>
+    <visual_scene id="VisualSceneNode" name="rdmscene">
+      <node id="VisualSceneNode1" name="fg_pear" sid="fg_pear" type="JOINT">
+        <matrix>1 0 0 -0.000693 0 1 0 0.02749 0 0 1 -0.003466 0 0 0 1</matrix>
+        <node id="VisualSceneNode2" name="sdw_circle" sid="sdw_circle" type="JOINT">
+          <matrix>0.55 0 0 0.000693 0 1 0 -0.027865 0 0 0.55 0.0001 0 0 0 1</matrix>
+        </node>
+      </node>
+      <node id="VisualSceneNode3" name="sdw_circle" type="NODE">
+        <matrix>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <instance_controller url="#Controller">
+          <skeleton>#VisualSceneNode1</skeleton>
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="VisualMaterial0" target="#VisualMaterial"/>
+            </technique_common>
+          </bind_material>
+        </instance_controller>
+      </node>
+      <node id="VisualSceneNode4" name="fg_pear" type="NODE">
+        <matrix>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <instance_controller url="#Controller1">
+          <skeleton>#VisualSceneNode1</skeleton>
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="VisualMaterial10" target="#VisualMaterial1"/>
+            </technique_common>
+          </bind_material>
+        </instance_controller>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#VisualSceneNode"/>
+  </scene>
+</COLLADA>
