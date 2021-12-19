@@ -12,6 +12,8 @@ public class HoneycombCharacter : MonoBehaviour
     public YellowDice YellowDice; 
     public CharacterType Type;
     public HoneycombController HoneycombController;
+    public GameObject Basket;
+    public GameObject Bees;
 
     public AudioSource VictoryAS;
     public AudioSource SadAS;
@@ -36,11 +38,11 @@ public class HoneycombCharacter : MonoBehaviour
         }
         if (_isWalking)
         {
-            if (Mathf.Abs(transform.position.x - _walkPos.x) < 0.2f)
+            if (Mathf.Abs(transform.position.x - _walkPos.x) < Time.deltaTime * Speed)
             {
                 transform.LookAt(new Vector3(transform.position.x - 10, transform.position.y, transform.position.z));
-
-                Animator.SetInteger("State", (int)CharacterState.Idle);
+                
+                Animator.SetInteger("State", Basket.activeSelf ? (int)CharacterState.Holding : (int)CharacterState.Idle);
                 _isWalking = false;
 
                 _callback?.Invoke();
@@ -59,13 +61,34 @@ public class HoneycombCharacter : MonoBehaviour
             if (_shouldJump)
             {
                 Jump();
-                _shouldJump = false;
             }
         }
         else if (CanJump)
         {
             CanJump = false;
-            Invoke("Jump", 1.5f);
+            Invoke("WaitToJump", 0.5f);
+        }
+        else if (_shouldJump)
+        {
+            var distanceToHoneycomb = HoneycombController.FruitsToHoneycomb();
+            if (distanceToHoneycomb == 3)
+            {
+                if (YellowDice.FacingAmount == 2)
+                {
+                    Jump();
+                }
+            }
+            else if (distanceToHoneycomb <= 2)
+            {
+                if (YellowDice.FacingAmount == 1)
+                {
+                    Jump();
+                }
+            }
+            else if (YellowDice.FacingAmount != 0)
+            {
+                Jump();
+            }
         }
     }
 
@@ -75,13 +98,9 @@ public class HoneycombCharacter : MonoBehaviour
         {
             Land();
         }
-        else if (collision.collider.name == "Side 1" || collision.collider.name == "Side 3")
+        else if (collision.collider.name == "Dice")
         {
-            YellowDice.HitSide(2);
-        }
-        else if (collision.collider.name == "Side 2" || collision.collider.name == "Side 4")
-        {
-            YellowDice.HitSide(1);
+            YellowDice.HitSide();
         }
     }
 
@@ -96,17 +115,25 @@ public class HoneycombCharacter : MonoBehaviour
         Rb.AddForce(new Vector3(0, JumpForce, 0), ForceMode.Impulse);
         Animator.SetInteger("State", (int)CharacterState.Jump);
         _isJumping = true;
+        _shouldJump = false;
     }
 
     public void Win()
     {
+        transform.LookAt(new Vector3(transform.position.x, transform.position.y, Camera.main.transform.position.z));
         VictoryAS.Play();
-        Physics.IgnoreCollision(GetComponent<Collider>(), FindObjectOfType<Spinner>().GetComponent<Collider>(), true);
         Animator.SetTrigger("Victory");
+    }
+
+    public void Lose()
+    {
+        Bees.SetActive(true);
+        SadAS.Play();
     }
 
     public void WalkTowards(Vector3 pos, Action callback)
     {
+        Basket.SetActive(false);
         transform.LookAt(new Vector3(pos.x, transform.position.y, transform.position.z));
         Animator.SetInteger("State", (int)CharacterState.Walk);
         _isWalking = true;
@@ -133,5 +160,11 @@ public class HoneycombCharacter : MonoBehaviour
         Animator.SetInteger("State", (int)CharacterState.Idle);
 
         WalkTowards(transform.position + Vector3.left * 3.75f, HoneycombController.MoveFruit);
+        Basket.SetActive(true);
+    }
+
+    private void WaitToJump()
+    {
+        _shouldJump = true;
     }
 }

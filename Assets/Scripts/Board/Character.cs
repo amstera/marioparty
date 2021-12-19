@@ -242,7 +242,8 @@ public enum CharacterState
 {
     Idle = 0,
     Jump = 1,
-    Walk = 2
+    Walk = 2,
+    Holding = 3
 }
 
 public enum CharacterType

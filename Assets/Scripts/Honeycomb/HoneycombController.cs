@@ -19,6 +19,8 @@ public class HoneycombController : MonoBehaviour
 
     public AudioSource MiniGameAS;
     public AudioSource MusicAS;
+    public AudioSource SuccessAS;
+    public AudioSource BeesAS;
 
     public List<AudioClip> MiniGameSounds;
 
@@ -38,19 +40,14 @@ public class HoneycombController : MonoBehaviour
     public void MoveFruit()
     {
         int amount = YellowDice.Amount;
-        for (int i = 0; i < amount; i++)
-        {
-            ShownFruits[0].Roll();
-            ShownFruits.RemoveAt(0);
-        }
-
-        StartCoroutine(AddNewFruit(amount));
+        MoveFruit(amount);
     }
 
     public void ChangeCharacterTurn(bool isEliminated)
     {
         if (_fruitAmount < YellowDice.Amount - 1 && !isEliminated)
         {
+            SuccessAS.Play();
             _fruitAmount++;
             return;
         }
@@ -59,7 +56,9 @@ public class HoneycombController : MonoBehaviour
 
         if (isEliminated)
         {
+            BeesAS.Play();
             Characters.RemoveAt(_charIndex);
+            curChar.Lose();
             curChar.WalkTowards(curChar.transform.position + Vector3.left * 10, null);
             Destroy(curChar, 5);
 
@@ -70,13 +69,23 @@ public class HoneycombController : MonoBehaviour
         }
         else
         {
+            SuccessAS.Play();
             _charIndex = (_charIndex + 1) % Characters.Count;
             curChar.WalkTowards(transform.position + Vector3.right * (Characters.Count * 1.5f), null);
         }
 
         if (Characters.Count == 1)
         {
-            //get winner
+            Winner = Characters.First().Type;
+
+            MusicAS.Stop();
+            MiniGameAS.clip = MiniGameSounds[(int)MiniGameSoundType.Win];
+            MiniGameAS.Play();
+
+            Characters.First().Win();
+            Text.Show($"{Winner} Wins!", 2f);
+            Fireworks.Play();
+            Invoke("FadeOut", 2f);
         }
         else
         {
@@ -98,9 +107,15 @@ public class HoneycombController : MonoBehaviour
     {
         var character = Characters[_charIndex];
 
+        character.transform.LookAt(new Vector3(character.transform.position.x, character.transform.position.y, Camera.main.transform.position.z));
         character.CanJump = true;
-        YellowDice.CanRotate = true;
+        YellowDice.StartRotating();
         _fruitAmount = 0;
+    }
+
+    public int FruitsToHoneycomb()
+    {
+        return ShownFruits.FindIndex(s => s.Type == FruitType.Honeycomb) + 1;
     }
 
     private void ShowGoText()
@@ -117,9 +132,11 @@ public class HoneycombController : MonoBehaviour
         var fruits = Fruits.FindAll(f => f.Type != FruitType.Honeycomb);
         var honeycomb = Fruits.Find(f => f.Type == FruitType.Honeycomb);
 
+        int honeycombSpot = Random.Range(6, 9);
+
         for (int i = 0; i < 9; i++)
         {
-            var chosenFruit = i == 7 ? honeycomb : fruits[Random.Range(0, fruits.Count)];
+            var chosenFruit = i == honeycombSpot ? honeycomb : fruits[Random.Range(0, fruits.Count)];
             var fruit = Instantiate(chosenFruit, new Vector3(), chosenFruit.transform.rotation);
             fruit.transform.parent = FruitsParent.transform;
             fruit.transform.localPosition = new Vector3(-2.75f + 0.8f * i, chosenFruit.transform.position.y, -0.15f);
@@ -137,19 +154,31 @@ public class HoneycombController : MonoBehaviour
         for (int i = 0; i < ShownFruits.Count; i++)
         {
             var shownFruit = ShownFruits[i];
-            shownFruit.transform.localPosition = new Vector3(shownFruit.transform.localPosition.x - (0.8f * amount), shownFruit.transform.localPosition.y, shownFruit.transform.localPosition.z);
+            shownFruit.transform.localPosition = new Vector3(shownFruit.transform.localPosition.x - 0.8f, shownFruit.transform.localPosition.y, shownFruit.transform.localPosition.z);
         }
 
-        for (int i = amount; i > 0; i--)
+        if (Characters.Count > 2 || (Winner == CharacterType.Unknown && !ShownFruits.Any(s => s.Type == FruitType.Honeycomb)))
         {
             yield return new WaitForSeconds(0.1f);
 
             var chosenFruit = ShownFruits.Any(s => s.Type == FruitType.Honeycomb) ? fruits[Random.Range(0, fruits.Count)] : honeycomb;
             var fruit = Instantiate(chosenFruit, new Vector3(), chosenFruit.transform.rotation);
             fruit.transform.parent = FruitsParent.transform;
-            fruit.transform.localPosition = new Vector3(-2.75f + 0.8f * (9 - i), chosenFruit.transform.position.y, -0.15f);
+            fruit.transform.localPosition = new Vector3(-2.75f + 0.8f * 8, chosenFruit.transform.position.y, -0.15f);
             ShownFruits.Add(fruit);
         }
+
+        if (amount > 0)
+        {
+            MoveFruit(amount);
+        }
+    }
+
+    private void MoveFruit(int amount)
+    {
+        ShownFruits[0].Roll();
+        ShownFruits.RemoveAt(0);
+        StartCoroutine(AddNewFruit(amount - 1));
     }
 
     private void FadeOut()
