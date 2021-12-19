@@ -239,6 +239,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8271743661963827101}
+  - component: {fileID: 3784094523068152539}
+  - component: {fileID: 6329383582395735967}
+  - component: {fileID: -4027659247725642139}
   m_Layer: 0
   m_Name: Honeycomb
   m_TagString: Untagged
@@ -263,6 +266,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
+--- !u!114 &3784094523068152539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8755265563166575911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7298c2a064320478c8fc715032a5d25e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rb: {fileID: -4027659247725642139}
+  Type: 1
+  HoneycombController: {fileID: 0}
+--- !u!65 &6329383582395735967
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8755265563166575911}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.015193, y: 0.007868798, z: 0.02}
+  m_Center: {x: 0.002403504, y: -0.001200042, z: 0}
+--- !u!54 &-4027659247725642139
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8755265563166575911}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &9174405280023232024
 GameObject:
   m_ObjectHideFlags: 0
