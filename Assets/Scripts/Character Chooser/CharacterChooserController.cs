@@ -23,7 +23,7 @@ public class CharacterChooserController : MonoBehaviour
     void Start()
     {
         SaveData saveData = SaveController.Load();
-        if (saveData != null)
+        if (saveData != null && saveData.MiniGameFrequency != null)
         {
             if (saveData.Turn >= TotalTurns)
             {

@@ -1,8 +1,29 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class QuitPanel : MonoBehaviour
 {
+    public GameObject QuitSave;
+    public GameObject Quit;
+    public Text QuitText;
+    public GameObject Cancel;
+
+    private bool _isMainPage;
+
+    void Start()
+    {
+        _isMainPage = SceneManager.GetActiveScene().name == "Character Chooser";
+
+        if (_isMainPage)
+        {
+            QuitSave.gameObject.SetActive(false);
+            Cancel.transform.position = Quit.transform.position + Vector3.down * 25;
+            Quit.transform.position = QuitSave.transform.position + Vector3.down * 25;
+
+            QuitText.text = "Yes (Y)";
+        }
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.N))
@@ -12,7 +33,7 @@ public class QuitPanel : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Y))
         {
-            if (SceneManager.GetActiveScene().name == "Character Chooser")
+            if (_isMainPage)
             {
                 Application.Quit();
             }
@@ -22,7 +43,12 @@ public class QuitPanel : MonoBehaviour
                 SceneManager.LoadSceneAsync("Character Chooser");
             }
         }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            Application.Quit();
+        }
     }
+
     public void Show()
     {
         FindObjectOfType<CameraMove>().Blur.enabled = true;

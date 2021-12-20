@@ -52,7 +52,7 @@ public class Dice : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.tag == "Character")
+        if (collision.collider.CompareTag("Character"))
         {
             UpdateFace();
         }

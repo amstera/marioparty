@@ -26,6 +26,7 @@ ScriptsOnlyBuild:
     - FlagCharacter
     - Fruit
     - GameController
+    - HiddenBlock
     - HockeyCharacter
     - HoneycombCharacter
     - HoneycombController
@@ -44,6 +45,7 @@ ScriptsOnlyBuild:
     - QuitPanel
     - RankingPanel
     - Rankings
+    - ReverseTurn
     - ScrollingUVs_Layers
     - Shell
     - ShyGuy
@@ -76,7 +78,6 @@ ScriptsOnlyBuild:
     - UnityEditor.Recorder.MovieRecorderSettings
     - UnityEditor.Recorder.RecorderControllerSettings
     - UnityEditor.Recorder.RecorderSettingsPrefsEditor
-    - UnityEditor.Recorder.RecorderWindow
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.dll:
@@ -756,6 +757,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 5174}
     - Class: 114
       Script: {instanceID: 5180}
+    - Class: 114
+      Script: {instanceID: 90374}
+    - Class: 114
+      Script: {instanceID: 93004}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 121
@@ -1428,7 +1433,7 @@ ScriptsOnlyBuild:
     className: EnumerableTestState
   - hash:
       serializedVersion: 2
-      Hash: a9c564e6dc12a927351e56a8c48ff274
+      Hash: 250c57f4c862d22f7bc81fee566176f5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameController
@@ -1476,7 +1481,7 @@ ScriptsOnlyBuild:
     className: AspectRatioFitter
   - hash:
       serializedVersion: 2
-      Hash: b85b0bb01371fec06eeadd3a81ce7752
+      Hash: 085038699301e1355fa2bc776b7587c5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Character
@@ -1536,7 +1541,7 @@ ScriptsOnlyBuild:
     className: GlobalFog
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 6fd71b8293d3d8e451b10bfa0c043d90
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: QuitPanel
@@ -1956,7 +1961,7 @@ ScriptsOnlyBuild:
     className: Circle
   - hash:
       serializedVersion: 2
-      Hash: 116941cc3d3002523d1cafd9083bcf3e
+      Hash: 18b278fefd23293ef854d49e970d9098
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Rankings
@@ -2236,6 +2241,18 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Postprocessing.Runtime.dll
     namespaceName: UnityEngine.Rendering.PostProcessing
     className: AmbientOcclusion
+  - hash:
+      serializedVersion: 2
+      Hash: 1ce444e288f8fd33d69c838c7e75d622
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: HiddenBlock
+  - hash:
+      serializedVersion: 2
+      Hash: c0d11be178105ff49c86d64520446f40
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ReverseTurn
   platform: 2
   scenePathNames:
   - Assets/Scenes/Character Chooser.unity

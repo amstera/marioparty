@@ -176,6 +176,7 @@ public class HoneycombCharacter : MonoBehaviour
     {
         if (YellowDice.CanRotate)
         {
+            _isJumping = false;
             Jump();
             return;
         }

@@ -26,14 +26,7 @@ public class YellowDice : MonoBehaviour
             Vector3 rotateAmount = Vector3.left * Speed * Time.deltaTime;
             _totalRotated = (_totalRotated + Mathf.Abs(rotateAmount.x)) % 360;
             transform.Rotate(rotateAmount, Space.Self);
-            if (_totalRotated <= 45 || (_totalRotated > 135 && _totalRotated <= 225) || (_totalRotated > 315 && _totalRotated <= 360))
-            {
-                FacingAmount = 2;
-            }
-            else
-            {
-                FacingAmount = 1;
-            }
+            UpdateFacingAmount();
         }
 	}
 
@@ -50,6 +43,8 @@ public class YellowDice : MonoBehaviour
             return;
         }
 
+        UpdateFacingAmount();
+
         DiceRollAS.Stop();
         DiceHitAS.Play();
 
@@ -65,6 +60,22 @@ public class YellowDice : MonoBehaviour
         else
         {
             transform.localEulerAngles = new Vector3(180, 0, 0);
+        }
+    }
+
+    private void UpdateFacingAmount()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(Camera.main.transform.position, transform.position - Camera.main.transform.position, out hit))
+        {
+            if (hit.collider.name == "Side 1" || hit.collider.name == "Side 3")
+            {
+                FacingAmount = 1;
+            }
+            else if (hit.collider.name == "Side 2" || hit.collider.name == "Side 4")
+            {
+                FacingAmount = 2;
+            }
         }
     }
 }

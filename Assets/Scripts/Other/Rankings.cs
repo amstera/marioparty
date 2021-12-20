@@ -8,6 +8,7 @@ public class Rankings : MonoBehaviour
     public List<RankingPanel> RankingPanels;
     public GameObject CharacterStats;
     public GameObject TurnText;
+    public GameObject ReverseTurn;
     public CameraMove Cam;
 
     public AudioSource CoinSound;
@@ -43,6 +44,10 @@ public class Rankings : MonoBehaviour
         if (TurnText != null)
         {
             TurnText.SetActive(false);
+        }
+        if (ReverseTurn != null)
+        {
+            ReverseTurn.SetActive(false);
         }
         _callback = callback;
 
@@ -94,6 +99,10 @@ public class Rankings : MonoBehaviour
         if (TurnText != null)
         {
             TurnText.SetActive(true);
+        }
+        if (ReverseTurn != null)
+        {
+            ReverseTurn.SetActive(true);
         }
     }
 }

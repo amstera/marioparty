@@ -35,6 +35,8 @@ public class GameController : MonoBehaviour
     public Pipe GoldenPipe;
     public LuckySpace LuckySpace;
     public QuitPanel QuitPanel;
+    public ReverseTurn ReverseTurn;
+    public HiddenBlock HiddenBlock;
 
     public AudioSource EnterMiniGameSound;
     public AudioSource MusicAS;
@@ -272,6 +274,15 @@ public class GameController : MonoBehaviour
         Dialog.ShowText($"{character.Type} used a {matchingItem.ItemNameText.text}!", CallItem);
     }
 
+    public void AddStar()
+    {
+        Character character = GetCurrentCharacter();
+
+        character.ChangeStars(1);
+        StarText.Show(character.transform.position + Vector3.up);
+        Invoke("ShowRankings", 1.5f);
+    }
+
     private void CallItem()
     {
         var character = GetCurrentCharacter();
@@ -346,7 +357,7 @@ public class GameController : MonoBehaviour
         character.gameObject.SetActive(false);
 
         var starSpace = Spaces[Spaces.FindIndex(s => s.Type == CircleType.Star) - 1];
-        var goldenPipe = Instantiate<Pipe>(GoldenPipe, starSpace.transform.position, Quaternion.identity);
+        var goldenPipe = Instantiate(GoldenPipe, starSpace.transform.position, Quaternion.identity);
         goldenPipe.Show(RevealCharacterFromGoldenPipe);
 
         foreach (CharacterType charType in starSpace.OnSpace)
@@ -591,17 +602,38 @@ public class GameController : MonoBehaviour
 
     private void NextTurn()
     {
-        //update char index and turn
-        CharIndex++;
-        if (CharIndex >= Characters.Count)
+        var character = Characters[CharIndex];
+        var currentSpace = Spaces[character.Position].Type;
+        if ((currentSpace == CircleType.Positive || currentSpace == CircleType.Negative) && !character.HiddenBlockHit && Random.Range(0, 50) == 1)
         {
-            CharIndex--;
-            Turn++;
-            Invoke("LoadMiniGame", 0.5f);
-            return;
+            var hiddenBlock = Instantiate(HiddenBlock, Characters[CharIndex].transform.position + Vector3.up * 2.5f, Quaternion.identity);
+            hiddenBlock.GameController = this;
+            Dialog.ShowText($"{character.Type} found a hidden block!", CharacterJumpSpecial);
+            character.HiddenBlockHit = true;
         }
+        else
+        {
+            //update char index and turn
+            character.HiddenBlockHit = false;
+            CharIndex++;
+            if (CharIndex >= Characters.Count)
+            {
+                CharIndex--;
+                Turn++;
+                Invoke("LoadMiniGame", 0.5f);
+                return;
+            }
 
-        DoTurn();
+            DoTurn();
+        }
+    }
+
+    private void CharacterJumpSpecial()
+    {
+        Character character = Characters[CharIndex];
+        character.IgnoreLanding = true;
+        character.CanJump = true;
+        character.Jump();
     }
 
     private void CharacterJump()
@@ -719,15 +751,6 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void AddStar()
-    {
-        Character character = GetCurrentCharacter();
-
-        character.ChangeStars(1);
-        StarText.Show(character.transform.position + Vector3.up);
-        Invoke("ShowRankings", 1.5f);
-    }
-
     private IEnumerator AddStolenStar(Character stealCharacter)
     {
         yield return new WaitForSeconds(1);
@@ -740,7 +763,7 @@ public class GameController : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
 
-        int coinsToSteal = Random.Range(1, stealCharacter.Coins / 3);
+        int coinsToSteal = Random.Range(Mathf.Max(1, stealCharacter.Coins / 5), stealCharacter.Coins / 3);
         stealCharacter.ChangeCoins(-coinsToSteal, false);
 
         Character character = GetCurrentCharacter();
@@ -838,6 +861,7 @@ public class GameController : MonoBehaviour
 
     private void ReverseBoard()
     {
+        ReverseTurn.Show(IsBoardReversed);
         Spaces.Reverse();
         foreach (Character c in Characters)
         {

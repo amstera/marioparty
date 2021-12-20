@@ -7,6 +7,8 @@ public class Character : MonoBehaviour
     public Rigidbody Rb;
     public bool IsPlayer;
     public bool CanJump;
+    public bool IgnoreLanding;
+    public bool HiddenBlockHit;
     public float JumpForce = 6;
     public float Speed = 5;
     public int Roll;
@@ -152,7 +154,7 @@ public class Character : MonoBehaviour
 
         _gameController.MusicAS.Stop();
         ItemSound.Play();
-        _gameController.MusicAS.PlayDelayed(4f);
+        _gameController.MusicAS.PlayDelayed(3.5f);
 
         CharacterAS.clip = CharacterSounds[(int)CharacterSoundType.Happy];
         CharacterAS.Play();
@@ -225,6 +227,12 @@ public class Character : MonoBehaviour
 
     private void Land()
     {
+        if (IgnoreLanding)
+        {
+            IgnoreLanding = false;
+            return;
+        }
+
         _isJumping = false;
         Animator.SetInteger("State", (int)CharacterState.Idle);
         _gameController.CharacterLanded(this);
