@@ -51,7 +51,7 @@ public class FlagCharacter : MonoBehaviour
             else if (!ShyGuy.ShowingTwoFlags)
             {
                 FlagNeutral.SetActive(false);
-                if (Random.Range(0, 6) == 1)
+                if (Random.Range(0, 7) == 1)
                 {
                     Flag = CorrectFlag == FlagType.A ? FlagType.B : FlagType.A;
                 }

@@ -33,7 +33,7 @@ public class EndGameController : MonoBehaviour
     {
         _saveData = SaveController.Load();
         ToadetteAS.Play();
-        Dialog.ShowText("Time for the bonus stars!", StartBonusStars);
+        Dialog.ShowText("Game's over! Time for the bonus stars!", StartBonusStars);
     }
 
     void Update()

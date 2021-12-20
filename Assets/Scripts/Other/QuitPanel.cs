@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class QuitPanel : MonoBehaviour
 {
@@ -11,7 +12,15 @@ public class QuitPanel : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Y))
         {
-            Application.Quit();
+            if (SceneManager.GetActiveScene().name == "Character Chooser")
+            {
+                Application.Quit();
+            }
+            else
+            {
+                PlayerPrefs.DeleteAll();
+                SceneManager.LoadSceneAsync("Character Chooser");
+            }
         }
     }
     public void Show()

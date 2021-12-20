@@ -42,6 +42,13 @@ public class LavaController : MonoBehaviour
             Fireworks.Play();
             Invoke("FadeOut", 2);
         }
+        else if (Characters.Count(c => c != null) == 0 && Winner == CharacterType.Unknown)
+        {
+            MiniGameAS.clip = MiniGameSounds[(int)MiniGameSoundType.Tie];
+            MiniGameAS.Play();
+            Text.Show($"Draw!", 2f);
+            Invoke("FadeOut", 2);
+        }
     }
 
     private void ShowGoText()

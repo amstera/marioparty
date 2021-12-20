@@ -9,6 +9,7 @@ public class SaveData
     public int Turn;
     public int TotalTurns;
     public string LastMiniGame;
+    public int[] MiniGameFrequency;
     public bool BoardReversed;
     public List<CompressedCircle> Spaces;
     public List<CharacterType> LastWinningCharacters;

@@ -17,10 +17,12 @@ public class HoneycombCharacter : MonoBehaviour
 
     public AudioSource VictoryAS;
     public AudioSource SadAS;
+    public AudioSource StepsAS;
 
     private bool _shouldJump;
     private bool _isJumping;
     private bool _isWalking;
+    private bool _showBasketAtDest;
     private Vector3 _walkPos;
     private Action _callback;
 
@@ -38,8 +40,24 @@ public class HoneycombCharacter : MonoBehaviour
         }
         if (_isWalking)
         {
-            if (Mathf.Abs(transform.position.x - _walkPos.x) < Time.deltaTime * Speed)
+            if (StepsAS != null && !StepsAS.isPlaying)
             {
+                StepsAS.Play();
+            }
+
+            if (Mathf.Abs(transform.position.x - _walkPos.x) < Time.deltaTime * Speed || Mathf.Abs(transform.position.x - _walkPos.x) > 15)
+            {
+                if (StepsAS != null)
+                {
+                    StepsAS.Stop();
+                }
+
+                if (_showBasketAtDest)
+                {
+                    Basket.SetActive(true);
+                }
+
+                transform.position = new Vector3(_walkPos.x, transform.position.y, transform.position.z);
                 transform.LookAt(new Vector3(transform.position.x - 10, transform.position.y, transform.position.z));
                 
                 Animator.SetInteger("State", Basket.activeSelf ? (int)CharacterState.Holding : (int)CharacterState.Idle);
@@ -58,7 +76,7 @@ public class HoneycombCharacter : MonoBehaviour
     {
         if (IsPlayer)
         {
-            if (_shouldJump)
+            if (CanJump && _shouldJump)
             {
                 Jump();
             }
@@ -131,9 +149,10 @@ public class HoneycombCharacter : MonoBehaviour
         SadAS.Play();
     }
 
-    public void WalkTowards(Vector3 pos, Action callback)
+    public void WalkTowards(Vector3 pos, Action callback, bool showBasketAtDest = false)
     {
         Basket.SetActive(false);
+        _showBasketAtDest = showBasketAtDest;
         transform.LookAt(new Vector3(pos.x, transform.position.y, transform.position.z));
         Animator.SetInteger("State", (int)CharacterState.Walk);
         _isWalking = true;
@@ -155,12 +174,17 @@ public class HoneycombCharacter : MonoBehaviour
 
     private void Land()
     {
+        if (YellowDice.CanRotate)
+        {
+            Jump();
+            return;
+        }
+
         _isJumping = false;
         CanJump = false;
         Animator.SetInteger("State", (int)CharacterState.Idle);
 
-        WalkTowards(transform.position + Vector3.left * 3.75f, HoneycombController.MoveFruit);
-        Basket.SetActive(true);
+        WalkTowards(transform.position + Vector3.left * 3.75f, HoneycombController.MoveFruit, true);
     }
 
     private void WaitToJump()

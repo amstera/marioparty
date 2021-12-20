@@ -14,6 +14,8 @@ public class GameController : MonoBehaviour
     public int Turn = -1;
     public int MaxTurns = 10;
     public string LastMiniGame;
+    public string ChosenMiniGame;
+    public int[] MiniGameFrequency = new int[5];
     public bool IsBoardReversed;
     public CameraMove Cam;
 
@@ -651,14 +653,14 @@ public class GameController : MonoBehaviour
         {
             if (character.Coins < 35)
             {
-                Dialog.ShowText("You don't have enough coins to steal a star!", ContinueTurn);
+                Dialog.ShowText("You don't have enough coins to steal a star! I'll steal coins instead!", StealCoins);
             }
             else
             {
                 Character stealCharacter = Characters.FindAll(c => c.Stars > 0 && c != character).OrderByDescending(c => c.Stars).FirstOrDefault();
                 if (stealCharacter == null)
                 {
-                    Dialog.ShowText("There's nobody to steal a star from!", ContinueTurn);
+                    Dialog.ShowText("There's nobody to steal a star from! I'll steal coins instead!", StealCoins);
                 }
                 else
                 {
@@ -667,6 +669,11 @@ public class GameController : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void StealCoins()
+    {
+        StealStar(true);
     }
 
     private void SeeItems(bool see)
@@ -781,10 +788,37 @@ public class GameController : MonoBehaviour
 
     private void LoadMiniGame()
     {
-        SaveController.Save(Characters, Spaces, Turn, MaxTurns, IsBoardReversed);
         EnterMiniGameSound.Play();
         FadePanel.FadeOut();
+
+        List<string> miniGames = new List<string> { "Lava Jump", "Bumper Ball", "Shy Guy", "Air Hockey", "Honeycomb Havoc" };
+        int index;
+        if (MiniGameFrequency.All(m => m == MiniGameFrequency[0])) //all values are equal
+        {
+            var miniGamesRemoved = miniGames.FindAll(m => m != LastMiniGame);
+            int chosenMiniGame = Random.Range(0, miniGamesRemoved.Count);
+            index = miniGames.FindIndex(m => m == miniGamesRemoved[chosenMiniGame]);
+        }
+        else
+        {
+            List<string> miniGamesRemoved = new List<string>();
+            int minimumFrequency = MiniGameFrequency.Min();
+            for (int i = 0; i < miniGames.Count; i++)
+            {
+                if (MiniGameFrequency[i] <= minimumFrequency)
+                {
+                    miniGamesRemoved.Add(miniGames[i]);
+                }
+            }
+            int chosenMiniGame = Random.Range(0, miniGamesRemoved.Count);
+            index = miniGames.FindIndex(m => m == miniGamesRemoved[chosenMiniGame]);
+        }
+
+        MiniGameFrequency[index]++;
+        ChosenMiniGame = miniGames[index];
+
         Invoke("LoadChosenMiniGame", 1.5f);
+        SaveController.Save(Characters, Spaces, Turn, MaxTurns, IsBoardReversed, MiniGameFrequency);
     }
 
     private void LoadEndGame()
@@ -794,9 +828,7 @@ public class GameController : MonoBehaviour
 
     private void LoadChosenMiniGame()
     {
-        List<string> miniGames = new List<string> { "Lava Jump", "Bumper Ball", "Shy Guy", "Air Hockey" };
-        miniGames.Remove(LastMiniGame);
-        SceneManager.LoadSceneAsync(miniGames[Random.Range(0, miniGames.Count)]);
+        SceneManager.LoadSceneAsync(ChosenMiniGame);
     }
 
     private void ShowOpeningText()
@@ -822,6 +854,7 @@ public class GameController : MonoBehaviour
 
         Turn = saveData.Turn;
         LastMiniGame = saveData.LastMiniGame;
+        MiniGameFrequency = saveData.MiniGameFrequency;
         IsBoardReversed = saveData.BoardReversed;
         MaxTurns = saveData.TotalTurns;
         if (IsBoardReversed)

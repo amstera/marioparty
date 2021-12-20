@@ -33,7 +33,7 @@ public class LuckySpace : MonoBehaviour
         _chosenIndex = UnityEngine.Random.Range(0, isLastTurn || character.Items.Count >= 3 ? 3 : LuckySpaces.Count);
         if (LuckySpaces[_chosenIndex].Type == LuckySpaceOptionType.GoldenPipe)
         {
-            if (UnityEngine.Random.Range(0, 3) != 1) //make it hard to get golden pipe
+            if (UnityEngine.Random.Range(0, 2) == 1) //make it hard to get golden pipe
             {
                 _chosenIndex = UnityEngine.Random.Range(0, LuckySpaces.Count - 1); //take another random choice that isn't golden pipe
             }

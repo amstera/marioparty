@@ -5,7 +5,7 @@ public class SaveController
 {
     public static string SaveDataKey = "SaveData";
 
-    public static void Save(List<Character> characters, List<Circle> spaces, int turn, int maxTurns, bool isBoardReversed)
+    public static void Save(List<Character> characters, List<Circle> spaces, int turn, int maxTurns, bool isBoardReversed, int[] minigameFrequency)
     {
         List<CompressedCharacter> compressedCharacters =  new List<CompressedCharacter>();
         int index = 0;
@@ -47,7 +47,8 @@ public class SaveController
             Turn = turn,
             TotalTurns = maxTurns,
             BoardReversed = isBoardReversed,
-            Spaces = compressedSpaces
+            Spaces = compressedSpaces,
+            MiniGameFrequency = minigameFrequency
         };
 
         Save(saveData);

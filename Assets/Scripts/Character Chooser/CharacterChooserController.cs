@@ -22,7 +22,19 @@ public class CharacterChooserController : MonoBehaviour
 
     void Start()
     {
-        PlayerPrefs.DeleteAll();
+        SaveData saveData = SaveController.Load();
+        if (saveData != null)
+        {
+            if (saveData.Turn >= TotalTurns)
+            {
+                PlayerPrefs.DeleteAll();
+            }
+            else
+            {
+                SceneManager.LoadSceneAsync("Game");
+            }
+        }
+        
 
         Cursor.visible = false;
     }

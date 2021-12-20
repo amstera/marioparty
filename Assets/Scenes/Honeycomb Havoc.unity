@@ -385,6 +385,7 @@ MonoBehaviour:
   Bees: {fileID: 1199513589}
   VictoryAS: {fileID: 212265652}
   SadAS: {fileID: 212265651}
+  StepsAS: {fileID: 212265655}
 --- !u!82 &212265651 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 8432566847390076136, guid: 025a5ffc21dae435786b81966b8ae5aa, type: 3}
@@ -393,6 +394,11 @@ AudioSource:
 --- !u!82 &212265652 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 7796687881755774197, guid: 025a5ffc21dae435786b81966b8ae5aa, type: 3}
+  m_PrefabInstance: {fileID: 1459844431}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &212265655 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4783259207514426617, guid: 025a5ffc21dae435786b81966b8ae5aa, type: 3}
   m_PrefabInstance: {fileID: 1459844431}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &244363895
@@ -858,6 +864,7 @@ MonoBehaviour:
   Bees: {fileID: 506577026}
   VictoryAS: {fileID: 448319968}
   SadAS: {fileID: 448319967}
+  StepsAS: {fileID: 448319971}
 --- !u!82 &448319967 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 1283223027613458749, guid: 35da60e48961b44729d798919d0e240a, type: 3}
@@ -866,6 +873,11 @@ AudioSource:
 --- !u!82 &448319968 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 4757994974305391593, guid: 35da60e48961b44729d798919d0e240a, type: 3}
+  m_PrefabInstance: {fileID: 1786880812}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &448319971 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1360928639978770157, guid: 35da60e48961b44729d798919d0e240a, type: 3}
   m_PrefabInstance: {fileID: 1786880812}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &478043568
@@ -5847,6 +5859,7 @@ MonoBehaviour:
   Bees: {fileID: 979390921}
   VictoryAS: {fileID: 696833175}
   SadAS: {fileID: 696833174}
+  StepsAS: {fileID: 0}
 --- !u!82 &696833174 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 4130519999921596967, guid: 4b9e51e459ed24784b61061df54955f3, type: 3}
@@ -6036,9 +6049,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 48391e08901e348a8883210c605ab347, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.35
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -6445,6 +6458,7 @@ MonoBehaviour:
   Bees: {fileID: 2067422793}
   VictoryAS: {fileID: 838111151}
   SadAS: {fileID: 838111150}
+  StepsAS: {fileID: 838111155}
 --- !u!82 &838111150 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 8541787434493035044, guid: 8e8eae0e4e7634e588131c9bb390228d, type: 3}
@@ -6458,6 +6472,11 @@ AudioSource:
 --- !u!95 &838111154 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5408544465795047810, guid: 8e8eae0e4e7634e588131c9bb390228d, type: 3}
+  m_PrefabInstance: {fileID: 324101535}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &838111155 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4549812891054445208, guid: 8e8eae0e4e7634e588131c9bb390228d, type: 3}
   m_PrefabInstance: {fileID: 324101535}
   m_PrefabAsset: {fileID: 0}
 --- !u!54 &838111156 stripped
@@ -11649,7 +11668,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1031972553}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.4, y: -5.37, z: -1.28}
+  m_LocalPosition: {x: -0.33, y: -5.37, z: -1.28}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 193943}
@@ -11692,7 +11711,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 717b1995468814e019f402a2d6db316e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: -1.5
   Loop: 1
   Mute: 0
@@ -16988,7 +17007,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1252189188}
   m_LocalRotation: {x: -0, y: -0.024856469, z: -0, w: 0.999691}
-  m_LocalPosition: {x: 6.16, y: 0.3, z: 2.07}
+  m_LocalPosition: {x: 6.3, y: 0.3, z: 2.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1284834432}
