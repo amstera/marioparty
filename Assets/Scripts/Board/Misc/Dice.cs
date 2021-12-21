@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class Dice : MonoBehaviour
     public TextMeshPro Text;
     public GameObject Sides;
     public Character Character;
+    public GameController GameController;
 
     public AudioSource DiceHit;
     public AudioSource DiceRoll;
@@ -22,6 +24,7 @@ public class Dice : MonoBehaviour
     void Start()
     {
         Text.transform.SetParent(null);
+        GameController = GameController.Instance;
     }
 
     void Update()
@@ -66,7 +69,7 @@ public class Dice : MonoBehaviour
         }
 
         IsRotating = false;
-        ChosenNumber = Random.Range(1, 7);
+        ChosenNumber = GameController.Turn == -1 ? GetStartingNumber() : Random.Range(1, 7);
 
         Vector3 newAngle = new Vector3(0, 0, 0);
         switch (ChosenNumber)
@@ -131,6 +134,17 @@ public class Dice : MonoBehaviour
         {
             meshRenderer.enabled = showSides;
         }
+    }
+
+    private int GetStartingNumber()
+    {
+        List<int> possibleRolls = new List<int>{ 1, 2, 3, 4, 5, 6 };
+        foreach (Character character in GameController.Characters)
+        {
+            possibleRolls.Remove(character.Roll);
+        }
+
+        return possibleRolls[Random.Range(0, possibleRolls.Count)];
     }
 
     private void HideNumber()

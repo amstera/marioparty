@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class AirHockeyController : MonoBehaviour
 {
     public List<HockeyCharacter> Characters;
+    public List<HockeyCharacter> FlippedCharacters;
     public SpecialText Text;
     public ParticleSystem Fireworks;
     public FadePanel FadePanel;
@@ -15,6 +16,9 @@ public class AirHockeyController : MonoBehaviour
     public Lights BlueLights;
     public Shell Shell;
 
+    public Material RedColor;
+    public Material BlueColor;
+
     public AudioSource MiniGameAS;
     public AudioSource MusicAS;
     public AudioSource GoalHornAS;
@@ -22,6 +26,11 @@ public class AirHockeyController : MonoBehaviour
     public List<AudioClip> MiniGameSounds;
 
     private SaveData _saveData;
+
+    void Awake()
+    {
+        SetCharacterPositions();
+    }
 
     void Start()
     {
@@ -135,6 +144,33 @@ public class AirHockeyController : MonoBehaviour
                 var matchingCharacter = _saveData.Characters.Find(c => c.Type == character.Type);
                 character.IsPlayer = matchingCharacter.IsPlayer;
             }
+        }
+    }
+
+    private void SetCharacterPositions()
+    {
+        var positions = Characters.Select(c => c.transform.position).ToList();
+        positions.Shuffle();
+        for (int i = 0; i < Characters.Count; i++)
+        {
+            var character = Characters[i];
+            var flipDiff = FlippedCharacters[i].transform.position - Characters[i].transform.position;
+            character.transform.position = new Vector3(positions[i].x, character.transform.position.y, character.transform.position.z);
+            var boardRenderer = character.transform.Find("Block").GetComponent<Renderer>();
+            var mats = boardRenderer.materials;
+            if (character.transform.position.x < -1)
+            {
+                character.Color = TeamColor.Red;
+                mats[0] = RedColor;
+            }
+            else
+            {
+                character.Color = TeamColor.Blue;
+                character.transform.localRotation = FlippedCharacters[i].transform.localRotation;
+                character.transform.position += flipDiff;
+                mats[0] = BlueColor;
+            }
+            boardRenderer.materials = mats;
         }
     }
 }

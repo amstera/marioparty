@@ -19,6 +19,11 @@ public class LavaController : MonoBehaviour
 
     private SaveData _saveData;
 
+    void Awake()
+    {
+        SetCharacterPositions();
+    }
+
     void Start()
     {
         _saveData = SaveController.Load();
@@ -56,6 +61,7 @@ public class LavaController : MonoBehaviour
         MiniGameAS.clip = MiniGameSounds[(int)MiniGameSoundType.Go];
         MiniGameAS.Play();
         Text.Show("Go!", 0.5f);
+        Characters.ForEach(c => c.CanJump = true);
     }
 
     private void FadeOut()
@@ -89,6 +95,17 @@ public class LavaController : MonoBehaviour
                 var matchingCharacter = _saveData.Characters.Find(c => c.Type == character.Type);
                 character.IsPlayer = matchingCharacter.IsPlayer;
             }
+        }
+    }
+
+    private void SetCharacterPositions()
+    {
+        var positions = Characters.Select(c => c.transform.position).ToList();
+        positions.Shuffle();
+        for (int i = 0; i < Characters.Count; i++)
+        {
+            var character = Characters[i];
+            character.transform.position = new Vector3(positions[i].x, character.transform.position.y, positions[i].z);
         }
     }
 }

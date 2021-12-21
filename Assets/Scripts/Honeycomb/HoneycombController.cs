@@ -28,6 +28,11 @@ public class HoneycombController : MonoBehaviour
     private int _charIndex;
     private int _fruitAmount;
 
+    void Awake()
+    {
+        SetCharacterPositions();
+    }
+
     void Start()
     {
         _saveData = SaveController.Load();
@@ -211,6 +216,31 @@ public class HoneycombController : MonoBehaviour
             {
                 var matchingCharacter = _saveData.Characters.Find(c => c.Type == character.Type);
                 character.IsPlayer = matchingCharacter.IsPlayer;
+            }
+        }
+    }
+
+    private void SetCharacterPositions()
+    {
+        var positions = Characters.Select(c => c.transform.position).ToList();
+        positions.Shuffle();
+        for (int i = 0; i < Characters.Count; i++)
+        {
+            var character = Characters[i];
+            character.transform.position = new Vector3(positions[i].x, character.transform.position.y, positions[i].z);
+        }
+
+        Characters = Characters.OrderBy(c => c.transform.position.x).ToList();
+
+        for (int i = 0; i < Characters.Count; i++)
+        {
+            if (i == 0)
+            {
+                Characters[i].LookAtCamera();
+            }
+            else
+            {
+                Characters[i].LookAhead();
             }
         }
     }

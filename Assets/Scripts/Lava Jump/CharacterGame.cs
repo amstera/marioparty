@@ -6,9 +6,12 @@ public class CharacterGame : MonoBehaviour
     public Animator Animator;
     public Rigidbody Rb;
     public bool IsPlayer;
+    public bool CanJump;
     public float JumpForce = 5;
     public List<GameObject> Obstacles;
     public CharacterType Type;
+
+
     public AudioSource VictoryAS;
     public AudioSource HitAS;
 
@@ -25,6 +28,11 @@ public class CharacterGame : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!CanJump)
+        {
+            return;
+        }
+
         if (IsPlayer)
         {
             if (_shouldJump)
@@ -37,7 +45,7 @@ public class CharacterGame : MonoBehaviour
         {
             foreach (GameObject obstacle in Obstacles)
             {
-                if (Vector3.Distance(transform.position, obstacle.transform.position) < Random.Range(1.25f, 2.2f))
+                if (Vector3.Distance(transform.position, obstacle.transform.position) < Random.Range(1.65f, 1.8f))
                 {
                     Jump();
                 }

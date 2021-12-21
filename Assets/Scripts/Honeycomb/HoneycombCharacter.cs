@@ -58,7 +58,7 @@ public class HoneycombCharacter : MonoBehaviour
                 }
 
                 transform.position = new Vector3(_walkPos.x, transform.position.y, transform.position.z);
-                transform.LookAt(new Vector3(transform.position.x - 10, transform.position.y, transform.position.z));
+                LookAhead();
                 
                 Animator.SetInteger("State", Basket.activeSelf ? (int)CharacterState.Holding : (int)CharacterState.Idle);
                 _isWalking = false;
@@ -138,7 +138,7 @@ public class HoneycombCharacter : MonoBehaviour
 
     public void Win()
     {
-        transform.LookAt(new Vector3(transform.position.x, transform.position.y, Camera.main.transform.position.z));
+        LookAtCamera();
         VictoryAS.Play();
         Animator.SetTrigger("Victory");
     }
@@ -170,6 +170,16 @@ public class HoneycombCharacter : MonoBehaviour
         {
             WalkTowards(transform.position + Vector3.left * 1.5f, null);
         }
+    }
+
+    public void LookAhead()
+    {
+        transform.LookAt(new Vector3(transform.position.x - 10, transform.position.y, transform.position.z));
+    }
+
+    public void LookAtCamera()
+    {
+        transform.LookAt(new Vector3(transform.position.x, transform.position.y, Camera.main.transform.position.z));
     }
 
     private void Land()

@@ -408,7 +408,7 @@ public class GameController : MonoBehaviour
     {
         if (Turn == -1)
         {
-            Dialog.ShowText($"{Characters[CharIndex].Type} goes first!", AddCoinsText);
+            Dialog.ShowText($"{Characters[CharIndex].Type} goes first! Then {Characters[CharIndex +1].Type}, {Characters[CharIndex + 2].Type}, and finally {Characters[CharIndex + 3].Type}!", AddCoinsText);
             return;
         }
 
@@ -421,7 +421,7 @@ public class GameController : MonoBehaviour
 
         if (CharIndex == 0)
         {
-            TurnText.DisplayTurn(Turn + 1);
+            TurnText.DisplayTurn(Turn + 1, MaxTurns);
             CurrentTurnText.Display(Turn + 1, MaxTurns);
             if ((Turn + 1) == MaxTurns - 5)
             {

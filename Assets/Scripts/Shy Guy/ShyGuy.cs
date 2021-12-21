@@ -45,7 +45,7 @@ public class ShyGuy : MonoBehaviour
     {
         yield return new WaitForSeconds(Mathf.Min(0.5f, WaitForSeconds/2));
 
-        ShowingTwoFlags = false;
+        Invoke("ShowingTwoFlagsFalse", 0.25f);
         if (Flag == FlagType.A)
         {
             FlagB.SetActive(false);
@@ -54,6 +54,11 @@ public class ShyGuy : MonoBehaviour
         {
             FlagA.SetActive(false);
         }
+    }
+
+    private void ShowingTwoFlagsFalse()
+    {
+        ShowingTwoFlags = false;
     }
 }
 
