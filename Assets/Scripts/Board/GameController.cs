@@ -607,7 +607,7 @@ public class GameController : MonoBehaviour
         var currentSpace = Spaces[character.Position].Type;
         if ((currentSpace == CircleType.Positive || currentSpace == CircleType.Negative) && !character.HiddenBlockHit && Turn > 1 && Random.Range(0, 35) == 1)
         {
-            var hiddenBlock = Instantiate(HiddenBlock, Characters[CharIndex].transform.position + Vector3.up * 2.5f, Quaternion.identity);
+            var hiddenBlock = Instantiate(HiddenBlock, Characters[CharIndex].transform.position + Vector3.up * 2f, Quaternion.identity);
             hiddenBlock.GameController = this;
             Dialog.ShowText($"{character.Type} found a hidden block!", CharacterJumpSpecial);
             character.HiddenBlockHit = true;
