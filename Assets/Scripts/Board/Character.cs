@@ -203,8 +203,9 @@ public class Character : MonoBehaviour
         {
             _spacesText.Show(Destinations.Count.ToString());
         }
-        if (Vector3.Distance(transform.position, pos) < 0.2f)
+        if (Vector3.Distance(transform.position, pos) < Speed * Time.deltaTime)
         {
+            transform.position = pos;
             Destinations.Dequeue();
             if (Destinations.Count == 0 || space.Type == CircleType.Star || space.Type == CircleType.Boo || space.Type == CircleType.Item)
             {

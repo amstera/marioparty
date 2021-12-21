@@ -13875,14 +13875,19 @@ MonoBehaviour:
   Rb: {fileID: 9096405973804898104}
   IsPlayer: 0
   CanJump: 0
+  IgnoreLanding: 0
+  HiddenBlockHit: 0
   JumpForce: 5
   Speed: 5
   Roll: 0
   Position: 0
   Coins: 0
   Stars: 0
+  MiniGamesWon: 0
+  SpacesWalked: 0
   Type: 3
   Items: 
+  UsedItem: 0
   AmountDisplay: {fileID: 6688809133580537226}
   Step: {fileID: 1360928639978770157}
   CoinSound: {fileID: 7612217033641474756}
@@ -13892,6 +13897,7 @@ MonoBehaviour:
   CharacterSounds:
   - {fileID: 8300000, guid: 84f21ea7b9e9245cb901a798e4bd1708, type: 3}
   - {fileID: 8300000, guid: 9a1c3785b784c47a39212d721f2ac7a2, type: 3}
+  _spacesText: {fileID: 0}
 --- !u!65 &1177517581424825035
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14317,7 +14323,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: faad337977cb144fb9d6bd9a0b277418, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 0
   Mute: 0

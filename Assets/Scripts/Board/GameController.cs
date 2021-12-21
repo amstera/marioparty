@@ -37,6 +37,7 @@ public class GameController : MonoBehaviour
     public QuitPanel QuitPanel;
     public ReverseTurn ReverseTurn;
     public HiddenBlock HiddenBlock;
+    public MiniGamePanel MiniGamePanel;
 
     public AudioSource EnterMiniGameSound;
     public AudioSource MusicAS;
@@ -604,7 +605,7 @@ public class GameController : MonoBehaviour
     {
         var character = Characters[CharIndex];
         var currentSpace = Spaces[character.Position].Type;
-        if ((currentSpace == CircleType.Positive || currentSpace == CircleType.Negative) && !character.HiddenBlockHit && Random.Range(0, 50) == 1)
+        if ((currentSpace == CircleType.Positive || currentSpace == CircleType.Negative) && !character.HiddenBlockHit && Turn > 1 && Random.Range(0, 35) == 1)
         {
             var hiddenBlock = Instantiate(HiddenBlock, Characters[CharIndex].transform.position + Vector3.up * 2.5f, Quaternion.identity);
             hiddenBlock.GameController = this;
@@ -756,7 +757,9 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         stealCharacter.ChangeStars(-1);
-        Dialog.ShowText($"You stole a star from {stealCharacter.Type}!", AddStar);
+        
+        Character character = GetCurrentCharacter();
+        Dialog.ShowText($"{character.Type} stole a star from {stealCharacter.Type}!", AddStar);
     }
 
     private IEnumerator AddStolenCoins(Character stealCharacter)
@@ -769,7 +772,7 @@ public class GameController : MonoBehaviour
         Character character = GetCurrentCharacter();
         character.ChangeCoins(coinsToSteal, false);
 
-        Dialog.ShowText($"You stole {coinsToSteal} coin{(coinsToSteal == 1 ? "" : "s")} from {stealCharacter.Type}!", ContinueTurn);
+        Dialog.ShowText($"{character.Type} stole {coinsToSteal} coin{(coinsToSteal == 1 ? "" : "s")} from {stealCharacter.Type}!", ContinueTurn);
     }
 
     private void ContinueTurn()
@@ -811,10 +814,7 @@ public class GameController : MonoBehaviour
 
     private void LoadMiniGame()
     {
-        EnterMiniGameSound.Play();
-        FadePanel.FadeOut();
-
-        List<string> miniGames = new List<string> { "Lava Jump", "Bumper Ball", "Shy Guy", "Air Hockey", "Honeycomb Havoc" };
+        List<string> miniGames = MiniGamePanel.MiniGames.Select(m => m.MiniGameSceneName).ToList();
         int index;
         if (MiniGameFrequency.All(m => m == MiniGameFrequency[0])) //all values are equal
         {
@@ -840,8 +840,17 @@ public class GameController : MonoBehaviour
         MiniGameFrequency[index]++;
         ChosenMiniGame = miniGames[index];
 
-        Invoke("LoadChosenMiniGame", 1.5f);
         SaveController.Save(Characters, Spaces, Turn, MaxTurns, IsBoardReversed, MiniGameFrequency);
+
+        MiniGamePanel.Show(index, LoadMiniGameSelection);
+    }
+
+    private void LoadMiniGameSelection()
+    {
+        EnterMiniGameSound.Play();
+        FadePanel.FadeOut();
+
+        Invoke("LoadChosenMiniGame", 1.5f);
     }
 
     private void LoadEndGame()

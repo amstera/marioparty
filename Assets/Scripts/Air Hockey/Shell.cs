@@ -9,11 +9,29 @@ public class Shell : MonoBehaviour
 
     private AirHockeyController _airHockeyController;
     private bool _hasHitGround;
+    private float _timeFrozen;
 
     void Start()
     {
         _airHockeyController = FindObjectOfType<AirHockeyController>();
         Invoke("AddStartingForce", 0.5f);
+    }
+
+    void FixedUpdate()
+    {
+        if (Rb.velocity.magnitude < 0.5f)
+        {
+            _timeFrozen += Time.fixedDeltaTime;
+            if (_timeFrozen > 5)
+            {
+                AddStartingForce();
+                _timeFrozen = 0;
+            }
+        }
+        else
+        {
+            _timeFrozen = 0;
+        }
     }
 
     void OnCollisionEnter(Collision collision)

@@ -313,6 +313,7 @@ MonoBehaviour:
   - {fileID: 960209343}
   CharacterStats: {fileID: 0}
   TurnText: {fileID: 0}
+  ReverseTurn: {fileID: 0}
   Cam: {fileID: 210880706}
   CoinSound: {fileID: 0}
 --- !u!114 &86425558
@@ -1639,7 +1640,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 659773c76d2a941a3bf2dfc121a34e37, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 0
   Mute: 0

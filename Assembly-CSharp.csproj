@@ -126,6 +126,7 @@
     <Compile Include="Assets/Scripts/Board/Misc/Cloud.cs" />
     <Compile Include="Assets/Scripts/Board/Circle.cs" />
     <Compile Include="Assets/Scripts/Other/Rankings.cs" />
+    <Compile Include="Assets/Scripts/Board/HiddenBlock.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/Vortex.cs" />
     <Compile Include="Assets/Scripts/Board/Misc/Fish.cs" />
     <Compile Include="Assets/Scripts/Board/Misc/Coin.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Assets/Scripts/Board/CurrentTurnText.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/TiltShift.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/Fisheye.cs" />
+    <Compile Include="Assets/Scripts/Board/ReverseTurn.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/MotionBlur.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/CreaseShading.cs" />
     <Compile Include="Assets/Scripts/Shy Guy/ShyGuyController.cs" />
@@ -149,8 +151,8 @@
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/ColorCorrectionRamp.cs" />
     <Compile Include="Assets/Scripts/Board/Items/ItemSelection.cs" />
     <Compile Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Scripts/Triangles.cs" />
-    <Compile Include="Assets/Scripts/Board/HiddenBlock.cs" />
-    <Compile Include="Assets/Scripts/Board/ReverseTurn.cs" />
+    <Compile Include="Assets/Scripts/Board/MiniGamePanel.cs" />
+    <Compile Include="Assets/Scripts/Board/MiniGameOption.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets/NatureStarterKit2/Standard Assets/Effects/ImageEffects/Shaders/Tonemapper.shader" />
