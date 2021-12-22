@@ -11,7 +11,7 @@ public class Fish : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.tag == "Terrain")
+        if (collision.collider.tag == "Terrain" && Time.timeSinceLevelLoad > 1)
         {
             FlipDirection();
         }

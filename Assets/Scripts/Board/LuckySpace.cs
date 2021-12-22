@@ -76,30 +76,30 @@ public class LuckySpace : MonoBehaviour
         {
             case LuckySpaceOptionType.Coins5:
                 _character.ChangeCoins(5, false);
-                _dialog.ShowText($"{_character.Type} got 5 coins!", _callback);
+                _dialog.ShowText($"{_character.Type} got 5 coins!", !_character.IsPlayer, _callback);
                 break;
             case LuckySpaceOptionType.Coins10:
                 _character.ChangeCoins(10, false);
-                _dialog.ShowText($"{_character.Type} got 10 coins!", _callback);
+                _dialog.ShowText($"{_character.Type} got 10 coins!", !_character.IsPlayer, _callback);
                 break;
             case LuckySpaceOptionType.Coins15:
                 _character.ChangeCoins(15, false);
-                _dialog.ShowText($"{_character.Type} got 15 coins!", _callback);
+                _dialog.ShowText($"{_character.Type} got 15 coins!", !_character.IsPlayer, _callback);
                 break;
             case LuckySpaceOptionType.Mushroom:
                 itemSelection = _itemSelections.Find(i => i.Type == ItemType.Mushroom);
                 _character.AddItem(itemSelection);
-                _dialog.ShowText($"{_character.Type} got a Mushroom!", _callback);
+                _dialog.ShowText($"{_character.Type} got a Mushroom!", !_character.IsPlayer, _callback);
                 break;
             case LuckySpaceOptionType.DoubleDice:
                 itemSelection = _itemSelections.Find(i => i.Type == ItemType.DoubleDice);
                 _character.AddItem(itemSelection);
-                _dialog.ShowText($"{_character.Type} got a Double Dice!", _callback);
+                _dialog.ShowText($"{_character.Type} got a Double Dice!", !_character.IsPlayer, _callback);
                 break;
             case LuckySpaceOptionType.GoldenPipe:
                 itemSelection = _itemSelections.Find(i => i.Type == ItemType.GoldenPipe);
                 _character.AddItem(itemSelection);
-                _dialog.ShowText($"{_character.Type} got a Golden Pipe!", _callback);
+                _dialog.ShowText($"{_character.Type} got a Golden Pipe!", !_character.IsPlayer, _callback);
                 break;
         }
 

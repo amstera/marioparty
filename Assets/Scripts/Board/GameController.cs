@@ -94,7 +94,7 @@ public class GameController : MonoBehaviour
             if (character.UsedItem == ItemType.DoubleDice)
             {
                 character.UsedItem = ItemType.None;
-                Dialog.ShowText($"{character.Type} rolls again with Double Dice", SetUpDoubleDice);
+                Dialog.ShowText($"{character.Type} rolls again with Double Dice", !character.IsPlayer, SetUpDoubleDice);
             }
             else
             {
@@ -196,7 +196,7 @@ public class GameController : MonoBehaviour
             {
                 if (Turn == MaxTurns - 1)
                 {
-                    Dialog.ShowText("You can't buy an item on the last turn", ContinueTurn);
+                    Dialog.ShowText("You can't buy an item on the last turn", !character.IsPlayer, ContinueTurn);
                 }
                 else
                 {
@@ -272,7 +272,7 @@ public class GameController : MonoBehaviour
 
         var itemType = character.UsedItem;
         var matchingItem = ItemsPanel.ItemSelections.Find(i => i.Type == itemType);
-        Dialog.ShowText($"{character.Type} used a {matchingItem.ItemNameText.text}!", CallItem);
+        Dialog.ShowText($"{character.Type} used a {matchingItem.ItemNameText.text}!", !character.IsPlayer, CallItem);
     }
 
     public void AddStar()
@@ -309,7 +309,7 @@ public class GameController : MonoBehaviour
         {
             character.UsedItem = ItemType.None;
             character.Items.Add(ItemType.WarpBlock);
-            Dialog.ShowText($"There's no one to warp with! The item wasn't used", SetUpDice);
+            Dialog.ShowText($"There's no one to warp with! The item wasn't used", !character.IsPlayer, SetUpDice);
             return;
         }
 
@@ -341,7 +341,7 @@ public class GameController : MonoBehaviour
         character.PlayHappySound();
         randomCharacter.PlaySadSound();
 
-        Dialog.ShowText($"{character.Type} and {randomCharacter.Type} swapped places!", SetUpDice);
+        Dialog.ShowText($"{character.Type} and {randomCharacter.Type} swapped places!", !character.IsPlayer && !randomCharacter.IsPlayer, SetUpDice);
     }
 
     private void UseGoldenPipe(Character character)
@@ -390,7 +390,7 @@ public class GameController : MonoBehaviour
         Character character = Characters[CharIndex];
         if (Characters[CharIndex].IsPlayer)
         {
-            Dialog.ShowText("Press space to hit the dice block", CharacterJump);
+            Dialog.ShowText("Press space to hit the dice block", false, CharacterJump);
         }
         else
         {
@@ -408,7 +408,7 @@ public class GameController : MonoBehaviour
     {
         if (Turn == -1)
         {
-            Dialog.ShowText($"{Characters[CharIndex].Type} goes first! Then {Characters[CharIndex +1].Type}, {Characters[CharIndex + 2].Type}, and finally {Characters[CharIndex + 3].Type}!", AddCoinsText);
+            Dialog.ShowText($"{Characters[CharIndex].Type} goes first! Then {Characters[CharIndex +1].Type}, {Characters[CharIndex + 2].Type}, and finally {Characters[CharIndex + 3].Type}!", false, AddCoinsText);
             return;
         }
 
@@ -425,7 +425,7 @@ public class GameController : MonoBehaviour
             CurrentTurnText.Display(Turn + 1, MaxTurns);
             if ((Turn + 1) == MaxTurns - 5)
             {
-                Dialog.ShowText($"Only 5 turns left! Spaces are worth double!", ShowCharacterStart);
+                Dialog.ShowText($"Only 5 turns left! Spaces are worth double!", false, ShowCharacterStart);
                 return;
             }
         }
@@ -467,7 +467,7 @@ public class GameController : MonoBehaviour
             Character character = GetCurrentCharacter();
             if (character.Items.Count == 0)
             {
-                Dialog.ShowText("You don't have any items to use", SetUpDice);
+                Dialog.ShowText("You don't have any items to use", !character.IsPlayer, SetUpDice);
                 return;
             }
 
@@ -584,7 +584,7 @@ public class GameController : MonoBehaviour
 
     private void AddCoinsText()
     {
-        Dialog.ShowText("Each player starts with 5 coins", AddStartingCoins);
+        Dialog.ShowText("Each player starts with 5 coins", false, AddStartingCoins);
     }
 
     private void AddStartingCoins()
@@ -605,11 +605,11 @@ public class GameController : MonoBehaviour
     {
         var character = Characters[CharIndex];
         var currentSpace = Spaces[character.Position].Type;
-        if ((currentSpace == CircleType.Positive || currentSpace == CircleType.Negative) && !character.HiddenBlockHit && Turn > 1 && Random.Range(0, 35) == 1)
+        if ((currentSpace == CircleType.Positive || currentSpace == CircleType.Negative) && !character.HiddenBlockHit && Turn > 1 && Characters.Count(c => c.Position == character.Position) == 1 && Random.Range(0, 35) == 1)
         {
             var hiddenBlock = Instantiate(HiddenBlock, Characters[CharIndex].transform.position + Vector3.up * 2f, Quaternion.identity);
             hiddenBlock.GameController = this;
-            Dialog.ShowText($"{character.Type} found a hidden block!", CharacterJumpSpecial);
+            Dialog.ShowText($"{character.Type} found a hidden block!", !character.IsPlayer, CharacterJumpSpecial);
             character.HiddenBlockHit = true;
         }
         else
@@ -652,7 +652,7 @@ public class GameController : MonoBehaviour
         {
             if (character.Coins < 20)
             {
-                Dialog.ShowText("You don't have enough coins to get this star!", ContinueTurn);
+                Dialog.ShowText("You don't have enough coins to get this star!", !character.IsPlayer, ContinueTurn);
             }
             else
             {
@@ -675,7 +675,7 @@ public class GameController : MonoBehaviour
             Character stealCharacter = Characters.FindAll(c => c != character).OrderByDescending(c => c.Coins).FirstOrDefault();
             if (stealCharacter.Coins == 0)
             {
-                Dialog.ShowText("There's nobody to steal coins from!", ContinueTurn);
+                Dialog.ShowText("There's nobody to steal coins from!", !character.IsPlayer, ContinueTurn);
             }
             else
             {
@@ -686,14 +686,14 @@ public class GameController : MonoBehaviour
         {
             if (character.Coins < 35)
             {
-                Dialog.ShowText("You don't have enough coins to steal a star! I'll steal coins instead!", StealCoins);
+                Dialog.ShowText("You don't have enough coins to steal a star! I'll steal coins instead!", !character.IsPlayer, StealCoins);
             }
             else
             {
                 Character stealCharacter = Characters.FindAll(c => c.Stars > 0 && c != character).OrderByDescending(c => c.Stars).FirstOrDefault();
                 if (stealCharacter == null)
                 {
-                    Dialog.ShowText("There's nobody to steal a star from! I'll steal coins instead!", StealCoins);
+                    Dialog.ShowText("There's nobody to steal a star from! I'll steal coins instead!", !character.IsPlayer, StealCoins);
                 }
                 else
                 {
@@ -719,7 +719,7 @@ public class GameController : MonoBehaviour
             {
                 if (character.Items.Count >= 3)
                 {
-                    Dialog.ShowText("You can only have 3 items at a time!", ContinueTurn);
+                    Dialog.ShowText("You can only have 3 items at a time!", !character.IsPlayer, ContinueTurn);
                 }
                 else
                 {
@@ -743,7 +743,7 @@ public class GameController : MonoBehaviour
                 character.ChangeCoins(-selectedItem.Cost, true);
                 character.AddItem(selectedItem);
 
-                FindObjectOfType<Dialog>().ShowText($"{character.Type} got a {selectedItem.ItemNameText.text}!", ReloadStatsAndContinueTurn);
+                FindObjectOfType<Dialog>().ShowText($"{character.Type} got a {selectedItem.ItemNameText.text}!", !character.IsPlayer, ReloadStatsAndContinueTurn);
             }
         }
         else
@@ -759,7 +759,7 @@ public class GameController : MonoBehaviour
         stealCharacter.ChangeStars(-1);
         
         Character character = GetCurrentCharacter();
-        Dialog.ShowText($"{character.Type} stole a star from {stealCharacter.Type}!", AddStar);
+        Dialog.ShowText($"{character.Type} stole a star from {stealCharacter.Type}!", !character.IsPlayer && !stealCharacter.IsPlayer, AddStar);
     }
 
     private IEnumerator AddStolenCoins(Character stealCharacter)
@@ -772,7 +772,7 @@ public class GameController : MonoBehaviour
         Character character = GetCurrentCharacter();
         character.ChangeCoins(coinsToSteal, false);
 
-        Dialog.ShowText($"{character.Type} stole {coinsToSteal} coin{(coinsToSteal == 1 ? "" : "s")} from {stealCharacter.Type}!", ContinueTurn);
+        Dialog.ShowText($"{character.Type} stole {coinsToSteal} coin{(coinsToSteal == 1 ? "" : "s")} from {stealCharacter.Type}!", !character.IsPlayer && !stealCharacter.IsPlayer, ContinueTurn);
     }
 
     private void ContinueTurn()
@@ -865,7 +865,7 @@ public class GameController : MonoBehaviour
 
     private void ShowOpeningText()
     {
-        Dialog.ShowText("Welcome! Get the most stars and coins to win!", ChooseCharacter);
+        Dialog.ShowText("Welcome! Get the most stars and coins to win!", false, ChooseCharacter);
     }
 
     private void ReverseBoard()

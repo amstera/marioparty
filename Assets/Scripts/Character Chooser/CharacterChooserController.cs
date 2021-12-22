@@ -47,9 +47,11 @@ public class CharacterChooserController : MonoBehaviour
             _charIndex--;
             SetActiveChar();
             RightTriangle.enabled = true;
+            RightTriangle.GetComponentInChildren<MeshRenderer>().enabled = true;
             if (_charIndex == 0)
             {
                 LeftTriangle.enabled = false;
+                LeftTriangle.GetComponentInChildren<MeshRenderer>().enabled = false;
             }
         }
         else if (Input.GetKeyDown(KeyCode.D) && _charIndex < 3)
@@ -58,9 +60,11 @@ public class CharacterChooserController : MonoBehaviour
             _charIndex++;
             SetActiveChar();
             LeftTriangle.enabled = true;
+            LeftTriangle.GetComponentInChildren<MeshRenderer>().enabled = true;
             if (_charIndex == 3)
             {
                 RightTriangle.enabled = false;
+                RightTriangle.GetComponentInChildren<MeshRenderer>().enabled = false;
             }
         }
 

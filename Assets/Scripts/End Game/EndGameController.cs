@@ -33,7 +33,7 @@ public class EndGameController : MonoBehaviour
     {
         _saveData = SaveController.Load();
         ToadetteAS.Play();
-        Dialog.ShowText("Game's over! Time for the bonus stars!", StartBonusStars);
+        Dialog.ShowText("Game's over! Time for the bonus stars!", false, StartBonusStars);
     }
 
     void Update()
@@ -52,7 +52,7 @@ public class EndGameController : MonoBehaviour
         Star2.SetActive(false);
 
         EndAS.Play();
-        Dialog.ShowText("The bonus star for most mini games won goes to...", GiveMiniGameBonusStar);
+        Dialog.ShowText("The bonus star for most mini games won goes to...", false, GiveMiniGameBonusStar);
     }
 
     private void GiveMiniGameBonusStar()
@@ -79,7 +79,7 @@ public class EndGameController : MonoBehaviour
         Fireworks.Play();
         Winner.Win();
 
-        Dialog.ShowText(dialog, callback);
+        Dialog.ShowText(dialog, false, callback);
     }
 
     private void PresentSecondBonusStar()
@@ -92,7 +92,7 @@ public class EndGameController : MonoBehaviour
         Star.SetActive(false);
         Toadette.SetActive(true);
 
-        Dialog.ShowText("The bonus star for most spaces walked goes to...", GiveSpacesWalkedBonusStar);
+        Dialog.ShowText("The bonus star for most spaces walked goes to...", false, GiveSpacesWalkedBonusStar);
     }
 
     private void GiveSpacesWalkedBonusStar()
@@ -115,7 +115,7 @@ public class EndGameController : MonoBehaviour
         Star.SetActive(false);
         Toadette.SetActive(true);
 
-        Dialog.ShowText("And the winner of Mario Party is...", RevealWinner);
+        Dialog.ShowText("And the winner of Mario Party is...", false, RevealWinner);
     }
 
     private void RevealWinner()

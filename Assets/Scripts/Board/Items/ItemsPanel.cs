@@ -75,7 +75,7 @@ public class ItemsPanel : MonoBehaviour
             _currentCharacter.ChangeCoins(-selectedItem.Cost, true);
             _currentCharacter.AddItem(selectedItem);
 
-            FindObjectOfType<Dialog>().ShowText($"{_currentCharacter.Type} got a {selectedItem.ItemNameText.text}!", _callback);
+            FindObjectOfType<Dialog>().ShowText($"{_currentCharacter.Type} got a {selectedItem.ItemNameText.text}!", !_currentCharacter.IsPlayer, _callback);
 
             gameObject.SetActive(false);
         }

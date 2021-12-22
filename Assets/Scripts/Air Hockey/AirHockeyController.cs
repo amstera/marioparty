@@ -154,7 +154,7 @@ public class AirHockeyController : MonoBehaviour
         for (int i = 0; i < Characters.Count; i++)
         {
             var character = Characters[i];
-            var flipDiff = FlippedCharacters[i].transform.position - Characters[i].transform.position;
+            var flipDiff = FlippedCharacters[i].transform.position - Characters[i].transform.position; //hacky
             character.transform.position = new Vector3(positions[i].x, character.transform.position.y, character.transform.position.z);
             var boardRenderer = character.transform.Find("Block").GetComponent<Renderer>();
             var mats = boardRenderer.materials;

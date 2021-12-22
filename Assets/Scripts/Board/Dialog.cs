@@ -12,10 +12,12 @@ public class Dialog : MonoBehaviour
     public AudioSource SelectAS;
 
     private Action _callback;
+    private bool _cpuApprove;
+    private float _timeTextShown;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && DialogText.text == _textToShow && _isShowingText)
+        if ((_cpuApprove ? Time.time - _timeTextShown > 0.5f : Input.GetKeyDown(KeyCode.Space)) && DialogText.text == _textToShow && _isShowingText)
         {
             SelectAS.Play();
             DialogText.text = string.Empty;
@@ -27,7 +29,7 @@ public class Dialog : MonoBehaviour
         }
     }
 
-    public void ShowText(string text, Action callback = null)
+    public void ShowText(string text, bool cpuApprove, Action callback = null)
     {
         if (_isShowingText)
         {
@@ -37,6 +39,7 @@ public class Dialog : MonoBehaviour
         _callback = callback;
         _isShowingText = true;
         _textToShow = text += " ▼";
+        _cpuApprove = cpuApprove;
         StartCoroutine(WriteOutText());
     }
 
@@ -49,6 +52,10 @@ public class Dialog : MonoBehaviour
                 yield return null;
             }
             DialogText.text += c;
+            if (DialogText.text == _textToShow)
+            {
+                _timeTextShown = Time.time;
+            }
             yield return new WaitForEndOfFrame();
         }
     }

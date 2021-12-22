@@ -21,7 +21,7 @@ public class QuitPanel : MonoBehaviour
             Cancel.transform.position = Quit.transform.position + Vector3.down * 25;
             Quit.transform.position = QuitSave.transform.position + Vector3.down * 25;
 
-            QuitText.text = "Yes (Y)";
+            QuitText.text = "Yes (Q)";
         }
     }
     void Update()
@@ -31,7 +31,7 @@ public class QuitPanel : MonoBehaviour
             FindObjectOfType<CameraMove>().Blur.enabled = false;
             gameObject.SetActive(false);
         }
-        else if (Input.GetKeyDown(KeyCode.Y))
+        else if (Input.GetKeyDown(KeyCode.Q))
         {
             if (_isMainPage)
             {
@@ -43,7 +43,7 @@ public class QuitPanel : MonoBehaviour
                 SceneManager.LoadSceneAsync("Character Chooser");
             }
         }
-        else if (Input.GetKeyDown(KeyCode.S))
+        else if (Input.GetKeyDown(KeyCode.Y))
         {
             Application.Quit();
         }
