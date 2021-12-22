@@ -55,6 +55,7 @@ public class Dialog : MonoBehaviour
             if (DialogText.text == _textToShow)
             {
                 _timeTextShown = Time.time;
+                yield return null;
             }
             yield return new WaitForEndOfFrame();
         }

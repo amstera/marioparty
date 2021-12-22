@@ -19,6 +19,6 @@ public class Fish : MonoBehaviour
 
     private void FlipDirection()
     {
-        transform.Rotate(0, 180, 0, Space.Self);
+        transform.Rotate(0, 90, 0, Space.Self);
     }
 }

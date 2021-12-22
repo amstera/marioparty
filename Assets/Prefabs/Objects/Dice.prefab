@@ -123,6 +123,7 @@ MonoBehaviour:
   Text: {fileID: 7178945240060381930}
   Sides: {fileID: 5770723001286513852}
   Character: {fileID: 0}
+  GameController: {fileID: 0}
   DiceHit: {fileID: 5162429720285454982}
   DiceRoll: {fileID: 4945361192809394606}
 --- !u!82 &5162429720285454982
@@ -917,6 +918,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roll Text
       objectReference: {fileID: 0}
+    - target: {fileID: 3750464669817516065, guid: b929140f1fae347528498a376da40ae1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 5151310886597981584, guid: d6b9ba0086b8c4620ad2bcf3a9b9d702, type: 2}
+    - target: {fileID: 5223935723264934821, guid: b929140f1fae347528498a376da40ae1, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: d6b9ba0086b8c4620ad2bcf3a9b9d702, type: 2}
+    - target: {fileID: 5223935723264934821, guid: b929140f1fae347528498a376da40ae1, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 5151310886597981584, guid: d6b9ba0086b8c4620ad2bcf3a9b9d702, type: 2}
     - target: {fileID: 8496579536006572212, guid: b929140f1fae347528498a376da40ae1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
