@@ -12,6 +12,7 @@ public class ShyGuyController : MonoBehaviour
     public FadePanel FadePanel;
     public CharacterType Winner;
     public FlagType FlagType;
+    public GameObject StartText;
 
     public AudioSource MiniGameAS;
     public AudioSource MusicAS;
@@ -22,13 +23,12 @@ public class ShyGuyController : MonoBehaviour
     private bool _isDraw;
     private float _timeSinceFlagShown;
     private float _timeBetweenTurns = 3f;
+    private bool _gameStarted;
 
     void Start()
     {
         _saveData = SaveController.Load();
         SetMainPlayer();
-        Text.Show("Ready...", 1.5f);
-        Invoke("ShowGoText", 1.5f);
 
         foreach (FlagCharacter character in Characters)
         {
@@ -38,6 +38,14 @@ public class ShyGuyController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space) && !_gameStarted)
+        {
+            _gameStarted = true;
+            StartText.SetActive(false);
+            Text.Show("Ready...", 1.5f);
+            Invoke("ShowGoText", 1.5f);
+        }
+
         if (FlagType != FlagType.None && (Time.time - _timeSinceFlagShown > _timeBetweenTurns || Characters.All(c => c.Flag != FlagType.None)))
         {
             bool eliminatedCharacter = false;

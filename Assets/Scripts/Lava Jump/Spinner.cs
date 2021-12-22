@@ -3,18 +3,12 @@ using UnityEngine;
 public class Spinner : MonoBehaviour
 {
     public float Speed = 5;
+    public bool CanSpin;
     public AudioSource SpinAS;
-
-    private bool _canStart;
-
-    void Start()
-    {
-        Invoke("StartSpinning", 2f);
-    }
 
     void Update()
     {
-        if (!_canStart)
+        if (!CanSpin)
         {
             return;
         }
@@ -29,11 +23,6 @@ public class Spinner : MonoBehaviour
 
     public void Stop()
     {
-        _canStart = false;
-    }
-
-    private void StartSpinning()
-    {
-        _canStart = true;
+        CanSpin = false;
     }
 }

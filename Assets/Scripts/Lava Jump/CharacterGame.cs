@@ -11,7 +11,6 @@ public class CharacterGame : MonoBehaviour
     public List<GameObject> Obstacles;
     public CharacterType Type;
 
-
     public AudioSource VictoryAS;
     public AudioSource HitAS;
 
@@ -20,7 +19,7 @@ public class CharacterGame : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (CanJump && Input.GetKeyDown(KeyCode.Space))
         {
             _shouldJump = true;
         }

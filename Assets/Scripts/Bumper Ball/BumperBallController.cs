@@ -9,6 +9,7 @@ public class BumperBallController : MonoBehaviour
     public SpecialText Text;
     public ParticleSystem Fireworks;
     public FadePanel FadePanel;
+    public GameObject StartText;
     public CharacterType Winner;
 
     public AudioSource MiniGameAS;
@@ -18,6 +19,7 @@ public class BumperBallController : MonoBehaviour
 
     private SaveData _saveData;
     private bool _isDraw;
+    private bool _gameStarted;
 
     void Awake()
     {
@@ -28,12 +30,18 @@ public class BumperBallController : MonoBehaviour
     {
         _saveData = SaveController.Load();
         SetMainPlayer();
-        Text.Show("Ready...", 1.5f);
-        Invoke("ShowGoText", 1.5f);
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space) && !_gameStarted)
+        {
+            _gameStarted = true;
+            StartText.SetActive(false);
+            Text.Show("Ready...", 1.5f);
+            Invoke("ShowGoText", 1.5f);
+        }
+
         if (Characters.Count(c => c != null) == 1 && Winner == CharacterType.Unknown && !_isDraw)
         {
             CharacterFollow winningCharacter = Characters.Find(c => c != null);
@@ -46,7 +54,7 @@ public class BumperBallController : MonoBehaviour
             Fireworks.Play();
             Invoke("FadeOut", 2);
         }
-        else if (Time.timeSinceLevelLoad >= 30 && Winner == CharacterType.Unknown && !_isDraw)
+        else if ((Characters.Count(c => c != null) == 0 || Time.timeSinceLevelLoad >= 30) && Winner == CharacterType.Unknown && !_isDraw)
         {
             _isDraw = true;
             foreach (var character in Characters)

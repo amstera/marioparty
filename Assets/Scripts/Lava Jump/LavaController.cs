@@ -11,6 +11,7 @@ public class LavaController : MonoBehaviour
     public ParticleSystem Fireworks;
     public FadePanel FadePanel;
     public CharacterType Winner;
+    public GameObject StartText;
 
     public AudioSource MiniGameAS;
     public AudioSource MusicAS;
@@ -18,6 +19,7 @@ public class LavaController : MonoBehaviour
     public List<AudioClip> MiniGameSounds;
 
     private SaveData _saveData;
+    private bool _gameStarted;
 
     void Awake()
     {
@@ -28,12 +30,18 @@ public class LavaController : MonoBehaviour
     {
         _saveData = SaveController.Load();
         SetMainPlayer();
-        Text.Show("Ready...", 1.5f);
-        Invoke("ShowGoText", 1.5f);
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space) && !_gameStarted)
+        {
+            _gameStarted = true;
+            StartText.SetActive(false);
+            Text.Show("Ready...", 1.5f);
+            Invoke("ShowGoText", 1.5f);
+        }
+
         if (Characters.Count(c => c != null) == 1 && Winner == CharacterType.Unknown)
         {
             CharacterGame winningCharacter = Characters.Find(c => c != null);
@@ -62,6 +70,7 @@ public class LavaController : MonoBehaviour
         MiniGameAS.Play();
         Text.Show("Go!", 0.5f);
         Characters.ForEach(c => c.CanJump = true);
+        Spinner.CanSpin = true;
     }
 
     private void FadeOut()

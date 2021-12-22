@@ -11,6 +11,7 @@ public class HoneycombController : MonoBehaviour
     public ParticleSystem Fireworks;
     public FadePanel FadePanel;
     public CharacterType Winner;
+    public GameObject StartText;
 
     public GameObject FruitsParent;
     public YellowDice YellowDice;
@@ -27,6 +28,7 @@ public class HoneycombController : MonoBehaviour
     private SaveData _saveData;
     private int _charIndex;
     private int _fruitAmount;
+    private bool _gameStarted;
 
     void Awake()
     {
@@ -38,8 +40,17 @@ public class HoneycombController : MonoBehaviour
         _saveData = SaveController.Load();
         SetMainPlayer();
         LoadFruit();
-        Text.Show("Ready...", 1.5f);
-        Invoke("ShowGoText", 1.5f);
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && !_gameStarted)
+        {
+            _gameStarted = true;
+            StartText.SetActive(false);
+            Text.Show("Ready...", 1.5f);
+            Invoke("ShowGoText", 1.5f);
+        }
     }
 
     public void MoveFruit()

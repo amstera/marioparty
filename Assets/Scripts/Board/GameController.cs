@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour
     public int MaxTurns = 10;
     public string LastMiniGame;
     public string ChosenMiniGame;
-    public int[] MiniGameFrequency = new int[5];
+    public int[] MiniGameFrequency;
     public bool IsBoardReversed;
     public CameraMove Cam;
 
@@ -55,6 +55,7 @@ public class GameController : MonoBehaviour
         var saveData = SaveController.Load();
         if (saveData == null || saveData.Turn == 0)
         {
+            MiniGameFrequency = new int[MiniGamePanel.MiniGames.Count];
             if (saveData != null)
             {
                 foreach (Character character in Characters)
@@ -487,6 +488,11 @@ public class GameController : MonoBehaviour
             return false;
         }
 
+        if (character.Items.All(i => i == ItemType.GoldenPipe) && DistanceToStar(character) < 6 && Turn < MaxTurns - 2)
+        {
+            return false;
+        }
+
         if (character.Items.All(i => i == ItemType.WarpBlock) && DistanceToStar(character) < 6)
         {
             return false;
@@ -497,7 +503,7 @@ public class GameController : MonoBehaviour
             return true;
         }
 
-        return Random.Range(0, 3) == 1;
+        return Random.Range(0, character.Coins < 20 ? 4 : 2) == 1;
     }
 
     private int DistanceToStar(Character character)

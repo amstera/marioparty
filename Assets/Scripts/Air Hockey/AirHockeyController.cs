@@ -10,6 +10,7 @@ public class AirHockeyController : MonoBehaviour
     public SpecialText Text;
     public ParticleSystem Fireworks;
     public FadePanel FadePanel;
+    public GameObject StartText;
     public List<CharacterType> Winners;
 
     public Lights RedLights;
@@ -26,6 +27,7 @@ public class AirHockeyController : MonoBehaviour
     public List<AudioClip> MiniGameSounds;
 
     private SaveData _saveData;
+    private bool _gameStarted;
 
     void Awake()
     {
@@ -36,8 +38,17 @@ public class AirHockeyController : MonoBehaviour
     {
         _saveData = SaveController.Load();
         SetMainPlayer();
-        Text.Show("Ready...", 1.5f);
-        Invoke("ShowGoText", 1.5f);
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && !_gameStarted)
+        {
+            _gameStarted = true;
+            StartText.SetActive(false);
+            Text.Show("Ready...", 1.5f);
+            Invoke("ShowGoText", 1.5f);
+        }
     }
 
     public void AddScore(TeamColor color)
