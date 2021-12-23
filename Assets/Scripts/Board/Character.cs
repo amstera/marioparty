@@ -9,6 +9,7 @@ public class Character : MonoBehaviour
     public bool CanJump;
     public bool IgnoreLanding;
     public bool HiddenBlockHit;
+    public bool CanHitDice;
     public float JumpForce = 6;
     public float Speed = 5;
     public int Roll;

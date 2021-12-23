@@ -19,13 +19,7 @@ public class Dialog : MonoBehaviour
     {
         if ((_cpuApprove ? Time.time - _timeTextShown > 0.5f : Input.GetKeyDown(KeyCode.Space)) && DialogText.text == _textToShow && _isShowingText)
         {
-            SelectAS.Play();
-            DialogText.text = string.Empty;
-            _isShowingText = false;
-            _textToShow = string.Empty;
-            var callBackToCall = _callback;
-            _callback = null;
-            callBackToCall?.Invoke();
+            Hide(true);
         }
     }
 
@@ -41,6 +35,24 @@ public class Dialog : MonoBehaviour
         _textToShow = text += " ▼";
         _cpuApprove = cpuApprove;
         StartCoroutine(WriteOutText());
+    }
+
+    public void Hide(bool usedEntered)
+    {
+        if (usedEntered)
+        {
+            SelectAS.Play();
+        }
+        else
+        {
+            _callback = null;
+        }
+        DialogText.text = string.Empty;
+        _isShowingText = false;
+        _textToShow = string.Empty;
+        var callBackToCall = _callback;
+        _callback = null;
+        callBackToCall?.Invoke();
     }
 
     private IEnumerator WriteOutText()

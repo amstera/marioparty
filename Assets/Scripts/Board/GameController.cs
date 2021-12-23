@@ -80,7 +80,17 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && !QuitPanel.gameObject.activeSelf && !ItemsPanel.gameObject.activeSelf && !ItemChoicePanel.gameObject.activeSelf)
         {
-            QuitPanel.Show();
+            Character character = GetCurrentCharacter();
+            if (character.CanHitDice)
+            {
+                Dice[(int)character.Type - 1].gameObject.SetActive(false);
+                ShowCharacterStart();
+                Dialog.Hide(false);
+            }
+            else
+            {
+                QuitPanel.Show();
+            }
         }
     }
 
@@ -389,8 +399,12 @@ public class GameController : MonoBehaviour
     private void ChooseCharacter()
     {
         Character character = Characters[CharIndex];
-        if (Characters[CharIndex].IsPlayer)
+        if (character.IsPlayer)
         {
+            if (Turn > 0)
+            {
+                character.CanHitDice = true;
+            }
             Dialog.ShowText("Press space to hit the dice block", false, CharacterJump);
         }
         else
@@ -488,12 +502,14 @@ public class GameController : MonoBehaviour
             return false;
         }
 
-        if (character.Items.All(i => i == ItemType.GoldenPipe) && DistanceToStar(character) < 6 && Turn < MaxTurns - 2)
+        int distanceToStar = DistanceToStar(character);
+
+        if (character.Items.All(i => i == ItemType.GoldenPipe) && ((distanceToStar < 6 && Turn < MaxTurns - 2) || distanceToStar == 1))
         {
             return false;
         }
 
-        if (character.Items.All(i => i == ItemType.WarpBlock) && DistanceToStar(character) < 6)
+        if (character.Items.All(i => i == ItemType.WarpBlock) && distanceToStar < 6)
         {
             return false;
         }
@@ -648,6 +664,7 @@ public class GameController : MonoBehaviour
         Character character = Characters[CharIndex];
         character.CanJump = true;
         character.Jump();
+        character.CanHitDice = false;
     }
 
     private void BuyStar(bool buy)

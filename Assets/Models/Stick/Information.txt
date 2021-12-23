@@ -1,0 +1,10 @@
+Original model by Epic Games.
+Model ported by Friedslick6.
+To correctly render this model:
+	"Blinn Basic Parameters":
+		Set the "Specular" map's colour swatch to the value, "128, 128, 128" ("7F7F7F").
+	"Maps":
+		Set the material's "Specular Color" map to the "Bitmap" map, "T_Stick_S.png".
+		Set the material's "Bump" map to a "Normal Bump" map.
+		Set the "Normal" map of the material's "Bump" map to the "Bitmap" map, "T_Stick_N.png".
+		Disable the "Additional Bump" map of the material's "Bump" map.

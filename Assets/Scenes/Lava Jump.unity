@@ -148,6 +148,7 @@ MonoBehaviour:
   Obstacles:
   - {fileID: 949045044}
   - {fileID: 1248825382}
+  Spinner: {fileID: 0}
   Type: 3
   VictoryAS: {fileID: 30897670}
   HitAS: {fileID: 30897669}
@@ -300,6 +301,7 @@ MonoBehaviour:
   Obstacles:
   - {fileID: 949045044}
   - {fileID: 1248825382}
+  Spinner: {fileID: 0}
   Type: 2
   VictoryAS: {fileID: 206947121}
   HitAS: {fileID: 206947120}
@@ -1925,6 +1927,7 @@ MonoBehaviour:
   Obstacles:
   - {fileID: 949045044}
   - {fileID: 1248825382}
+  Spinner: {fileID: 0}
   Type: 1
   VictoryAS: {fileID: 1310468639}
   HitAS: {fileID: 1310468642}
@@ -2127,7 +2130,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1177517581424825035, guid: 35da60e48961b44729d798919d0e240a, type: 3}
       propertyPath: m_Size.z
-      value: 8.313091
+      value: 5.990441
       objectReference: {fileID: 0}
     - target: {fileID: 1177517581424825035, guid: 35da60e48961b44729d798919d0e240a, type: 3}
       propertyPath: m_Center.x
@@ -2135,7 +2138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1177517581424825035, guid: 35da60e48961b44729d798919d0e240a, type: 3}
       propertyPath: m_Center.z
-      value: -0.9418856
+      value: 0.21943927
       objectReference: {fileID: 0}
     - target: {fileID: 1283223027613458749, guid: 35da60e48961b44729d798919d0e240a, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
@@ -2242,6 +2245,7 @@ MonoBehaviour:
   Obstacles:
   - {fileID: 949045044}
   - {fileID: 1248825382}
+  Spinner: {fileID: 0}
   Type: 4
   VictoryAS: {fileID: 1531495623}
   HitAS: {fileID: 1531495621}
@@ -2526,7 +2530,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1838882997}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 4, z: -6.12}
+  m_LocalPosition: {x: 0, y: 4, z: -5.9}
   m_LocalScale: {x: 0.5, y: 3, z: 0.5}
   m_Children:
   - {fileID: 949045045}
@@ -2865,6 +2869,14 @@ PrefabInstance:
     - target: {fileID: 612108535401276491, guid: 4b9e51e459ed24784b61061df54955f3, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 891369446566222570, guid: 4b9e51e459ed24784b61061df54955f3, type: 3}
+      propertyPath: m_Size.z
+      value: 0.62516004
+      objectReference: {fileID: 0}
+    - target: {fileID: 891369446566222570, guid: 4b9e51e459ed24784b61061df54955f3, type: 3}
+      propertyPath: m_Center.z
+      value: 0.037419945
       objectReference: {fileID: 0}
     - target: {fileID: 4638773461042463672, guid: 4b9e51e459ed24784b61061df54955f3, type: 3}
       propertyPath: m_Mass

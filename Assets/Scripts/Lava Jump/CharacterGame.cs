@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CharacterGame : MonoBehaviour
@@ -9,6 +10,7 @@ public class CharacterGame : MonoBehaviour
     public bool CanJump;
     public float JumpForce = 5;
     public List<GameObject> Obstacles;
+    public Spinner Spinner;
     public CharacterType Type;
 
     public AudioSource VictoryAS;
@@ -16,6 +18,11 @@ public class CharacterGame : MonoBehaviour
 
     private bool _isJumping;
     private bool _shouldJump;
+
+    void Start()
+    {
+        Spinner = FindObjectOfType<Spinner>();
+    }
 
     void Update()
     {
@@ -40,14 +47,13 @@ public class CharacterGame : MonoBehaviour
                 _shouldJump = false;
             }
         }
-        else
+        else if (!_isJumping)
         {
-            foreach (GameObject obstacle in Obstacles)
+            var closestObstacle = Obstacles.OrderBy(o => Vector3.Distance(transform.position, o.transform.position)).First();
+            float coefficient = Random.Range(32f, 36f);
+            if (Vector3.Distance(transform.position, closestObstacle.transform.position) < Spinner.Speed / coefficient) //Random.Range(1.65f, 1.8f)
             {
-                if (Vector3.Distance(transform.position, obstacle.transform.position) < Random.Range(1.65f, 1.8f))
-                {
-                    Jump();
-                }
+                Jump();
             }
         }
     }
