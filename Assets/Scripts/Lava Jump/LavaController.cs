@@ -84,7 +84,6 @@ public class LavaController : MonoBehaviour
         if (_saveData != null)
         {
             _saveData.LastWinningCharacters = new List<CharacterType> { Winner };
-            _saveData.LastMiniGame = "Lava Jump";
             var winningCharacter = _saveData.Characters.Find(c => c.Type == Winner);
             winningCharacter.Coins += 10;
             winningCharacter.MiniGamesWon++;

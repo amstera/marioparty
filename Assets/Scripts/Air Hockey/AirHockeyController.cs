@@ -127,7 +127,6 @@ public class AirHockeyController : MonoBehaviour
         if (_saveData != null)
         {
             _saveData.LastWinningCharacters = Winners;
-            _saveData.LastMiniGame = "Air Hockey";
             if (Winners.Count > 0)
             {
                 foreach (var character in _saveData.Characters)

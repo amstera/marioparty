@@ -90,7 +90,6 @@ public class BumperBallController : MonoBehaviour
         if (_saveData != null)
         {
             _saveData.LastWinningCharacters = new List<CharacterType> { _isDraw ? CharacterType.Unknown : Winner };
-            _saveData.LastMiniGame = "Bumper Ball";
             if (Winner != CharacterType.Unknown)
             {
                 var winningCharacter = _saveData.Characters.Find(c => c.Type == Winner);

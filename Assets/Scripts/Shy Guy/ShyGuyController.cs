@@ -141,7 +141,6 @@ public class ShyGuyController : MonoBehaviour
         if (_saveData != null)
         {
             _saveData.LastWinningCharacters = new List<CharacterType> { _isDraw ? CharacterType.Unknown : Winner };
-            _saveData.LastMiniGame = "Shy Guy";
             if (Winner != CharacterType.Unknown)
             {
                 var winningCharacter = _saveData.Characters.Find(c => c.Type == Winner);

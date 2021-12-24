@@ -643,7 +643,7 @@ public class GameController : MonoBehaviour
             {
                 CharIndex--;
                 Turn++;
-                Invoke("LoadMiniGame", 0.5f);
+                Invoke("LoadMiniGame", 0.25f);
                 return;
             }
 
@@ -863,7 +863,7 @@ public class GameController : MonoBehaviour
         MiniGameFrequency[index]++;
         ChosenMiniGame = miniGames[index];
 
-        SaveController.Save(Characters, Spaces, Turn, MaxTurns, IsBoardReversed, MiniGameFrequency);
+        SaveController.Save(Characters, Spaces, Turn, MaxTurns, IsBoardReversed, ChosenMiniGame, MiniGameFrequency);
 
         MiniGamePanel.Show(index, LoadMiniGameSelection);
     }

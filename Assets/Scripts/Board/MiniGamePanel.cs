@@ -35,7 +35,7 @@ public class MiniGamePanel : MonoBehaviour
 
         _rotatingSelectionCount++;
 
-        if (_rotatingSelectionCount > 10 && _showingIndex == _chosenIndex)
+        if (_rotatingSelectionCount > 12 && _showingIndex == _chosenIndex)
         {
             SelectionAS.pitch = 1.25f;
             SelectionAS.Play();
