@@ -81,7 +81,7 @@ public class GameController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) && !QuitPanel.gameObject.activeSelf && !ItemsPanel.gameObject.activeSelf && !ItemChoicePanel.gameObject.activeSelf)
         {
             Character character = GetCurrentCharacter();
-            if (character.CanHitDice)
+            if (character?.CanHitDice ?? false)
             {
                 Dice[(int)character.Type - 1].gameObject.SetActive(false);
                 ShowCharacterStart();
@@ -440,7 +440,7 @@ public class GameController : MonoBehaviour
             CurrentTurnText.Display(Turn + 1, MaxTurns);
             if ((Turn + 1) == MaxTurns - 5)
             {
-                Dialog.ShowText($"Only 5 turns left! Spaces are worth double!", false, ShowCharacterStart);
+                Dialog.ShowText($"Only a few turns left! Spaces are now worth double!", false, ShowCharacterStart);
                 return;
             }
         }

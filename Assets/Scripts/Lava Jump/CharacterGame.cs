@@ -50,8 +50,8 @@ public class CharacterGame : MonoBehaviour
         else if (!_isJumping)
         {
             var closestObstacle = Obstacles.OrderBy(o => Vector3.Distance(transform.position, o.transform.position)).First();
-            float coefficient = Random.Range(32f, 36f);
-            if (Vector3.Distance(transform.position, closestObstacle.transform.position) < Spinner.Speed / coefficient) //Random.Range(1.65f, 1.8f)
+            float coefficient = Random.Range(33f, 36f);
+            if (Vector3.Distance(transform.position, closestObstacle.transform.position) < Spinner.Speed / coefficient)
             {
                 Jump();
             }

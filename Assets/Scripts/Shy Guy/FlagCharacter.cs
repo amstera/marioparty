@@ -22,6 +22,12 @@ public class FlagCharacter : MonoBehaviour
     public AudioSource LoseAS;
 
     private bool _startMoving;
+    private ShyGuyController _shyGuyController;
+
+    void Start()
+    {
+        _shyGuyController = FindObjectOfType<ShyGuyController>();
+    }
 
     void Update()
     {
@@ -51,7 +57,8 @@ public class FlagCharacter : MonoBehaviour
             else if (!ShyGuy.ShowingTwoFlags)
             {
                 FlagNeutral.SetActive(false);
-                if (Random.Range(0, 6) == 1)
+                int odds = Mathf.Clamp(24/_shyGuyController.Round, 4, 12);
+                if (Random.Range(0, odds) == 1)
                 {
                     Flag = CorrectFlag == FlagType.A ? FlagType.B : FlagType.A;
                 }

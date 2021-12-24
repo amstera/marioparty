@@ -13,6 +13,7 @@ public class ShyGuyController : MonoBehaviour
     public CharacterType Winner;
     public FlagType FlagType;
     public GameObject StartText;
+    public int Round = 1;
 
     public AudioSource MiniGameAS;
     public AudioSource MusicAS;
@@ -95,6 +96,7 @@ public class ShyGuyController : MonoBehaviour
             }
             else
             {
+                Round++;
                 Invoke("WaitForNewTurn", eliminatedCharacter ? 3f : 0.5f);
             }
         }
