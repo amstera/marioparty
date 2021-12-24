@@ -11,6 +11,7 @@ public class FlyGuy : MonoBehaviour
     public float DistanceSpun;
     public float Speed = 1.5f;
     public CharacterType CharacterType;
+    public GameObject Gear;
 
     public AudioSource HelicopterAS;
 
@@ -32,11 +33,17 @@ public class FlyGuy : MonoBehaviour
                 {
                     DistanceSpun += 0.5f;
                     _isSecondKey = false;
+                    RotateGear(true, true);
                 }
                 else if (!_isSecondKey && Input.GetKeyDown(KeyCode.A))
                 {
                     _isSecondKey = true;
+                    RotateGear(true, true);
                 }
+            }
+            else
+            {
+                RotateGear(true, false);
             }
         }
         else if (CanMove && DistanceSpun > 0)
@@ -47,6 +54,7 @@ public class FlyGuy : MonoBehaviour
             }
             transform.position += transform.forward * Speed * Time.deltaTime;
             DistanceSpun -= Time.deltaTime;
+            RotateGear(false, false);
         }
         else if (CanMove && DistanceSpun <= 0)
         {
@@ -70,6 +78,11 @@ public class FlyGuy : MonoBehaviour
         Animator.SetInteger("State", (int)FlyGuyState.Spinning);
 
         HelicopterAS.Play();
+    }
+
+    private void RotateGear(bool clockwise, bool extraPush)
+    {
+        Gear.transform.Rotate(new Vector3(0, -1, 0) * (clockwise ? 1 : -1) * (extraPush ? 15 : 5), Space.Self);
     }
 }
 
