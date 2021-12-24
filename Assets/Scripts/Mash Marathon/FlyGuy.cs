@@ -31,7 +31,7 @@ public class FlyGuy : MonoBehaviour
             {
                 if (_isSecondKey && Input.GetKeyDown(KeyCode.D))
                 {
-                    DistanceSpun += 0.5f;
+                    DistanceSpun += 0.475f + Time.deltaTime;
                     _isSecondKey = false;
                     RotateGear(true, true);
                 }
