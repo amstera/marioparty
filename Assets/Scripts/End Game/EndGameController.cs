@@ -57,7 +57,7 @@ public class EndGameController : MonoBehaviour
 
     private void GiveMiniGameBonusStar()
     {
-        var miniGameWinner = _saveData.Characters.OrderByDescending(c => c.MiniGamesWon).First();
+        var miniGameWinner = _saveData.Characters.OrderByDescending(c => c.MiniGamesWon).ThenBy(c => c.Stars).First();
         miniGameWinner.Stars++;
 
         string dialog = $"{miniGameWinner.Type}! Who won {miniGameWinner.MiniGamesWon} mini games!";
@@ -97,7 +97,7 @@ public class EndGameController : MonoBehaviour
 
     private void GiveSpacesWalkedBonusStar()
     {
-        var spacesWalkedWinner = _saveData.Characters.OrderByDescending(c => c.SpacesWalked).First();
+        var spacesWalkedWinner = _saveData.Characters.OrderByDescending(c => c.SpacesWalked).ThenBy(c => c.Stars).First();
         spacesWalkedWinner.Stars++;
 
         string dialog = $"{spacesWalkedWinner.Type}! Who walked {spacesWalkedWinner.SpacesWalked} spaces!";

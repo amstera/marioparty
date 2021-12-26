@@ -123,11 +123,12 @@ public class MashMarathonController : MonoBehaviour
     {
         FlyGuys.ForEach(f => f.CanMash = false);
         ExclamationBubbles.SetActive(false);
+        var playerDistance = FlyGuys.Find(f => f.IsPlayer).DistanceSpun;
         foreach (FlyGuy flyGuy in FlyGuys)
         {
             if (!flyGuy.IsPlayer)
             {
-                flyGuy.DistanceSpun = Random.Range(9f, 13f);
+                flyGuy.DistanceSpun = Mathf.Min(12.5f, Mathf.Max(7f, playerDistance) + Random.Range(-3f, 3f));
             }
         }
         FlyGuys.ForEach(f => f.StartSpinning());

@@ -627,7 +627,7 @@ public class GameController : MonoBehaviour
     {
         var character = Characters[CharIndex];
         var currentSpace = Spaces[character.Position].Type;
-        if ((currentSpace == CircleType.Positive || currentSpace == CircleType.Negative) && !character.HiddenBlockHit && Turn > 1 && Characters.Count(c => c.Position == character.Position) == 1 && Random.Range(0, 35) == 1)
+        if ((currentSpace == CircleType.Positive || currentSpace == CircleType.Negative) && !character.HiddenBlockHit && Turn > 1 && Characters.Count(c => c.Position == character.Position) == 1 && Random.Range(0, 40) == 1)
         {
             var hiddenBlock = Instantiate(HiddenBlock, Characters[CharIndex].transform.position + Vector3.up * 2f, Quaternion.identity);
             hiddenBlock.GameController = this;
