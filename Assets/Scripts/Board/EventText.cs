@@ -4,19 +4,31 @@ using UnityEngine;
 public class EventText : MonoBehaviour
 {
     private Action _callback;
+    private bool _isPlayer;
 
-    public void Show(Action callback)
+    public void Show(Action callback, bool isPlayer)
     {
         _callback = callback;
+        _isPlayer = isPlayer;
         gameObject.SetActive(true);
+
+        if (!_isPlayer)
+        {
+            Invoke("Exit", 1.25f);
+        }
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (_isPlayer && Input.GetKeyDown(KeyCode.Space))
         {
-            _callback?.Invoke();
-            gameObject.SetActive(false);
+            Exit();
         }
+    }
+
+    private void Exit()
+    {
+        _callback?.Invoke();
+        gameObject.SetActive(false);
     }
 }

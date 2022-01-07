@@ -187,7 +187,7 @@ public class GameController : MonoBehaviour
         {
             IsBoardReversed = !IsBoardReversed;
             ReverseBoard();
-            EventText.Show(NextTurn);
+            EventText.Show(NextTurn, character.IsPlayer);
         }
         else if (space.Type == CircleType.Lucky)
         {
